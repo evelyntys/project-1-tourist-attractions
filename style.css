@@ -1,0 +1,54 @@
+#map{
+    height: 80vh;
+}
+
+.marker-cluster-small {
+    background-color: rgba(218, 94, 94, 0.6);
+    }
+    .marker-cluster-small div {
+    background-color: rgba(226, 36, 36, 0.6);
+    }
+    .marker-cluster-medium {
+    background-color: rgba(3, 96, 110, 0.6);
+    }
+    .marker-cluster-medium div {
+    background-color: rgba(12, 104, 150, 0.6);
+    }
+    
+    .marker-cluster-large {
+    background-color: rgba(85, 51, 36, 0.6);
+    }
+    .marker-cluster-large div {
+    background-color: rgba(91, 54, 19, 0.6);
+    }
+
+#searchbar{
+    display:none;
+}
+
+.leaflet-control{
+    background-color:rgba(3, 96, 110, 0.6)
+}
+
+.leaflet-control-layers{
+    background-color: rosybrown;
+}
+
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background-color: rosybrown;
+	}
+
+
+/* .leaflet-control-layers-toggle {
+    background-image: url(tickets.png);
+    width: 36px;
+    height: 36px;
+} */
+
+.leaflet-top.leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle {
+    background-image: url(images/overlay-control/tickets.png);
+    width: 36px;
+    height: 36px;
+}
