@@ -4,11 +4,6 @@ let archiArr = [];
 let link = null;
 let routing = null;
 
-var sidebar = L.control.sidebar('sidebar', {
-    position: 'left'
-});
-
-map.addControl(sidebar);
 
 
 window.addEventListener('DOMContentLoaded', async function () {
@@ -75,8 +70,9 @@ window.addEventListener('DOMContentLoaded', async function () {
                 }
 
                 cultureHistoryMarker.on('dblclick', async function mapfly(e) {
+                    document.querySelector('#map').classList.remove('col-12');
+                    document.querySelector('#map').classList.add('col-9');
                     searchResultLayer.clearLayers();
-                    sidebar.show()
                     document.querySelector('#searchbar').style.display = 'block';
 
                     map.flyTo([each.geometry.coordinates[1], each.geometry.coordinates[0]], 16)
