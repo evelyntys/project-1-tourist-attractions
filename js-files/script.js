@@ -22,52 +22,58 @@ window.addEventListener('DOMContentLoaded', async function () {
             }
 
             if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('culture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('history')))) {
-                cultureHistory.push(each)
-                document.querySelector('#culture').innerHTML += `<div class="card mt-3" style="width: 18rem;">
+                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], 
+                    { icon: heritageIcon })
+                    .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
+                    <h4>${each[data]['Name']}</h4>  
+                    <h6>Opening Hours:</h6> ${each[data]['Opening Hours']}<br>
+                    ${entranceFee[each[data]['foc']]}`)
+                
+                    if (each[data]['foc'] == 'yes') {
+                    cultureHistoryMarker.addTo(cultureHistoryLayerfoc)
+
+                }
+                
+                else {
+                    document.querySelector('#culture-hist').innerHTML += `<div class="card mt-3" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}
+                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view' href='#map'>see on map</a>
                       <a href="#map" class="btn-sm btn-dark get-directions">Get directions</a>
                     </div>
                   </div>`
                 let view = document.querySelectorAll('.view');
-                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: heritageIcon }).bindPopup(`<img style='width: 100%' src="${imgUrl}> <h4>${each[data]['Name']}<h4><h6>  ${each[data]['Opening Hours']}`)
-                if (each[data]['foc'] == 'yes') {
-                    cultureHistoryMarker.addTo(cultureHistoryLayerfoc)
-
-                }
-                else {
                     cultureHistoryMarker.addTo(cultureHistoryLayer)
 
                 }
-                testArr.push(cultureHistoryMarker)
-                for (let i = 0; i < view.length; i++) {
-                    view[i].addEventListener('click', function (e) {
-                        map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
-                        testArr[i].openPopup()
+                // testArr.push(cultureHistoryMarker)
+                // for (let i = 0; i < view.length; i++) {
+                //     view[i].addEventListener('click', function (e) {
+                //         map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
+                //         testArr[i].openPopup()
 
-                    })
-                }
+                //     })
+                // }
 
-                let getDirections = document.querySelectorAll('.get-directions');
-                for (let i = 0; i < view.length; i++) {
-                    getDirections[i].addEventListener('click', function () {
-                        map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
-                        testArr[i].openPopup();
-                        chosenLat = view[i].dataset.latitude
-                        chosenLng = view[i].dataset.longitude
-                        if (routing) { routing.remove() }
-                        routing = L.Routing.control({
-                            waypoints: [
-                                L.latLng(userLat, userLng),
-                                L.latLng(chosenLat, chosenLng)
-                            ]
-                        }).addTo(map);
-                    })
-                }
+                // let getDirections = document.querySelectorAll('.get-directions');
+                // for (let i = 0; i < view.length; i++) {
+                //     getDirections[i].addEventListener('click', function () {
+                //         map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
+                //         testArr[i].openPopup();
+                //         chosenLat = view[i].dataset.latitude
+                //         chosenLng = view[i].dataset.longitude
+                //         if (routing) { routing.remove() }
+                //         routing = L.Routing.control({
+                //             waypoints: [
+                //                 L.latLng(userLat, userLng),
+                //                 L.latLng(chosenLat, chosenLng)
+                //             ]
+                //         }).addTo(map);
+                //     })
+                // }
 
                 cultureHistoryMarker.on('dblclick', async function mapfly(e) {
                     document.querySelector('#map').classList.remove('col-12');
@@ -93,49 +99,49 @@ window.addEventListener('DOMContentLoaded', async function () {
                 archiLandscapes.push(each)
                 // let architectureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: architectureIcon }).bindPopup(each[data]['Name'])
                 let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: archiLandscapesIcon }).bindPopup(`<img style='width: 100%' src="${imgUrl}> <h4>${each[data]['Name']}<h4><h6>  ${each[data]['Opening Hours']}`)
-                document.querySelector('#architecture').innerHTML += `<div class="card mt-3" style="width: 18rem;">
-                        <img src="${imgUrl}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">${each[data]['Name']}</h5>
-                          <h6 class="card-text">${each[data]['Opening Hours']}
-                          <p class="card-text">${each[data]['description']}</p>
-                          <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>see on map</a>
-                          <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
-                        </div>
-                      </div>`
                 if (each[data]['foc'] == 'yes') {
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc)
 
                 }
                 else {
-                    archiLandscapesMarker.addTo(archiLandscapesLayer)
+                    archiLandscapesMarker.addTo(archiLandscapesLayer);
+                     document.querySelector('#archi-land').innerHTML += `<div class="card mt-3" style="width: 18rem;">
+                        <img src="${imgUrl}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">${each[data]['Name']}</h5>
+                          <h6 class="card-text">${each[data]['Opening Hours']}</h6>
+                          <p class="card-text">${each[data]['description']}</p>
+                          <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>see on map</a>
+                          <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                        </div>
+                      </div>`
 
                 }
-                let viewArchitecture = document.querySelectorAll('.view-architecture');
-                archiArr.push(archiLandscapesMarker)
-                for (let i = 0; i < viewArchitecture.length; i++) {
-                    viewArchitecture[i].addEventListener('click', function (e) {
-                        map.flyTo([viewArchitecture[i].dataset.latitude, viewArchitecture[i].dataset.longitude], 16)
-                        archiArr[i].openPopup()
+                // let viewArchitecture = document.querySelectorAll('.view-architecture');
+                // archiArr.push(archiLandscapesMarker)
+                // for (let i = 0; i < viewArchitecture.length; i++) {
+                //     viewArchitecture[i].addEventListener('click', function (e) {
+                //         map.flyTo([viewArchitecture[i].dataset.latitude, viewArchitecture[i].dataset.longitude], 16)
+                //         archiArr[i].openPopup()
 
-                    })
-                }
+                //     })
+                // }
 
-                let getDirectionsArchi = document.querySelectorAll('.get-directions-archi');
-                for (let i = 0; i < viewArchitecture.length; i++) {
-                    getDirectionsArchi[i].addEventListener('click', function () {
-                        map.flyTo([viewArchitecture[i].dataset.latitude, viewArchitecture[i].dataset.longitude], 16)
-                        archiArr[i].openPopup();
-                        chosenLat = viewArchitecture[i].dataset.latitude
-                        chosenLng = viewArchitecture[i].dataset.longitude
-                        L.Routing.control({
-                            waypoints: [
-                                L.latLng(userLat, userLng),
-                                L.latLng(chosenLat, chosenLng)
-                            ]
-                        }).addTo(map);
-                    })
-                }
+                // let getDirectionsArchi = document.querySelectorAll('.get-directions-archi');
+                // for (let i = 0; i < viewArchitecture.length; i++) {
+                //     getDirectionsArchi[i].addEventListener('click', function () {
+                //         map.flyTo([viewArchitecture[i].dataset.latitude, viewArchitecture[i].dataset.longitude], 16)
+                //         archiArr[i].openPopup();
+                //         chosenLat = viewArchitecture[i].dataset.latitude
+                //         chosenLng = viewArchitecture[i].dataset.longitude
+                //         L.Routing.control({
+                //             waypoints: [
+                //                 L.latLng(userLat, userLng),
+                //                 L.latLng(chosenLat, chosenLng)
+                //             ]
+                //         }).addTo(map);
+                //     })
+                // }
 
                 archiLandscapesMarker.on('dblclick', async function mapfly(e) {
                     searchResultLayer.clearLayers();
@@ -359,4 +365,13 @@ document.querySelector('#weatherBtn').addEventListener('click', function () {
     else {
         map.addLayer(weatherMarkers)
     }
+})
+
+let pages = document.querySelectorAll('.page');
+document.querySelector('#toggle').addEventListener('click', function(e){
+    let page = e.target.dataset.page;
+    document.querySelector('#page-1').classList.add('hidden');
+    document.querySelector('#page-1').classList.remove('show');
+    document.querySelector('#page-2').classList.add('show');
+    document.querySelector('#page-2').classList.remove('hidden')
 })

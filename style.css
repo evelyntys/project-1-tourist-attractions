@@ -94,3 +94,27 @@
   .custom-popup .leaflet-popup-tip {
     border-style: solid 2px #C0392B;
     }
+#all-pages{
+    position: relative;
+}
+
+.page{
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.hidden{
+    transform: translateX(-100%);
+    transition: transform 1s;
+}
+
+.show{
+    transform: translateX(0);
+    transition: transform 1s;
+}
+
+#page-1{
+    background-color: lightsalmon
+}

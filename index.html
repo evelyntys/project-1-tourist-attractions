@@ -17,51 +17,114 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-    <link rel="stylesheet" href="TripgoRouting.css" />
+    <link rel='stylehsheet' href="sidebar.css">
     <link rel="stylesheet" href="style.css">
 
-
-    <title>Hello, world!</title>
+    <link rel="icon" href="images/navbar/traveler.png">
+    <title>SGgoWhere</title>
 </head>
 
 <body>
-
-    <ul class="nav bg-warning">
-        <li class="nav-item ">
-            <a class="nav-link  active" aria-current="page" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-        </li>
-    </ul>
-    <div class="container mt-3">
-        <button class="btn-warning" id="directions">directions from current location</button>
+    <div id="all-pages">
+    <div id='page-1' class="page">
+        <button id="toggle">foc</button>
     </div>
 
-    <div class="container mt-3" id="searchbar">
-        <input type="text" placeholder="e.g. food, stations" id="search"><button class="btn-warning"
-            id="searchBtn">search for nearby items</button>
-        <div class="container mt-3" id="validate">
-
+    <div id="page-2" class="page hidden">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img class='pl-2' style='height: 40px'
+                        src='images/navbar/traveler.png'>SGgoWhere</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-3">
+            <button class="btn-warning" id="directions">directions from current location</button>
         </div>
-    </div>
+
     <div class="container mt-3">
         currently showing <div id="now">no foc</div> layer
         <button class="btn-warning" id="foc-toggle">see locations foc?</button>
 
     </div>
 
-    <div class="container mt-3">
-        <div id="map">
+    <button id="weatherBtn">check weather</button>
+
+    <div id='map-container' class="container d-flex flex-row row-inverse mt-3">
+        <div id="map" class="custom-popup col-12"></div>
+        <div id="searchbar" class="col-4">
+            <input type="text" placeholder="e.g. food, stations" id="search"><button class="btn-warning"
+                id="searchBtn">search for nearby items</button>
+            <div id="results"></div>
+            <div id="validate"></div>
         </div>
 
-        <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="culture">
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="culture-hist-tab" data-bs-toggle="tab"
+                    data-bs-target="#culture-hist" type="button" role="tab" aria-controls="culture-hist"
+                    aria-selected="true">Culture & History</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="arts-tab" data-bs-toggle="tab" data-bs-target="#arts" type="button"
+                    role="tab" aria-controls="arts" aria-selected="false">Arts</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="nature-tab" data-bs-toggle="tab" data-bs-target="#nature" type="button"
+                    role="tab" aria-controls="nature" aria-selected="false">Nature</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="archi-land-tab" data-bs-toggle="tab" data-bs-target="#archi-land"
+                    type="button" role="tab" aria-controls="archi-land" aria-selected="false">Architecture &
+                    Landscapes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="recreation-tab" data-bs-toggle="tab" data-bs-target="#recreation"
+                    type="button" role="tab" aria-controls="recreation" aria-selected="false">Recreation</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active d-flex flex-row flex-wrap justify-content-evenly" id="culture-hist"
+                role="tabpanel" aria-labelledby="culture-hist-tab">
+
+            </div>
+            <div class="tab-pane fade" id="arts" role="tabpanel" aria-labelledby="arts-tab">...</div>
+            <div class="tab-pane fade" id="archi-land" role="tabpanel" aria-labelledby="archi-land-tab">
+
+            </div>
+            <div class="tab-pane fade" id="nature" role="tabpanel" aria-labelledby="nature-tab">...</div>
+            <div class="tab-pane fade" id="recreation" role="tabpanel" aria-labelledby="recreation-tab">...</div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+
+
+<!-- <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="culture">
 
         </div>
 
@@ -87,26 +150,30 @@
 
         <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="landscapes">
 
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
-        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- leaflet -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
-    <!-- marker clustering -->
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js"
-        charset="utf-8"></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-    <script src="dist/TripgoRouting.js"></script>
-    <script src="js-files/utility.js"></script>
-    <script src="js-files/script.js"></script>
+        </div> -->
+</div>
+<!-- axios script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+    integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- leaflet -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+<!-- marker clustering -->
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
+<!-- bootstrap script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<!-- own scripts -->
+<script src="js-files/utility.js"></script>
+<script src="js-files/map.js"></script>
+<script src="js-files/foursquare-search.js"></script>
+<script src="js-files/sidebar.js"></script>
+<script src="js-files/script.js"></script>
 
 </body>
 
