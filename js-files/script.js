@@ -1,7 +1,7 @@
 let map = createMap()
 let testArr = [];
 let archiArr = [];
-let link = null;
+let imgUrl = null;
 let routing = null;
 
 
@@ -14,17 +14,17 @@ window.addEventListener('DOMContentLoaded', async function () {
         // console.log(each.properties.Name)
         for (let data in each) {
 
-            //to get image link for display of images
+            //to get image imgUrl for display of images
             if (each[data]['PHOTOURL']) {
-                let imgUrl = each[data]['PHOTOURL'].split('')
+                imgUrl = each[data]['PHOTOURL'].split('')
                 let indexEnd = imgUrl.indexOf('>')
-                link = imgUrl.slice(25, indexEnd).join('')
+                imgUrl = imgUrl.slice(25, indexEnd).join('')
             }
 
             if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('culture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('history')))) {
                 cultureHistory.push(each)
                 document.querySelector('#culture').innerHTML += `<div class="card mt-3" style="width: 18rem;">
-                    <img src="${link}" class="card-img-top" alt="...">
+                    <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}
@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     </div>
                   </div>`
                 let view = document.querySelectorAll('.view');
-                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: heritageIcon }).bindPopup(`<img style='width: 100%' src="${link}> <h4>${each[data]['Name']}<h4>  <h6>${each[data]['Opening Hours']}</h6>`)
+                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: heritageIcon }).bindPopup(`<img style='width: 100%' src="${imgUrl}> <h4>${each[data]['Name']}<h4>  <h6>${each[data]['Opening Hours']}</h6>`)
                 if (each[data]['foc'] == 'yes') {
                     cultureHistoryMarker.addTo(cultureHistoryLayerfoc)
 
@@ -92,9 +92,9 @@ window.addEventListener('DOMContentLoaded', async function () {
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('architecture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('places-to-see')))) {
                 archiLandscapes.push(each)
                 // let architectureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: architectureIcon }).bindPopup(each[data]['Name'])
-                let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: archiLandscapesIcon }).bindPopup(`<img style='width: 100%' src="${link}> <h4>${each[data]['Name']}<h4>  <h6>${each[data]['Opening Hours']}</h6>`)
+                let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: archiLandscapesIcon }).bindPopup(`<img style='width: 100%' src="${imgUrl}> <h4>${each[data]['Name']}<h4>  <h6>${each[data]['Opening Hours']}</h6>`)
                 document.querySelector('#architecture').innerHTML += `<div class="card mt-3" style="width: 18rem;">
-                        <img src="${link}" class="card-img-top" alt="...">
+                        <img src="${imgUrl}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">${each[data]['Name']}</h5>
                           <h6 class="card-text">${each[data]['Opening Hours']}
@@ -317,3 +317,16 @@ focToggle.addEventListener('click', function () {
 //direction loads in later
 //sequence of routing and controller; reset controller first then do directions to have controller say on top
 //function that resets controller, function that does directions ->  then run in sequence for controllers then direction
+
+let weatherAPI = 'https://api.data.gov.sg/v1/environment/2-hour-weather-forecast';
+async function getWeather(){
+    let response = await axios.get(weatherAPI);
+    let weatherData = response.data;
+    for (let i=0; i<weatherData.area_metadata.length; i++){
+        let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude]).addTo(map)
+        marker.bindPopup(`${weatherData.items[0].forecasts[i].area}
+        ${weatherData.items[0].forecasts[i].forecast}`)
+    }
+}
+
+getWeather()
