@@ -1,9 +1,3 @@
-let architecture = [];
-let architectureLayer = L.markerClusterGroup();
-let architectureLayerfoc = L.markerClusterGroup();
-let culture = [];
-let cultureLayerfoc = L.markerClusterGroup();
-let cultureLayer = L.markerClusterGroup();
 let recreation = [];
 let recreationLayer = L.markerClusterGroup();
 let recreationLayerfoc = L.markerClusterGroup();
@@ -13,32 +7,16 @@ let natureLayerfoc = L.markerClusterGroup();
 let arts = [];
 let artsLayer = L.markerClusterGroup();
 let artsLayerfoc = L.markerClusterGroup();
-let history = [];
-let historyLayer = L.markerClusterGroup();
-let historyLayerfoc = L.markerClusterGroup();
-let landscapes = [];
-let landscapesLayer = L.markerClusterGroup();
-let landscapesLayerfoc = L.markerClusterGroup();
+let cultureHistory = [];
+let cultureHistoryLayer = L.markerClusterGroup();
+let cultureHistoryLayerfoc = L.markerClusterGroup();
+let archiLandscapes = [];
+let archiLandscapesLayer = L.markerClusterGroup();
+let archiLandscapesLayerfoc = L.markerClusterGroup();
 
-//icons
-var museumIcon = L.icon({
-    iconUrl: 'images/map-markers/museum.png',
-
-    iconSize: [50, 50],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-});
-
+//marker icons for map
 var natureIcon = L.icon({
     iconUrl: 'images/map-markers/nature.png',
-
-    iconSize: [50, 50],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76]
-});
-
-var architectureIcon = L.icon({
-    iconUrl: 'images/map-markers/architecture.png',
 
     iconSize: [50, 50],
     iconAnchor: [22, 94],
@@ -61,7 +39,7 @@ var recreationIcon = L.icon({
     popupAnchor: [-3, -76]
 });
 
-var landscapesIcon = L.icon({
+var archiLandscapesIcon = L.icon({
     iconUrl: 'images/map-markers/landscapes.png',
 
     iconSize: [50, 50],
@@ -83,3 +61,49 @@ var searchIcon = L.icon({
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76]
 })
+
+//variables to store lat/lng of chosen attraction to serve as start point for routing 
+let chosenLat = null;
+let chosenLng = null;
+
+//weather icons
+var fairIcon = L.icon({
+    iconUrl: 'images/weather/sun.png',
+
+    iconSize: [50, 50],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
+
+var partlyCloudyIcon = L.icon({
+    iconUrl: 'images/weather/partly-cloudy.png',
+
+    iconSize: [50, 50],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
+
+var cloudyIcon = L.icon({
+    iconUrl: 'images/weather/cloudy.png',
+
+    iconSize: [50, 50],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
+
+var rainIcon = L.icon({
+    iconUrl: 'images/weather/rain.png',
+
+    iconSize: [50, 50],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
+
+var thunderyIcon = L.icon({
+    iconUrl: 'images/weather/storm.png',
+
+    iconSize: [50, 50],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
+
