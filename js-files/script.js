@@ -314,6 +314,8 @@ focToggle.addEventListener('click', function () {
     }
 })
 
+let weatherMarkers = L.layerGroup()
+
 //direction loads in later
 //sequence of routing and controller; reset controller first then do directions to have controller say on top
 //function that resets controller, function that does directions ->  then run in sequence for controllers then direction
@@ -323,10 +325,19 @@ async function getWeather(){
     let response = await axios.get(weatherAPI);
     let weatherData = response.data;
     for (let i=0; i<weatherData.area_metadata.length; i++){
-        let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude]).addTo(map)
+        let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude]).addTo(weatherMarkers)
         marker.bindPopup(`${weatherData.items[0].forecasts[i].area}
         ${weatherData.items[0].forecasts[i].forecast}`)
     }
 }
 
 getWeather()
+
+document.querySelector('#weatherBtn').addEventListener('click', function(){
+    if (map.hasLayer(weatherMarkers)){
+        map.removeLayer(weatherMarkers)
+    }
+    else{
+        map.addLayer(weatherMarkers)
+    }
+})
