@@ -93,6 +93,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 artsMarker.on('click', function (){
                     searchResultLayer.clearLayers();
+                    document.querySelector('#search-side').style.display = 'block';
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
                     map.flyTo([chosenLat, chosenLng], 16)
@@ -152,7 +153,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16)
+                    map.flyTo([chosenLat, chosenLng], 16);
+                    document.querySelector('#search-side').style.display = 'block';
                 })
             }
 
@@ -210,64 +212,9 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16)
+                    map.flyTo([chosenLat, chosenLng], 16);
+                    document.querySelector('#search-side').style.display = 'block';
                 })
-                // let view = document.querySelectorAll('.view');
-                // for (let i = 0; i < view.length; i++) {
-                //     view[i].addEventListener('click', function () {
-                //         document.querySelector('#searchbar').style.display = 'block';
-                //     })
-                // }
-
-                // let directions = document.querySelectorAll('.directions');
-                // for (let each of directions) {
-                //     each.addEventListener('click', function (e) {
-                //         map.flyTo([each.dataset.latitude, each.dataset.longitude], 16)
-                //     })
-                // }
-
-                // for (let i = 0; i < view.length; i++) {
-                //     view[i].addEventListener('click', function (e) {
-                //         map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
-
-                //     })
-                // }
-
-                // let getDirections = document.querySelectorAll('.get-directions');
-                // for (let i = 0; i < view.length; i++) {
-                //     getDirections[i].addEventListener('click', function () {
-                //         map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
-                //         testArr[i].openPopup();
-                //         chosenLat = view[i].dataset.latitude
-                //         chosenLng = view[i].dataset.longitude
-                //         if (routing) { routing.remove() }
-                //         routing = L.Routing.control({
-                //             waypoints: [
-                //                 L.latLng(userLat, userLng),
-                //                 L.latLng(chosenLat, chosenLng)
-                //             ]
-                //         }).addTo(map);
-                //     })
-                // }
-
-                // cultureHistoryMarker.on('click', async function mapfly(e) {
-                //     searchResultLayer.clearLayers();
-                //     document.querySelector('#searchbar').style.display = 'block';
-
-                //     map.flyTo([each.geometry.coordinates[1], each.geometry.coordinates[0]], 16)
-                //     chosenLat = each.geometry.coordinates[1];
-                //     chosenLng = each.geometry.coordinates[0];
-                //     showRoute()
-                    // if (routing) { routing.remove() }
-
-                    // routing = L.Routing.control({
-                    //     waypoints: [
-                    //         L.latLng(userLat, userLng),
-                    //         L.latLng(chosenLat, chosenLng)
-                    //     ]
-                    // }).addTo(map);
-
-            //     })
             }
 
             //archi landscape layer
@@ -324,51 +271,9 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16)
+                    map.flyTo([chosenLat, chosenLng], 16);
+                    document.querySelector('#search-side').style.display = 'block';
                 })
-                // let viewArchitecture = document.querySelectorAll('.view-architecture');
-                // archiArr.push(archiLandscapesMarker)
-                // for (let i = 0; i < viewArchitecture.length; i++) {
-                //     viewArchitecture[i].addEventListener('click', function (e) {
-                //         map.flyTo([viewArchitecture[i].dataset.latitude, viewArchitecture[i].dataset.longitude], 16)
-                //         archiArr[i].openPopup()
-
-                //     })
-                // }
-
-                // let getDirectionsArchi = document.querySelectorAll('.get-directions-archi');
-                // for (let i = 0; i < viewArchitecture.length; i++) {
-                //     getDirectionsArchi[i].addEventListener('click', function () {
-                //         map.flyTo([viewArchitecture[i].dataset.latitude, viewArchitecture[i].dataset.longitude], 16)
-                //         archiArr[i].openPopup();
-                //         chosenLat = viewArchitecture[i].dataset.latitude
-                //         chosenLng = viewArchitecture[i].dataset.longitude
-                //         L.Routing.control({
-                //             waypoints: [
-                //                 L.latLng(userLat, userLng),
-                //                 L.latLng(chosenLat, chosenLng)
-                //             ]
-                //         }).addTo(map);
-                //     })
-                // }
-
-                // archiLandscapesMarker.on('dblclick', async function mapfly(e) {
-                //     searchResultLayer.clearLayers();
-                //     document.querySelector('#searchbar').style.display = 'block';
-
-                //     map.flyTo([each.geometry.coordinates[1], each.geometry.coordinates[0]], 16)
-                //     chosenLat = each.geometry.coordinates[1];
-                //     chosenLng = each.geometry.coordinates[0];
-
-
-                //     L.Routing.control({
-                //         waypoints: [
-                //             L.latLng(userLat, userLng),
-                //             L.latLng(chosenLat, chosenLng)
-                //         ]
-                //     }).addTo(map);
-
-                // })
             }
 
             //recreation layer
@@ -424,7 +329,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16)
+                    map.flyTo([chosenLat, chosenLng], 16);
+                    document.querySelector('#search-side').style.display = 'block';
                 })
             }
 
@@ -476,11 +382,10 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
     }
 })
 
-// var marker = new L.marker([userLat, userLng], {
-//     draggable: 'true'
-// });
-
-
+document.querySelector('#reset').addEventListener('click', function(){
+    document.querySelector('#results').innerHTML = "";
+    searchResultLayer.clearLayers()
+})
 
 //overlay controls
 let overlayLayers = {

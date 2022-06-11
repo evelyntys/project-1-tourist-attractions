@@ -62,40 +62,99 @@
             </div>
 
             <div class="container mt-3">
-
+                Change Layer of Attractions<br>
+                Currently showing: Locations with <div id="now">foc</div>
+                <button class="btn-warning" id="foc-toggle">see locations foc?</button>
             </div>
+            <button id="weatherBtn">check weather</button>
+        </div>
 
-            <!-- search offcanvas -->
-            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#searchcanvas" role="button"
-                aria-controls="searchcanvas">
-                search canvas
-            </a>
+        <div id='map-container' class="mt-3">
+            <div id="map" class="custom-popup col-12"></div>
+        </div>
 
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="searchcanvas"
-                aria-labelledby="offcanvasExampleLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div id="searchbar">
-                        <input type="text" placeholder="e.g. food, stations" id="search"><button class="btn-warning"
-                            id="searchBtn">search for nearby items</button>
-                        <div id="results"></div>
-                        <div id="validate"></div>
+        <!-- search offcanvas -->
+        <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#searchcanvas" role="button"
+            aria-controls="searchcanvas" id="search-side">
+            search canvas
+        </a>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="searchcanvas" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                    <input type="text" placeholder="e.g. food, stations" id="search">
+                    <button class="btn-warning"
+                        id="searchBtn">search for nearby items</button>
+                        <button id="reset">reset</button>
+                    <div id="results"></div>
+                    <div id="validate"></div>
+            </div>
+        </div>
+
+
+        <!-- nav off-canvas -->
+        <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+            aria-controls="offcanvasExample">
+            nav paid
+        </a>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                            aria-selected="true">arts</button>
+                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">nature</button>
+                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">culture &
+                            history</button>
+                        <button class="nav-link" id="nav-archiland-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-archiland" type="button" role="tab" aria-controls="nav-contact"
+                            aria-selected="false">archi land</button>
+                        <button class="nav-link" id="nav-recre-tab" data-bs-toggle="tab" data-bs-target="#nav-recre"
+                            type="button" role="tab" aria-controls="nav-contact"
+                            aria-selected="false">recreation</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div id="arts"></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div id="nature"></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <div id="culture-hist"></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-archiland" role="tabpanel" aria-labelledby="nav-archiland-tab">
+                        <div id="archi-land"></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-recre" role="tabpanel" aria-labelledby="nav-recre-tab">
+                        <div id="recreation"></div>
                     </div>
                 </div>
+                <div>
+                </div>
+            </div>
             </div>
 
-
-            <!-- nav off-canvas -->
-            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                aria-controls="offcanvasExample">
-                nav paid
+            <!-- nav foc off-canvas -->
+            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample2" role="button"
+                aria-controls="offcanvasExample2">
+                nav foc
             </a>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample2"
+                aria-labelledby="offcanvasExampleLabel" data-bs-scroll="true" data-bs-backdrop="false">
                 <div class="offcanvas-header">
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
@@ -103,110 +162,40 @@
                 <div class="offcanvas-body">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">arts</button>
-                          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">nature</button>
-                          <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">culture & history</button>
-                          <button class="nav-link" id="nav-archiland-tab" data-bs-toggle="tab" data-bs-target="#nav-archiland" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">archi land</button>
-                          <button class="nav-link" id="nav-recre-tab" data-bs-toggle="tab" data-bs-target="#nav-recre" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">recreation</button>
+                            <button class="nav-link active" id="nav1-tab" data-bs-toggle="tab" data-bs-target="#nav1"
+                                type="button" role="tab" aria-controls="nav1" aria-selected="true">arts</button>
+                            <button class="nav-link" id="nav2-tab" data-bs-toggle="tab" data-bs-target="#nav2"
+                                type="button" role="tab" aria-controls="nav2" aria-selected="false">nature</button>
+                            <button class="nav-link" id="nav3-tab" data-bs-toggle="tab" data-bs-target="#nav3"
+                                type="button" role="tab" aria-controls="nav3" aria-selected="false">culture &
+                                history</button>
+                            <button class="nav-link" id="nav4-tab" data-bs-toggle="tab" data-bs-target="#nav4"
+                                type="button" role="tab" aria-controls="nav4" aria-selected="false">archi land</button>
+                            <button class="nav-link" id="nav5-tab" data-bs-toggle="tab" data-bs-target="#nav5"
+                                type="button" role="tab" aria-controls="nav5" aria-selected="false">recreation</button>
                         </div>
-                      </nav>
-                      <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><div id="arts"></div></div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><div id="nature"></div></div>
-                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"><div id="culture-hist"></div></div>
-                        <div class="tab-pane fade" id="nav-archiland" role="tabpanel" aria-labelledby="nav-archiland-tab"><div id="archi-land"></div></div>
-                        <div class="tab-pane fade" id="nav-recre" role="tabpanel" aria-labelledby="nav-recre-tab"><div id="recreation"></div></div>
-                      </div>
-                        <div>
-                        Change Layer of Attractions<br>
-                        Currently showing: Locations with <div id="now">FOC</div>
-                        <button class="btn-warning" id="foc-toggle">see locations foc?</button>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav1" role="tabpanel" aria-labelledby="nav1-tab">
+                            <div id="artsfoc"></div>
                         </div>
-                        <button id="weatherBtn">check weather</button>
-                        <!-- <div id="arts"></div>
-                        <div id="nature"></div>
-                        <div id="culture-hist"></div>
-                        <div id="archi-land"></div>
-                        <div id="recreation"></div> -->
+                        <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
+                            <div id="naturefoc"></div>
+                        </div>
+                        <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab">
+                            <div id="culture-hist-foc"></div>
+                        </div>
+                        <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab">
+                            <div id="archi-land-foc"></div>
+                        </div>
+                        <div class="tab-pane fade" id="nav5" role="tabpanel" aria-labelledby="nav5-tab">
+                            <div id="recreation-foc"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-             <!-- nav foc off-canvas -->
-             <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample2" role="button"
-             aria-controls="offcanvasExample2">
-             nav foc
-         </a>
-         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample2"
-             aria-labelledby="offcanvasExampleLabel" data-bs-scroll="true" data-bs-backdrop="false">
-             <div class="offcanvas-header">
-                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                     aria-label="Close"></button>
-             </div>
-             <div class="offcanvas-body">
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                      <button class="nav-link active" id="nav1-tab" data-bs-toggle="tab" data-bs-target="#nav1" type="button" role="tab" aria-controls="nav1" aria-selected="true">arts</button>
-                      <button class="nav-link" id="nav2-tab" data-bs-toggle="tab" data-bs-target="#nav2" type="button" role="tab" aria-controls="nav2" aria-selected="false">nature</button>
-                      <button class="nav-link" id="nav3-tab" data-bs-toggle="tab" data-bs-target="#nav3" type="button" role="tab" aria-controls="nav3" aria-selected="false">culture & history</button>
-                      <button class="nav-link" id="nav4-tab" data-bs-toggle="tab" data-bs-target="#nav4" type="button" role="tab" aria-controls="nav4" aria-selected="false">archi land</button>
-                      <button class="nav-link" id="nav5-tab" data-bs-toggle="tab" data-bs-target="#nav5" type="button" role="tab" aria-controls="nav5" aria-selected="false">recreation</button>
-                    </div>
-                  </nav>
-                  <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav1" role="tabpanel" aria-labelledby="nav1-tab"><div id="artsfoc"></div></div>
-                    <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab"><div id="naturefoc"></div></div>
-                    <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab"><div id="culture-hist-foc"></div></div>
-                    <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab"><div id="archi-land-foc"></div></div>
-                    <div class="tab-pane fade" id="nav5" role="tabpanel" aria-labelledby="nav5-tab"><div id="recreation-foc"></div></div>
-                  </div>
-                 <!-- <div id="hide-search">
-                     <div>
-                     Change Layer of Attractions<br>
-                     Currently showing: Locations with <div id="now">FOC</div>
-                     <button class="btn-warning" id="foc-toggle">see locations foc?</button>
-                     </div> -->
-                     <!-- <button id="weatherBtn">check weather</button>
-                     <div id="artsfoc"></div>
-                     <div id="naturefoc"></div>
-                     <div id="culture-histfoc"></div>
-                     <div id="archi-landfoc"></div>
-                     <div id="recreation"></div>
-                 </div> -->
-             </div>
-         </div>
 
-            <div id='map-container' class="mt-3">
-                <div id="map" class="custom-popup col-12"></div>
-            </div>
-
-
-            <!-- <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="culture">
-
-        </div>
-
-        <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="architecture">
-
-        </div>
-
-        <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="recreation">
-
-        </div>
-
-        <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="nature">
-
-        </div>
-
-        <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="arts">
-
-        </div>
-
-        <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="history">
-
-        </div>
-
-        <div class="container mt-3 bg-warning d-flex flex-row flex-wrap justify-content-evenly" id="landscapes">
-
-        </div> -->
             <!-- axios script -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
                 integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
