@@ -25,59 +25,57 @@ window.addEventListener('DOMContentLoaded', async function () {
                 cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], 
                     { icon: heritageIcon })
                     .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
-                    <h4>${each[data]['Name']}</h4>  
-                    <h6>Opening Hours:</h6> ${each[data]['Opening Hours']}<br>
-                    ${entranceFee[each[data]['foc']]}`)
+                    ${each[data]['Name']}<br>  
+                    Opening Hours: ${each[data]['Opening Hours']}<br>
+                    ${each[data]['description']}
+                    ${entranceFee[each[data]['foc']]}
+                    // <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view'
+                    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">see on map</button>
+                    <a href="#map" class="btn-sm btn-dark get-directions">Get directions</a>`
+                    )
                 
                     if (each[data]['foc'] == 'yes') {
                     cultureHistoryMarker.addTo(cultureHistoryLayerfoc)
 
                 }
                 
-                else {
-                    document.querySelector('#culture-hist').innerHTML += `<div class="card mt-3" style="width: 18rem;">
-                    <img src="${imgUrl}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
-                      <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view' href='#map'>see on map</a>
-                      <a href="#map" class="btn-sm btn-dark get-directions">Get directions</a>
-                    </div>
-                  </div>`
-                let view = document.querySelectorAll('.view');
+                else{
                     cultureHistoryMarker.addTo(cultureHistoryLayer)
 
                 }
-                // testArr.push(cultureHistoryMarker)
+                let view = document.querySelectorAll('.view');
+                for (let i=0; i<view.length;i++){
+                    view[i].addEventListener('click', function(){
+                        alert('hi')
+                        document.querySelector('#hide-search').style.display = 'none';
+                        document.querySelector('#searchbar').style.display = 'block';
+                    })
+                }
                 // for (let i = 0; i < view.length; i++) {
                 //     view[i].addEventListener('click', function (e) {
                 //         map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
-                //         testArr[i].openPopup()
 
                 //     })
                 // }
 
-                // let getDirections = document.querySelectorAll('.get-directions');
-                // for (let i = 0; i < view.length; i++) {
-                //     getDirections[i].addEventListener('click', function () {
-                //         map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
-                //         testArr[i].openPopup();
-                //         chosenLat = view[i].dataset.latitude
-                //         chosenLng = view[i].dataset.longitude
-                //         if (routing) { routing.remove() }
-                //         routing = L.Routing.control({
-                //             waypoints: [
-                //                 L.latLng(userLat, userLng),
-                //                 L.latLng(chosenLat, chosenLng)
-                //             ]
-                //         }).addTo(map);
-                //     })
-                // }
+                let getDirections = document.querySelectorAll('.get-directions');
+                for (let i = 0; i < view.length; i++) {
+                    getDirections[i].addEventListener('click', function () {
+                        map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
+                        testArr[i].openPopup();
+                        chosenLat = view[i].dataset.latitude
+                        chosenLng = view[i].dataset.longitude
+                        if (routing) { routing.remove() }
+                        routing = L.Routing.control({
+                            waypoints: [
+                                L.latLng(userLat, userLng),
+                                L.latLng(chosenLat, chosenLng)
+                            ]
+                        }).addTo(map);
+                    })
+                }
 
                 cultureHistoryMarker.on('dblclick', async function mapfly(e) {
-                    document.querySelector('#map').classList.remove('col-12');
-                    document.querySelector('#map').classList.add('col-9');
                     searchResultLayer.clearLayers();
                     document.querySelector('#searchbar').style.display = 'block';
 
@@ -103,20 +101,20 @@ window.addEventListener('DOMContentLoaded', async function () {
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc)
 
                 }
-                else {
-                    archiLandscapesMarker.addTo(archiLandscapesLayer);
-                     document.querySelector('#archi-land').innerHTML += `<div class="card mt-3" style="width: 18rem;">
-                        <img src="${imgUrl}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">${each[data]['Name']}</h5>
-                          <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                          <p class="card-text">${each[data]['description']}</p>
-                          <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>see on map</a>
-                          <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
-                        </div>
-                      </div>`
+                // else {
+                //     archiLandscapesMarker.addTo(archiLandscapesLayer);
+                //      document.querySelector('#archi-land').innerHTML += `<div class="card mt-3" style="width: 18rem;">
+                //         <img src="${imgUrl}" class="card-img-top" alt="...">
+                //         <div class="card-body">
+                //           <h5 class="card-title">${each[data]['Name']}</h5>
+                //           <h6 class="card-text">${each[data]['Opening Hours']}</h6>
+                //           <p class="card-text">${each[data]['description']}</p>
+                //           <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>see on map</a>
+                //           <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                //         </div>
+                //       </div>`
 
-                }
+                // }
                 // let viewArchitecture = document.querySelectorAll('.view-architecture');
                 // archiArr.push(archiLandscapesMarker)
                 // for (let i = 0; i < viewArchitecture.length; i++) {
@@ -217,6 +215,9 @@ searchResultLayer.addTo(map)
 //usersearch foursquare
 document.querySelector('#searchBtn').addEventListener('click', async function () {
     searchResultLayer.clearLayers();
+    if (routing) {
+        routing.remove()
+    }
     document.querySelector('#results').innerHTML = "";
     query = document.querySelector('#search').value;
     if (query.length > 0) {
@@ -255,11 +256,9 @@ function position(markers) {
 
 }
 
-L.control.locate().addTo(map);
-
-var marker = new L.marker([userLat, userLng], {
-    draggable: 'true'
-});
+// var marker = new L.marker([userLat, userLng], {
+//     draggable: 'true'
+// });
 
 
 
@@ -349,7 +348,7 @@ async function getWeather() {
             ${weatherData.items[0].forecasts[i].forecast}`)
         }
         else {
-            let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: sunIcon }).addTo(weatherMarkers)
+            let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: fairIcon }).addTo(weatherMarkers)
             marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
             ${weatherData.items[0].forecasts[i].forecast}`)
         }
@@ -357,6 +356,7 @@ async function getWeather() {
 }
 
 
+//for weather markers and selectors
 document.querySelector('#weatherBtn').addEventListener('click', function () {
     getWeather()
     if (map.hasLayer(weatherMarkers)) {
@@ -367,11 +367,20 @@ document.querySelector('#weatherBtn').addEventListener('click', function () {
     }
 })
 
-let pages = document.querySelectorAll('.page');
+
+//animation code
 document.querySelector('#toggle').addEventListener('click', function(e){
     let page = e.target.dataset.page;
     document.querySelector('#page-1').classList.add('hidden');
     document.querySelector('#page-1').classList.remove('show');
+    document.querySelector('#page-2').style.display = 'block';
     document.querySelector('#page-2').classList.add('show');
     document.querySelector('#page-2').classList.remove('hidden')
+})
+
+document.querySelector('#go-back').addEventListener('click', function(e){
+    document.querySelector('#page-2').classList.add('hidden');
+    document.querySelector('#page-2').classList.remove('show');
+    document.querySelector('#page-1').classList.add('show');
+    document.querySelector('#page-1').classList.remove('hidden')
 })
