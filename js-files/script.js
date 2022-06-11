@@ -398,8 +398,7 @@ let controller = L.control.layers({}, overlayLayers).addTo(map);
 
 
 //toggle for current layer
-let focToggle = document.querySelector('#foc-toggle')
-let current = document.querySelector('#now')
+let focToggle = document.querySelector('#change')
 let PAID = [artsLayer, natureLayer, cultureHistoryLayer, archiLandscapesLayer, recreationLayer];
 let FREE = [artsLayerfoc, natureLayerfoc, cultureHistoryLayerfoc, archiLandscapesLayerfoc, recreationLayerfoc];
 
@@ -407,9 +406,9 @@ focToggle.addEventListener('click', function () {
     if (routing) {
         routing.remove()
     }
-    if (current.innerHTML == "no foc") {
+    if (document.querySelector('#staticEmail').value == "Attractions with Paid Entry") {
         controller.remove();
-        current.innerHTML = "foc"
+        document.querySelector('#staticEmail').value = "Attractions with Free Entry"
         overlayLayersFOC = {
             '<img style="height: 25px" src="images/map-markers/arts.png"> artsfoc': artsLayerfoc,
             '<img style="height: 25px" src="images/map-markers/nature.png">naturefoc': natureLayerfoc,
@@ -428,7 +427,7 @@ focToggle.addEventListener('click', function () {
         document.querySelector('.leaflet-control-layers-toggle').style.backgroundImage = "url(images/overlay-control/free.png)";
     }
     else {
-        current.innerText = "no foc";
+        document.querySelector('#staticEmail').value = "Attractions with Paid Entry";
         controller.remove()
         let i = 0;
         for (let each in overlayLayers) {
@@ -493,18 +492,18 @@ document.querySelector('#weatherBtn').addEventListener('click', function () {
 
 
 //animation code
-document.querySelector('#toggle').addEventListener('click', function (e) {
-    let page = e.target.dataset.page;
-    document.querySelector('#page-1').classList.add('hidden');
-    document.querySelector('#page-1').classList.remove('show');
-    document.querySelector('#page-2').style.display = 'block';
-    document.querySelector('#page-2').classList.add('show');
-    document.querySelector('#page-2').classList.remove('hidden')
-})
+// document.querySelector('#toggle').addEventListener('click', function (e) {
+//     let page = e.target.dataset.page;
+//     document.querySelector('#page-1').classList.add('hidden');
+//     document.querySelector('#page-1').classList.remove('show');
+//     document.querySelector('#page-2').style.display = 'block';
+//     document.querySelector('#page-2').classList.add('show');
+//     document.querySelector('#page-2').classList.remove('hidden')
+// })
 
-document.querySelector('#go-back').addEventListener('click', function (e) {
-    document.querySelector('#page-2').classList.add('hidden');
-    document.querySelector('#page-2').classList.remove('show');
-    document.querySelector('#page-1').classList.add('show');
-    document.querySelector('#page-1').classList.remove('hidden')
-})
+// document.querySelector('#go-back').addEventListener('click', function (e) {
+//     document.querySelector('#page-2').classList.add('hidden');
+//     document.querySelector('#page-2').classList.remove('show');
+//     document.querySelector('#page-1').classList.add('show');
+//     document.querySelector('#page-1').classList.remove('hidden')
+// })
