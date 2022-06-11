@@ -106,7 +106,7 @@
                           <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">arts</button>
                           <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">nature</button>
                           <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">culture & history</button>
-                          <button class="nav-link" id="nav-archiland-tab" data-bs-toggle="tab" data-bs-target="#nav-archiand" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">archi land</button>
+                          <button class="nav-link" id="nav-archiland-tab" data-bs-toggle="tab" data-bs-target="#nav-archiland" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">archi land</button>
                           <button class="nav-link" id="nav-recre-tab" data-bs-toggle="tab" data-bs-target="#nav-recre" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">recreation</button>
                         </div>
                       </nav>
@@ -143,19 +143,35 @@
                      aria-label="Close"></button>
              </div>
              <div class="offcanvas-body">
-                 <div id="hide-search">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <button class="nav-link active" id="nav1-tab" data-bs-toggle="tab" data-bs-target="#nav1" type="button" role="tab" aria-controls="nav1" aria-selected="true">arts</button>
+                      <button class="nav-link" id="nav2-tab" data-bs-toggle="tab" data-bs-target="#nav2" type="button" role="tab" aria-controls="nav2" aria-selected="false">nature</button>
+                      <button class="nav-link" id="nav3-tab" data-bs-toggle="tab" data-bs-target="#nav3" type="button" role="tab" aria-controls="nav3" aria-selected="false">culture & history</button>
+                      <button class="nav-link" id="nav4-tab" data-bs-toggle="tab" data-bs-target="#nav4" type="button" role="tab" aria-controls="nav4" aria-selected="false">archi land</button>
+                      <button class="nav-link" id="nav5-tab" data-bs-toggle="tab" data-bs-target="#nav5" type="button" role="tab" aria-controls="nav5" aria-selected="false">recreation</button>
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav1" role="tabpanel" aria-labelledby="nav1-tab"><div id="artsfoc"></div></div>
+                    <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab"><div id="naturefoc"></div></div>
+                    <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab"><div id="culture-hist-foc"></div></div>
+                    <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab"><div id="archi-land-foc"></div></div>
+                    <div class="tab-pane fade" id="nav5" role="tabpanel" aria-labelledby="nav5-tab"><div id="recreation-foc"></div></div>
+                  </div>
+                 <!-- <div id="hide-search">
                      <div>
                      Change Layer of Attractions<br>
                      Currently showing: Locations with <div id="now">FOC</div>
                      <button class="btn-warning" id="foc-toggle">see locations foc?</button>
-                     </div>
-                     <button id="weatherBtn">check weather</button>
+                     </div> -->
+                     <!-- <button id="weatherBtn">check weather</button>
                      <div id="artsfoc"></div>
                      <div id="naturefoc"></div>
                      <div id="culture-histfoc"></div>
                      <div id="archi-landfoc"></div>
                      <div id="recreation"></div>
-                 </div>
+                 </div> -->
              </div>
          </div>
 
