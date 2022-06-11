@@ -25,10 +25,10 @@
 </head>
 
 <body>
-    <div id="all-pages">
+    <!-- <div id="all-pages">
         <div id='page-1' class="page">
             <button id="toggle">foc</button>
-        </div>
+        </div> -->
 
         <div id="page-2" class="page hidden">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -66,11 +66,11 @@
                 Currently showing: Locations with <div id="now">foc</div>
                 <button class="btn-warning" id="foc-toggle">see locations foc?</button>
             </div>
-            <button id="weatherBtn">check weather</button>
         </div>
 
         <div id='map-container' class="mt-3">
             <div id="map" class="custom-popup col-12"></div>
+            <button class='btn' id="weatherBtn"><i class="bi bi-brightness-high"></i>weather</button>
         </div>
 
         <!-- search offcanvas -->
@@ -81,15 +81,15 @@
 
         <div class="offcanvas offcanvas-start" tabindex="-1" id="searchcanvas" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                <h5 class="offcanvas-title">Search for nearby items</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                     <input type="text" placeholder="e.g. food, stations" id="search">
                     <button class="btn-warning"
-                        id="searchBtn">search for nearby items</button>
-                        <button id="reset">reset</button>
+                        id="searchBtn"><i class="bi bi-search"></i></button>
+                        <button id="reset"><i class="bi bi-arrow-counterclockwise"></i></button>
                     <div id="results"></div>
                     <div id="validate"></div>
             </div>

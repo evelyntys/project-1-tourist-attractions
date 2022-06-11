@@ -96,7 +96,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     document.querySelector('#search-side').style.display = 'block';
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16)
+                    map.flyTo([chosenLat, chosenLng], 13)
                 })
             }
 
@@ -129,8 +129,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
-                      <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
+                      <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions-arts btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">view on map</button>
                     </div>
                   </div>`
 
@@ -143,8 +142,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
-                      <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
+                      <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions-arts btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">view on map</button>
                     </div>
                   </div>`
 
@@ -153,7 +151,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
+                    map.flyTo([chosenLat, chosenLng], 13);
                     document.querySelector('#search-side').style.display = 'block';
                 })
             }
@@ -212,7 +210,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
+                    map.flyTo([chosenLat, chosenLng], 13);
                     document.querySelector('#search-side').style.display = 'block';
                 })
             }
@@ -271,7 +269,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
+                    map.flyTo([chosenLat, chosenLng], 13);
                     document.querySelector('#search-side').style.display = 'block';
                 })
             }
@@ -305,8 +303,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
-                      <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
+                      <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions-arts btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">view on map</button>
                     </div>
                   </div>`
 
@@ -319,8 +316,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
-                      <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
+                      <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions-arts btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">view on map</button>
                     </div>
                   </div>`
 
@@ -329,7 +325,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
+                    map.flyTo([chosenLat, chosenLng], 13);
                     document.querySelector('#search-side').style.display = 'block';
                 })
             }
@@ -370,7 +366,7 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
             resultElement.setAttribute("data-bs-dismiss", "offcanvas");
             resultElement.setAttribute("aria-label", "Close")
             resultElement.addEventListener('click', function () {
-                map.flyTo([lat, lng], 16)
+                map.flyTo([lat, lng], 13)
                 resultPopup.openPopup();
             })
 
@@ -384,7 +380,8 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
 
 document.querySelector('#reset').addEventListener('click', function(){
     document.querySelector('#results').innerHTML = "";
-    searchResultLayer.clearLayers()
+    searchResultLayer.clearLayers();
+    document.querySelector('#search').value = "";
 })
 
 //overlay controls
