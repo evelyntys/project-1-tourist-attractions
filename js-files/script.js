@@ -461,6 +461,8 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
             let resultElement = document.createElement('div');
             resultElement.className = 'search-result';
             resultElement.innerHTML = eachResult.name;
+            resultElement.setAttribute("data-bs-dismiss", "offcanvas");
+            resultElement.setAttribute("aria-label", "Close")
             resultElement.addEventListener('click', function () {
                 map.flyTo([lat, lng], 16)
                 resultPopup.openPopup();
