@@ -408,7 +408,11 @@ focToggle.addEventListener('click', function () {
     }
     if (document.querySelector('#staticEmail').value == "Attractions with Paid Entry") {
         controller.remove();
-        document.querySelector('#staticEmail').value = "Attractions with Free Entry"
+        document.querySelector('#staticEmail').value = "Attractions with Free Entry";
+        document.querySelector('#nav-toggle')['data-bs-toggle']="offcanvas";
+        document.querySelector('#nav-toggle').href = "#offcanvasExample2";
+        document.querySelector('#nav-toggle').role="button"
+        document.querySelector('#nav-toggle')['aria-controls']="offcanvasExample2"
         overlayLayersFOC = {
             '<img style="height: 25px" src="images/map-markers/arts.png"> artsfoc': artsLayerfoc,
             '<img style="height: 25px" src="images/map-markers/nature.png">naturefoc': natureLayerfoc,
@@ -428,7 +432,12 @@ focToggle.addEventListener('click', function () {
     }
     else {
         document.querySelector('#staticEmail').value = "Attractions with Paid Entry";
-        controller.remove()
+        controller.remove();
+        document.querySelector('#staticEmail').value = "Attractions with Free Entry";
+        document.querySelector('#nav-toggle')['data-bs-toggle']="offcanvas";
+        document.querySelector('#nav-toggle').href = "#offcanvasExample";
+        document.querySelector('#nav-toggle').role="button"
+        document.querySelector('#nav-toggle')['aria-controls']="offcanvasExample"
         let i = 0;
         for (let each in overlayLayers) {
             map.removeLayer(FREE[i]);
@@ -507,3 +516,9 @@ document.querySelector('#weatherBtn').addEventListener('click', function () {
 //     document.querySelector('#page-1').classList.add('show');
 //     document.querySelector('#page-1').classList.remove('hidden')
 // })
+
+// if(document.querySelector('#staticEmail').value == 'Attractions with Paid Entry'){
+//     document.querySelector('#nav-toggle').setAttribute('data-bs-toggle', 'offcanvas');
+//     document.querySelector('#nav-toggle').setAttribute('href', 'offcanvasExample');
+// }
+
