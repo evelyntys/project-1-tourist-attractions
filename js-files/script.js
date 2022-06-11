@@ -5,6 +5,26 @@ let imgUrl = null;
 let routing = null;
 
 
+//get user location
+navigator.geolocation.getCurrentPosition(position)
+let userLat = null;
+let userLng = null;
+
+function position(markers) {
+    userLat = markers.coords.latitude;
+    userLng = markers.coords.longitude;
+}
+
+function showRoute(){
+    if (routing){
+        routing.remove()
+    }
+    navigator.geolocation.getCurrentPosition(position)
+    routing = L.Routing.control({ waypoints: [
+                    L.latLng(userLat, userLng),
+                    L. latLng(chosenLat, chosenLng)
+                ]}).addTo(map)
+}
 
 window.addEventListener('DOMContentLoaded', async function () {
 
@@ -21,20 +41,29 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //arts layer
 
-            if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('arts') 
-            || each[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
+            if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('arts')
+                || each[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
                 arts.push(each)
-                let artsMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], 
-                { icon: artsIcon })
-                .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
+                let artsMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                    { icon: artsIcon })
+                    .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
                 ${each[data]['Name']}<br>  
                 Opening Hours: ${each[data]['Opening Hours']}<br>
                 ${each[data]['description']}
                 ${entranceFee[each[data]['foc']]}
-                <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view'
-                type="button"  data-bs-toggle="offcanvas" href="#searchcanvas" role="button" aria-controls="searchcanvas">search nearby</button>
-                <a href="#map" class="btn-sm btn-dark get-directions">Get directions</a>`
+                <button
+                class='btn-sm btn-dark view'
+                type="button" data-bs-toggle="offcanvas" role="button" 
+                aria-controls="searchcanvas" 
+                data-bs-target="#searchcanvas">search nearby</button>
+                
+                <button class='btn-sm btn-dark help'
+                type="button" onclick='showRoute()'}>
+                get directions</button>`
                 )
+
+                    
+
                 if (each[data]['foc'] == 'yes') {
                     artsMarker.addTo(artsLayerfoc);
                     document.querySelector('#artsfoc').innerHTML += `<div class="card mt-3" style="width: 18rem;">
@@ -43,8 +72,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
-                      <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                      <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions-arts btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">view on map</button>
                     </div>
                   </div>`
 
@@ -57,29 +85,41 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
-                      <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view'
-                type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">search nearby</button>
-                <a href="#map" class="btn-sm btn-dark get-directions">Get directions</a>
+                      <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions-arts" data-bs-dismiss="offcanvas" aria-label="Close">view on map</button>
                     </div>
                   </div>`
 
                 }
+
+                artsMarker.on('click', function (){
+                    searchResultLayer.clearLayers();
+                    chosenLat = each.geometry.coordinates[1];
+                    chosenLng = each.geometry.coordinates[0];
+                    map.flyTo([chosenLat, chosenLng], 16)
+                })
             }
+
 
             //nature layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('nature') || each[data]['PHOTOURL'].toLowerCase().includes('nature'))) {
                 nature.push(each)
-                let natureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], 
+                let natureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: natureIcon })
                     .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
                 ${each[data]['Name']}<br>  
                 Opening Hours: ${each[data]['Opening Hours']}<br>
                 ${each[data]['description']}
                 ${entranceFee[each[data]['foc']]}
-                <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view'
-                type="button" data-bs-toggle="offcanvas" role="button" aria-controls="searchcanvas" data-bs-target="#searchcanvas" >search nearby</button>
-                <a href="#map" class="btn-sm btn-dark get-directions">Get directions</a>`
-                );
+                <button
+                class='btn-sm btn-dark view'
+                type="button" data-bs-toggle="offcanvas" role="button" 
+                aria-controls="searchcanvas" 
+                data-bs-target="#searchcanvas">search nearby</button>
+                
+                <button class='btn-sm btn-dark help'
+                type="button" onclick='showRoute()'}>
+                get directions</button>`
+                    );
                 if (each[data]['foc'] == 'yes') {
                     natureMarker.addTo(natureLayerfoc);
                     document.querySelector('#naturefoc').innerHTML += `<div class="card mt-3" style="width: 18rem;">
@@ -89,7 +129,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                      <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
                     </div>
                   </div>`
 
@@ -103,28 +143,40 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                      <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
                     </div>
                   </div>`
 
                 }
+                natureMarker.on('click', function (){
+                    searchResultLayer.clearLayers();
+                    chosenLat = each.geometry.coordinates[1];
+                    chosenLng = each.geometry.coordinates[0];
+                    map.flyTo([chosenLat, chosenLng], 16)
+                })
             }
 
             //culture history layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('culture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('history')))) {
-                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], 
+                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: heritageIcon })
                     .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
                     ${each[data]['Name']}<br>  
                     Opening Hours: ${each[data]['Opening Hours']}<br>
                     ${each[data]['description']}
                     ${entranceFee[each[data]['foc']]}
-                    // <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view'
-                    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">search nearby</button>
-                    <a href="#map" class="btn-sm btn-dark get-directions">Get directions</a>`
-                    )
+                    <button
+                class='btn-sm btn-dark view'
+                type="button" data-bs-toggle="offcanvas" role="button" 
+                aria-controls="searchcanvas" 
+                data-bs-target="#searchcanvas">search nearby</button>
                 
-                    if (each[data]['foc'] == 'yes') {
+                <button class='btn-sm btn-dark help'
+                type="button" onclick='showRoute()'}>
+                get directions</button>`
+                    )
+
+                if (each[data]['foc'] == 'yes') {
                     cultureHistoryMarker.addTo(cultureHistoryLayerfoc);
                     document.querySelector('#culture-hist-foc').innerHTML += `<div class="card mt-3" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
@@ -138,8 +190,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                   </div>`
 
                 }
-                
-                else{
+
+                else {
                     cultureHistoryMarker.addTo(cultureHistoryLayer);
                     document.querySelector('#culture-hist').innerHTML += `<div class="card mt-3" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
@@ -153,19 +205,26 @@ window.addEventListener('DOMContentLoaded', async function () {
                   </div>`
 
                 }
-                let view = document.querySelectorAll('.view');
-                for (let i=0; i<view.length;i++){
-                    view[i].addEventListener('click', function(){
-                        document.querySelector('#searchbar').style.display = 'block';
-                    })
-                }
 
-                let directions = document.querySelectorAll('.directions');
-                for (let each of directions){
-                    each.addEventListener('click', function(e){
-                        map.flyTo([each.dataset.latitude, each.dataset.longitude], 16)
-                    })
-                }
+                cultureHistoryMarker.on('click', function (){
+                    searchResultLayer.clearLayers();
+                    chosenLat = each.geometry.coordinates[1];
+                    chosenLng = each.geometry.coordinates[0];
+                    map.flyTo([chosenLat, chosenLng], 16)
+                })
+                // let view = document.querySelectorAll('.view');
+                // for (let i = 0; i < view.length; i++) {
+                //     view[i].addEventListener('click', function () {
+                //         document.querySelector('#searchbar').style.display = 'block';
+                //     })
+                // }
+
+                // let directions = document.querySelectorAll('.directions');
+                // for (let each of directions) {
+                //     each.addEventListener('click', function (e) {
+                //         map.flyTo([each.dataset.latitude, each.dataset.longitude], 16)
+                //     })
+                // }
 
                 // for (let i = 0; i < view.length; i++) {
                 //     view[i].addEventListener('click', function (e) {
@@ -174,47 +233,64 @@ window.addEventListener('DOMContentLoaded', async function () {
                 //     })
                 // }
 
-                let getDirections = document.querySelectorAll('.get-directions');
-                for (let i = 0; i < view.length; i++) {
-                    getDirections[i].addEventListener('click', function () {
-                        map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
-                        testArr[i].openPopup();
-                        chosenLat = view[i].dataset.latitude
-                        chosenLng = view[i].dataset.longitude
-                        if (routing) { routing.remove() }
-                        routing = L.Routing.control({
-                            waypoints: [
-                                L.latLng(userLat, userLng),
-                                L.latLng(chosenLat, chosenLng)
-                            ]
-                        }).addTo(map);
-                    })
-                }
+                // let getDirections = document.querySelectorAll('.get-directions');
+                // for (let i = 0; i < view.length; i++) {
+                //     getDirections[i].addEventListener('click', function () {
+                //         map.flyTo([view[i].dataset.latitude, view[i].dataset.longitude], 16)
+                //         testArr[i].openPopup();
+                //         chosenLat = view[i].dataset.latitude
+                //         chosenLng = view[i].dataset.longitude
+                //         if (routing) { routing.remove() }
+                //         routing = L.Routing.control({
+                //             waypoints: [
+                //                 L.latLng(userLat, userLng),
+                //                 L.latLng(chosenLat, chosenLng)
+                //             ]
+                //         }).addTo(map);
+                //     })
+                // }
 
-                cultureHistoryMarker.on('click', async function mapfly(e) {
-                    searchResultLayer.clearLayers();
-                    document.querySelector('#searchbar').style.display = 'block';
+                // cultureHistoryMarker.on('click', async function mapfly(e) {
+                //     searchResultLayer.clearLayers();
+                //     document.querySelector('#searchbar').style.display = 'block';
 
-                    map.flyTo([each.geometry.coordinates[1], each.geometry.coordinates[0]], 16)
-                    chosenLat = each.geometry.coordinates[1];
-                    chosenLng = each.geometry.coordinates[0];
-                    if (routing) { routing.remove() }
+                //     map.flyTo([each.geometry.coordinates[1], each.geometry.coordinates[0]], 16)
+                //     chosenLat = each.geometry.coordinates[1];
+                //     chosenLng = each.geometry.coordinates[0];
+                //     showRoute()
+                    // if (routing) { routing.remove() }
 
-                    routing = L.Routing.control({
-                        waypoints: [
-                            L.latLng(userLat, userLng),
-                            L.latLng(chosenLat, chosenLng)
-                        ]
-                    }).addTo(map);
+                    // routing = L.Routing.control({
+                    //     waypoints: [
+                    //         L.latLng(userLat, userLng),
+                    //         L.latLng(chosenLat, chosenLng)
+                    //     ]
+                    // }).addTo(map);
 
-                })
+            //     })
             }
 
             //archi landscape layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('architecture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('places-to-see')))) {
                 archiLandscapes.push(each)
                 // let architectureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: architectureIcon }).bindPopup(each[data]['Name'])
-                let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], { icon: archiLandscapesIcon }).bindPopup(`<img style='width: 100%' src="${imgUrl}> <h4>${each[data]['Name']}<h4><h6>  ${each[data]['Opening Hours']}`)
+                let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                    { icon: archiLandscapesIcon })
+                    .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
+                    ${each[data]['Name']}<br>  
+                    Opening Hours: ${each[data]['Opening Hours']}<br>
+                    ${each[data]['description']}
+                    ${entranceFee[each[data]['foc']]}
+                    <button
+                    class='btn-sm btn-dark view'
+                    type="button" data-bs-toggle="offcanvas" role="button" 
+                    aria-controls="searchcanvas" 
+                    data-bs-target="#searchcanvas">search nearby</button>
+                    
+                    <button class='btn-sm btn-dark help'
+                    type="button" onclick='showRoute()'}>
+                    get directions</button>`
+                    )
                 if (each[data]['foc'] == 'yes') {
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc);
                     document.querySelector('#archi-land-foc').innerHTML += `<div class="card mt-3" style="width: 18rem;">
@@ -224,25 +300,32 @@ window.addEventListener('DOMContentLoaded', async function () {
                           <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                           <p class="card-text">${each[data]['description']}</p>
                           <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                          <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                        <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
                         </div>
                       </div>`
 
                 }
                 else {
                     archiLandscapesMarker.addTo(archiLandscapesLayer);
-                     document.querySelector('#archi-land').innerHTML += `<div class="card mt-3" style="width: 18rem;">
+                    document.querySelector('#archi-land').innerHTML += `<div class="card mt-3" style="width: 18rem;">
                         <img src="${imgUrl}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">${each[data]['Name']}</h5>
                           <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                           <p class="card-text">${each[data]['description']}</p>
                           <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                          <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                        <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
                         </div>
                       </div>`
 
                 }
+
+                archiLandscapesMarker.on('click', function (){
+                    searchResultLayer.clearLayers();
+                    chosenLat = each.geometry.coordinates[1];
+                    chosenLng = each.geometry.coordinates[0];
+                    map.flyTo([chosenLat, chosenLng], 16)
+                })
                 // let viewArchitecture = document.querySelectorAll('.view-architecture');
                 // archiArr.push(archiLandscapesMarker)
                 // for (let i = 0; i < viewArchitecture.length; i++) {
@@ -269,40 +352,46 @@ window.addEventListener('DOMContentLoaded', async function () {
                 //     })
                 // }
 
-                archiLandscapesMarker.on('dblclick', async function mapfly(e) {
-                    searchResultLayer.clearLayers();
-                    document.querySelector('#searchbar').style.display = 'block';
+                // archiLandscapesMarker.on('dblclick', async function mapfly(e) {
+                //     searchResultLayer.clearLayers();
+                //     document.querySelector('#searchbar').style.display = 'block';
 
-                    map.flyTo([each.geometry.coordinates[1], each.geometry.coordinates[0]], 16)
-                    chosenLat = each.geometry.coordinates[1];
-                    chosenLng = each.geometry.coordinates[0];
+                //     map.flyTo([each.geometry.coordinates[1], each.geometry.coordinates[0]], 16)
+                //     chosenLat = each.geometry.coordinates[1];
+                //     chosenLng = each.geometry.coordinates[0];
 
 
-                    L.Routing.control({
-                        waypoints: [
-                            L.latLng(userLat, userLng),
-                            L.latLng(chosenLat, chosenLng)
-                        ]
-                    }).addTo(map);
+                //     L.Routing.control({
+                //         waypoints: [
+                //             L.latLng(userLat, userLng),
+                //             L.latLng(chosenLat, chosenLng)
+                //         ]
+                //     }).addTo(map);
 
-                })
+                // })
             }
 
             //recreation layer
 
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('recreation') || each[data]['PHOTOURL'].toLowerCase().includes('recreation'))) {
                 recreation.push(each)
-                let recreationMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]], 
+                let recreationMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: recreationIcon })
                     .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
-                ${each[data]['Name']}<br>  
-                Opening Hours: ${each[data]['Opening Hours']}<br>
-                ${each[data]['description']}
-                ${entranceFee[each[data]['foc']]}
-                <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view'
-                type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">search nearby</button>
-                <a href="#map" class="btn-sm btn-dark get-directions">Get directions</a>`
-                )
+                    ${each[data]['Name']}<br>  
+                    Opening Hours: ${each[data]['Opening Hours']}<br>
+                    ${each[data]['description']}
+                    ${entranceFee[each[data]['foc']]}
+                    <button
+                class='btn-sm btn-dark view'
+                type="button" data-bs-toggle="offcanvas" role="button" 
+                aria-controls="searchcanvas" 
+                data-bs-target="#searchcanvas">search nearby</button>
+                
+                <button class='btn-sm btn-dark help'
+                type="button" onclick='showRoute()'}>
+                get directions</button>`
+                    )
                 if (each[data]['foc'] == 'yes') {
                     recreationMarker.addTo(recreationLayerfoc);
                     document.querySelector('#recreation-foc').innerHTML += `<div class="card mt-3" style="width: 18rem;">
@@ -312,7 +401,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                      <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
                     </div>
                   </div>`
 
@@ -326,11 +415,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       <a data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' class='btn-sm btn-dark view-architecture' href='#map'>search nearby</a>
-                      <a href="#map" class="btn-sm btn-dark get-directions-archi">Get directions</a>
+                    <button data-latitude='${each.geometry.coordinates[1]}' data-longitude='${each.geometry.coordinates[0]}' type="button" class="btn directions" data-bs-dismiss="offcanvas" aria-label="Close">get directions</button>
                     </div>
                   </div>`
 
                 }
+                recreationMarker.on('click', function (){
+                    searchResultLayer.clearLayers();
+                    chosenLat = each.geometry.coordinates[1];
+                    chosenLng = each.geometry.coordinates[0];
+                    map.flyTo([chosenLat, chosenLng], 16)
+                })
             }
 
         }
@@ -378,17 +473,6 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
         document.querySelector('#validate').innerHTML = `<div class='alert alert-warning'>please enter a search term</div>`
     }
 })
-
-//get user location
-navigator.geolocation.getCurrentPosition(position)
-let userLat = null;
-let userLng = null;
-
-function position(markers) {
-    userLat = markers.coords.latitude;
-    userLng = markers.coords.longitude;
-
-}
 
 // var marker = new L.marker([userLat, userLng], {
 //     draggable: 'true'
@@ -463,17 +547,17 @@ async function getWeather() {
     let response = await axios.get(weatherAPI);
     let weatherData = response.data;
     for (let i = 0; i < weatherData.area_metadata.length; i++) {
-        if (weatherData.items[0].forecasts[i].forecast.toLowerCase() == 'cloudy') {
+        if (weatherData.items[0].forecasts[i].forecast.toLowerCase().includes('partly cloudy')) {
             let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: partlyCloudyIcon }).addTo(weatherMarkers)
             marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
             ${weatherData.items[0].forecasts[i].forecast}`)
         }
-        else if (weatherData.items[0].forecasts[i].forecast.toLowerCase() == 'partly cloudy') {
+        else if (weatherData.items[0].forecasts[i].forecast.toLowerCase().includes('cloudy')) {
             let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: cloudyIcon }).addTo(weatherMarkers)
             marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
         ${weatherData.items[0].forecasts[i].forecast}`)
         }
-        else if (weatherData.items[0].forecasts[i].forecast.toLowerCase() == 'thunder') {
+        else if (weatherData.items[0].forecasts[i].forecast.toLowerCase().includes('thunder')) {
             let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: thunderyIcon }).addTo(weatherMarkers)
             marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
             ${weatherData.items[0].forecasts[i].forecast}`)
@@ -505,7 +589,7 @@ document.querySelector('#weatherBtn').addEventListener('click', function () {
 
 
 //animation code
-document.querySelector('#toggle').addEventListener('click', function(e){
+document.querySelector('#toggle').addEventListener('click', function (e) {
     let page = e.target.dataset.page;
     document.querySelector('#page-1').classList.add('hidden');
     document.querySelector('#page-1').classList.remove('show');
@@ -514,7 +598,7 @@ document.querySelector('#toggle').addEventListener('click', function(e){
     document.querySelector('#page-2').classList.remove('hidden')
 })
 
-document.querySelector('#go-back').addEventListener('click', function(e){
+document.querySelector('#go-back').addEventListener('click', function (e) {
     document.querySelector('#page-2').classList.add('hidden');
     document.querySelector('#page-2').classList.remove('show');
     document.querySelector('#page-1').classList.add('show');
