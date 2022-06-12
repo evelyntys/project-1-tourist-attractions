@@ -45,10 +45,9 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('arts')
                 || each[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
-                let artsMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
-                    { icon: artsIcon })
-                    .bindPopup(
-                        `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
+                    let popup = L.responsivePopup()
+                    .setContent(
+                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
                 <h6>${each[data]['Name']}</h6>  
                 <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
                 <p>${each[data]['description']}</p>
@@ -61,14 +60,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                 
                 <button class='btn-sm btn-dark'
                 type="button" onclick='showRoute()'}>
-                get directions</button>`
-                    )
+                get directions</button>`)
+
+                let artsMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                    { icon: artsIcon })
+                    .bindPopup(popup)
 
                 if (each[data]['foc'] == 'yes') {
                     artsPopupFOC.push(artsMarker)
                     artsMarker.addTo(artsLayerfoc);
                     document.querySelector('#artsfoc').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                `<div class="card mt-3" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
@@ -106,7 +108,6 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 artsMarker.on('click', function () {
                     searchResultLayer.clearLayers();
-                    document.querySelector('#search-side').style.display = 'block';
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
                     map.flyTo([chosenLat, chosenLng], 13)
@@ -126,23 +127,26 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //nature layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('nature') || each[data]['PHOTOURL'].toLowerCase().includes('nature'))) {
-                let natureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
-                    { icon: natureIcon })
-                    .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
-                ${each[data]['Name']}<br>  
-                Opening Hours: ${each[data]['Opening Hours']}<br>
-                ${each[data]['description']}
-                ${entranceFee[each[data]['foc']]}
+                let popup = L.responsivePopup()
+                    .setContent(
+                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
+                <h6>${each[data]['Name']}</h6>  
+                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
+                <p>${each[data]['description']}</p>
+                <h6>${entranceFee[each[data]['foc']]}</h6>
                 <button
                 class='btn-sm btn-dark view'
                 type="button" data-bs-toggle="offcanvas" role="button" 
                 aria-controls="searchcanvas" 
                 data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-dark help'
+                <button class='btn-sm btn-dark'
                 type="button" onclick='showRoute()'}>
-                get directions</button>`
-                    );
+                get directions</button>`);
+
+                let natureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                    { icon: natureIcon })
+                    .bindPopup(popup);
                 if (each[data]['foc'] == 'yes') {
                     naturePopupFOC.push(natureMarker)
                     natureMarker.addTo(natureLayerfoc);
@@ -200,23 +204,26 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //culture history layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('culture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('history')))) {
-                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
-                    { icon: heritageIcon })
-                    .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
-                    ${each[data]['Name']}<br>  
-                    Opening Hours: ${each[data]['Opening Hours']}<br>
-                    ${each[data]['description']}
-                    ${entranceFee[each[data]['foc']]}
-                    <button
+                let popup = L.responsivePopup()
+                    .setContent(
+                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
+                <h6>${each[data]['Name']}</h6>  
+                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
+                <p>${each[data]['description']}</p>
+                <h6>${entranceFee[each[data]['foc']]}</h6>
+                <button
                 class='btn-sm btn-dark view'
                 type="button" data-bs-toggle="offcanvas" role="button" 
                 aria-controls="searchcanvas" 
                 data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-dark help'
+                <button class='btn-sm btn-dark'
                 type="button" onclick='showRoute()'}>
-                get directions</button>`
-                    )
+                get directions</button>`)
+
+                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                    { icon: heritageIcon })
+                    .bindPopup(popup)
 
                 if (each[data]['foc'] == 'yes') {
                     cultureHistPopupFOC.push(cultureHistoryMarker)
@@ -277,23 +284,26 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //archi landscape layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('architecture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('places-to-see')))) {
+                let popup = L.responsivePopup()
+                    .setContent(
+                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
+                <h6>${each[data]['Name']}</h6>  
+                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
+                <p>${each[data]['description']}</p>
+                <h6>${entranceFee[each[data]['foc']]}</h6>
+                <button
+                class='btn-sm btn-dark view'
+                type="button" data-bs-toggle="offcanvas" role="button" 
+                aria-controls="searchcanvas" 
+                data-bs-target="#searchcanvas">search nearby</button>
+                
+                <button class='btn-sm btn-dark'
+                type="button" onclick='showRoute()'}>
+                get directions</button>`)
+
                 let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: archiLandscapesIcon })
-                    .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
-                    ${each[data]['Name']}<br>  
-                    Opening Hours: ${each[data]['Opening Hours']}<br>
-                    ${each[data]['description']}
-                    ${entranceFee[each[data]['foc']]}
-                    <button
-                    class='btn-sm btn-dark view'
-                    type="button" data-bs-toggle="offcanvas" role="button" 
-                    aria-controls="searchcanvas" 
-                    data-bs-target="#searchcanvas">search nearby</button>
-                    
-                    <button class='btn-sm btn-dark help'
-                    type="button" onclick='showRoute()'}>
-                    get directions</button>`
-                    )
+                    .bindPopup(popup)
                 if (each[data]['foc'] == 'yes') {
                     archiLandPopupFOC.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc);
@@ -352,23 +362,25 @@ window.addEventListener('DOMContentLoaded', async function () {
             //recreation layer
 
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('recreation') || each[data]['PHOTOURL'].toLowerCase().includes('recreation'))) {
-                let recreationMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
-                    { icon: recreationIcon })
-                    .bindPopup(`<img style='width: 50%' class='mx-auto' src="${imgUrl}> 
-                    ${each[data]['Name']}<br>  
-                    Opening Hours: ${each[data]['Opening Hours']}<br>
-                    ${each[data]['description']}
-                    ${entranceFee[each[data]['foc']]}
-                    <button
+                let popup = L.responsivePopup()
+                    .setContent(
+                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
+                <h6>${each[data]['Name']}</h6>  
+                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
+                <p>${each[data]['description']}</p>
+                <h6>${entranceFee[each[data]['foc']]}</h6>
+                <button
                 class='btn-sm btn-dark view'
                 type="button" data-bs-toggle="offcanvas" role="button" 
                 aria-controls="searchcanvas" 
                 data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-dark help'
+                <button class='btn-sm btn-dark'
                 type="button" onclick='showRoute()'}>
-                get directions</button>`
-                    )
+                get directions</button>`)
+                let recreationMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                    { icon: recreationIcon })
+                    .bindPopup(popup)
                 if (each[data]['foc'] == 'yes') {
                     recreationPopupFOC.push(recreationMarker);
                     recreationMarker.addTo(recreationLayerfoc);

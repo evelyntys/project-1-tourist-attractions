@@ -9,17 +9,21 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <!-- leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin="" />
+    <!-- responsive popup CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-responsive-popup@1.0.0/leaflet.responsive.popup.css" />
+    <!-- marker cluster CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+    <!-- routing CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-    <link rel='stylehsheet' href="sidebar.css">
+    <!-- own CSS -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- tab header -->
     <link rel="icon" href="images/navbar/traveler.png">
     <title>SGgoWhere</title>
 </head>
@@ -31,15 +35,20 @@
         </div> -->
 
     <div id="page-2" class="page hidden">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img class='pl-2' style='height: 40px'
-                        src='images/navbar/traveler.png'>SGgoWhere</a>
-                <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                    value="Attractions with Paid Entry">
-                <button class="btn btn-outline-success" id="change" type="submit">change</button>
+        <div class="container-fluid row visible-sm hidden-lg">
+            <a class="navbar-brand" id="nav-toggle" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                aria-controls="offcanvasExample"><img class='pl-2' style='height: 40px'
+                    src='images/navbar/traveler.png'>SGgoWhere</a>
+            <div>
+                <div class="row">
+                    <div class="col-9">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                            value="Attractions with Paid Entry">
+                    </div>
+                    <button class="btn btn-outline-success col-3" id="change" type="submit">change</button>
+                </div>
             </div>
-        </nav>
+        </div>
         <!-- <div class="container mt-3">
             <button id="go-back">return to animation</button>
         </div> -->
@@ -51,13 +60,13 @@
         </div> -->
     </div>
 
-    <div id='map-container' class="mt-3">
+    <div id='map-container'>
         <div id="map" class="custom-popup col-12"></div>
         <button class='btn' id="weatherBtn"><i class="bi bi-brightness-high"></i>weather</button>
         <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#searchcanvas" role="button"
-        aria-controls="searchcanvas" id="search-side">
-        return to search
-    </a>
+            aria-controls="searchcanvas" id="search-side">
+            return to search
+        </a>
     </div>
 
     <!-- search offcanvas -->
@@ -78,12 +87,13 @@
 
 
     <!-- nav off-canvas -->
-    <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+    <!-- <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
         aria-controls="offcanvasExample">
         nav paid
-    </a>
+    </a> -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Attractions with Paid Entry</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -125,13 +135,14 @@
     </div>
 
     <!-- nav foc off-canvas -->
-    <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample2" role="button"
+    <!-- <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample2" role="button"
         aria-controls="offcanvasExample2">
         nav foc
-    </a>
+    </a> -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample2" aria-labelledby="offcanvasExampleLabel"
         data-bs-scroll="true" data-bs-backdrop="false">
         <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Attractions with Free Entry</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -179,6 +190,8 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
+    <!-- responsive popup -->
+    <script src="https://unpkg.com/leaflet-responsive-popup@1.0.0/leaflet.responsive.popup.js"></script>
     <!-- marker clustering -->
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
     <!-- bootstrap script -->
