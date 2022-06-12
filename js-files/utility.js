@@ -14,6 +14,8 @@ let archiLandscapes = [];
 let archiLandscapesLayer = L.markerClusterGroup();
 let archiLandscapesLayerfoc = L.markerClusterGroup();
 
+let searchResultLayer = L.layerGroup();
+
 //marker icons for map
 var natureIcon = L.icon({
     iconUrl: 'images/map-markers/nature.png',
@@ -107,3 +109,30 @@ var thunderyIcon = L.icon({
     popupAnchor: [-3, -76]
 });
 
+//keys for foc/paid attraction
+let entranceFee = {
+    'yes': 'Free entry',
+    'depends': 'Free entry for Singaporeans/PRs, foreigners to buy tickets',
+    'no': 'Tickets to be purchased prior to entry'
+}
+
+let artsPopup = [];
+let artsPopupFOC = [];
+let naturePopup = [];
+let naturePopupFOC = [];
+let cultureHistPopup = [];
+let cultureHistFOC = [];
+let archiLandPopup = [];
+let archiLandFOC = [];
+let recreationPopup = [];
+let recreationPopupFOC = [];
+
+function directToMap(button, layer, popup) {
+    for (let j = 0; j < button.length; j++) {
+        button[j].addEventListener('click', function () {
+            layer.zoomToShowLayer(popup[j], function () {
+                popup[j].openPopup();
+            });
+        })
+    }
+}
