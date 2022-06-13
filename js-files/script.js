@@ -15,18 +15,7 @@ function position(markers) {
     userLng = markers.coords.longitude;
 }
 
-function showRoute() {
-    if (routing) {
-        routing.remove()
-    }
-    navigator.geolocation.getCurrentPosition(position)
-    routing = L.Routing.control({
-        waypoints: [
-            L.latLng(userLat, userLng),
-            L.latLng(chosenLat, chosenLng)
-        ]
-    }).addTo(map)
-}
+let addClass = '';
 
 window.addEventListener('DOMContentLoaded', async function () {
 
@@ -40,14 +29,9 @@ window.addEventListener('DOMContentLoaded', async function () {
                 let indexEnd = imgUrl.indexOf('>')
                 imgUrl = imgUrl.slice(25, indexEnd).join('')
             }
-
-            //arts layer
-
-            if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('arts')
-                || each[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
-                    let popup = L.responsivePopup()
+            let popup = L.responsivePopup()
                     .setContent(
-                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
+                `<img style='width: 100%' src="${imgUrl}> 
                 <h6>${each[data]['Name']}</h6>  
                 <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
                 <p>${each[data]['description']}</p>
@@ -61,6 +45,14 @@ window.addEventListener('DOMContentLoaded', async function () {
                 <button class='btn-sm btn-dark'
                 type="button" onclick='showRoute()'}>
                 get directions</button>`)
+
+
+            //arts layer
+
+
+            if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('arts')
+                || each[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
+                    addClass = 'view-arts-foc'
 
                 let artsMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: artsIcon })
@@ -110,7 +102,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 13)
+                    map.flyTo([chosenLat, chosenLng], 16);
+                    document.querySelector('#search-side').style.display = 'block';
                 })
 
                 //event listener to direct from offcanvas to map
@@ -127,22 +120,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //nature layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('nature') || each[data]['PHOTOURL'].toLowerCase().includes('nature'))) {
-                let popup = L.responsivePopup()
-                    .setContent(
-                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
-                <h6>${each[data]['Name']}</h6>  
-                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
-                <p>${each[data]['description']}</p>
-                <h6>${entranceFee[each[data]['foc']]}</h6>
-                <button
-                class='btn-sm btn-dark view'
-                type="button" data-bs-toggle="offcanvas" role="button" 
-                aria-controls="searchcanvas" 
-                data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-dark'
-                type="button" onclick='showRoute()'}>
-                get directions</button>`);
 
                 let natureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: natureIcon })
@@ -189,7 +167,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 13);
+                    map.flyTo([chosenLat, chosenLng], 16);
                     document.querySelector('#search-side').style.display = 'block';
                 })
 
@@ -204,22 +182,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //culture history layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('culture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('history')))) {
-                let popup = L.responsivePopup()
-                    .setContent(
-                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
-                <h6>${each[data]['Name']}</h6>  
-                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
-                <p>${each[data]['description']}</p>
-                <h6>${entranceFee[each[data]['foc']]}</h6>
-                <button
-                class='btn-sm btn-dark view'
-                type="button" data-bs-toggle="offcanvas" role="button" 
-                aria-controls="searchcanvas" 
-                data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-dark'
-                type="button" onclick='showRoute()'}>
-                get directions</button>`)
 
                 cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: heritageIcon })
@@ -269,7 +232,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 13);
+                    map.flyTo([chosenLat, chosenLng], 16);
                     document.querySelector('#search-side').style.display = 'block';
                 })
 
@@ -284,22 +247,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //archi landscape layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('architecture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('places-to-see')))) {
-                let popup = L.responsivePopup()
-                    .setContent(
-                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
-                <h6>${each[data]['Name']}</h6>  
-                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
-                <p>${each[data]['description']}</p>
-                <h6>${entranceFee[each[data]['foc']]}</h6>
-                <button
-                class='btn-sm btn-dark view'
-                type="button" data-bs-toggle="offcanvas" role="button" 
-                aria-controls="searchcanvas" 
-                data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-dark'
-                type="button" onclick='showRoute()'}>
-                get directions</button>`)
 
                 let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: archiLandscapesIcon })
@@ -346,7 +294,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 13);
+                    map.flyTo([chosenLat, chosenLng], 16);
                     document.querySelector('#search-side').style.display = 'block';
                 })
 
@@ -362,22 +310,7 @@ window.addEventListener('DOMContentLoaded', async function () {
             //recreation layer
 
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('recreation') || each[data]['PHOTOURL'].toLowerCase().includes('recreation'))) {
-                let popup = L.responsivePopup()
-                    .setContent(
-                `<div class='mx-auto'><img style='width: 50%' src="${imgUrl}></div> 
-                <h6>${each[data]['Name']}</h6>  
-                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
-                <p>${each[data]['description']}</p>
-                <h6>${entranceFee[each[data]['foc']]}</h6>
-                <button
-                class='btn-sm btn-dark view'
-                type="button" data-bs-toggle="offcanvas" role="button" 
-                aria-controls="searchcanvas" 
-                data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-dark'
-                type="button" onclick='showRoute()'}>
-                get directions</button>`)
                 let recreationMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: recreationIcon })
                     .bindPopup(popup)
@@ -422,7 +355,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     searchResultLayer.clearLayers();
                     chosenLat = each.geometry.coordinates[1];
                     chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 13);
+                    map.flyTo([chosenLat, chosenLng], 16);
                     document.querySelector('#search-side').style.display = 'block';
                 })
 
