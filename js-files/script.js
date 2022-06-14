@@ -389,7 +389,7 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
     document.querySelector('#results').innerHTML = "";
     query = document.querySelector('#search').value;
     if (query.length > 0) {
-        let locations = await searchnearby(query);
+        let locations = await searchNearby(query);
         L.circle([chosenLat, chosenLng], { radius: 1000, color: '#C0392B' }).addTo(searchResultLayer);
         if (locations.results == false) {
             document.querySelector('#results').innerHTML = "no results found";
@@ -399,27 +399,32 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 let id = eachResult.fsq_id;
                 let lat = eachResult.geocodes.main.latitude;
                 let lng = eachResult.geocodes.main.longitude;
-                let photo = await photosearch(id);
-                let photourl = photo[0].prefix + 'original' + photo[0].suffix;
-                console.log(photourl); 
+                let photoLink = ""
+                let photo = await photoSearch(id);
+                let displayHours = await openingHours(id);
+                if(photo[0]){
+                photoLink = photo[0].prefix + 'original' + photo[0].suffix;
+                }
+                
                 let popupContent = L.responsivePopup()
                 .setContent(`
-                <img style='width: 100%' src='${photourl}'>
+                <img style='width: 100%' src='${photoLink}'>
                 <h4>${eachResult.name}</h4>
+                <h4>${displayHours.hours.display}</h4>
             <h6>${eachResult.location.formatted_address}</h6>`)
-                let resultPopup = L.marker([lat, lng], { icon: searchIcon }).addTo(searchResultLayer);
-                resultPopup
-                    .bindPopup(popupContent)
+                let resultPopup = L.marker([lat, lng], { icon: searchIcon })
+                .addTo(searchResultLayer)
+                .bindPopup(popupContent)
                 let perResult = document.createElement('div');
                 perResult.className = 'search-result';
                 perResult.innerHTML = eachResult.name;
                 perResult.setAttribute("data-bs-dismiss", "offcanvas");
                 perResult.setAttribute("aria-label", "Close")
                 perResult.addEventListener('click', function () {
-                    map.flyTo([lat, lng], 13)
-                    resultPopup.openPopup();
+                    map.flyTo([lat, lng], 16);
+                    resultPopup.openPopup()
                 })
-                document.querySelector('#results').appendChild(perResult);
+            document.querySelector('#results').appendChild(perResult);
             }
         }
     }
