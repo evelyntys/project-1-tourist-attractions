@@ -15,7 +15,6 @@ function position(markers) {
     userLng = markers.coords.longitude;
 }
 
-let addClass = '';
 
 window.addEventListener('DOMContentLoaded', async function () {
 
@@ -46,13 +45,14 @@ window.addEventListener('DOMContentLoaded', async function () {
                 type="button" onclick='showRoute()'}>
                 get directions</button>`)
 
+                
 
             //arts layer
 
 
             if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('arts')
                 || each[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
-                    addClass = 'view-arts-foc'
+                    
 
                 let artsMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: artsIcon })
@@ -389,19 +389,27 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
     document.querySelector('#results').innerHTML = "";
     query = document.querySelector('#search').value;
     if (query.length > 0) {
-        let locations = await search(query);
+        let locations = await searchnearby(query);
         L.circle([chosenLat, chosenLng], { radius: 1000, color: '#C0392B' }).addTo(searchResultLayer);
         if (locations.results == false) {
             document.querySelector('#results').innerHTML = "no results found";
         }
         else {
             for (let eachResult of locations.results) {
+                let id = eachResult.fsq_id;
                 let lat = eachResult.geocodes.main.latitude;
                 let lng = eachResult.geocodes.main.longitude;
+                let photo = await photosearch(id);
+                let photourl = photo[0].prefix + 'original' + photo[0].suffix;
+                console.log(photourl); 
+                let popupContent = L.responsivePopup()
+                .setContent(`
+                <img style='width: 100%' src='${photourl}'>
+                <h4>${eachResult.name}</h4>
+            <h6>${eachResult.location.formatted_address}</h6>`)
                 let resultPopup = L.marker([lat, lng], { icon: searchIcon }).addTo(searchResultLayer);
                 resultPopup
-                    .bindPopup(`<h4>${eachResult.name}</h4>
-                <h6>${eachResult.location.formatted_address}</h6>`)
+                    .bindPopup(popupContent)
                 let perResult = document.createElement('div');
                 perResult.className = 'search-result';
                 perResult.innerHTML = eachResult.name;

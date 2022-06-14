@@ -2,7 +2,7 @@
 const BASE_API_URL = 'https://api.foursquare.com/v3/';
 const API_KEY = 'fsq3ZRDrusEE9o+I1ExY+0+OY+AEHvj6C8fw5zccHOkbJpA=';
 
-async function search(query) {
+async function searchnearby(query) {
     let url = BASE_API_URL + 'places/search';
     let response = await axios.get(url, {
         'params': {
@@ -10,6 +10,21 @@ async function search(query) {
             'query': query,
             'radius': 1000,
             'limit': 50,
+        },
+        'headers': {
+            'Accept': 'application/json',
+            'Authorization': API_KEY
+        }
+    });
+    return response.data
+}
+
+async function photosearch(id) {
+    let url = BASE_API_URL + `places/${id}/photos`;
+    let response = await axios.get(url, {
+        'params': {
+            'fsq_id': id,
+            'limit': 1,
         },
         'headers': {
             'Accept': 'application/json',
