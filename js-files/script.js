@@ -34,15 +34,18 @@ window.addEventListener('DOMContentLoaded', async function () {
                 <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
                 <p>${each[data]['description']}</p>
                 <h6>${entranceFee[each[data]['foc']]}</h6>
-                <button
-                class='btn-sm btn-dark view'
+
+                <div class='mx-auto'>
+                <button class='btn-sm btn-outline-danger view'
                 type="button" data-bs-toggle="offcanvas" role="button" 
                 aria-controls="searchcanvas" 
                 data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-dark'
+                <button class='btn-sm btn-outline-danger'
                 type="button" onclick='showRouteToAttraction()'}>
-                get directions</button>`)
+                get directions</button>
+                </div>`)
+            
 
 
 
@@ -61,19 +64,19 @@ window.addEventListener('DOMContentLoaded', async function () {
                     artsPopupFOC.push(artsMarker)
                     artsMarker.addTo(artsLayerfoc);
                     document.querySelector('#artsfoc').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                    </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn view-arts-foc btn-dark" 
+                    class="btn view-arts-foc btn-outline-danger" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
-                    </div>
                   </div>`
                 }
 
@@ -81,16 +84,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     artsPopup.push(artsMarker)
                     artsMarker.addTo(artsLayer);
                     document.querySelector('#arts').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                      </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn view-arts btn-dark" 
+                    class="btn view-arts btn-outline-danger" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -128,16 +132,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     naturePopupFOC.push(natureMarker)
                     natureMarker.addTo(natureLayerfoc);
                     document.querySelector('#naturefoc').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                    </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn directions-arts btn-dark view-nature-foc" 
+                    class="btn btn-outline-danger view-nature-foc" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -147,16 +152,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     naturePopup.push(natureMarker);
                     natureMarker.addTo(natureLayer);
                     document.querySelector('#nature').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                      </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn directions-arts btn-dark view-nature" 
+                    class="btn btn-outline-danger view-nature" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -191,16 +197,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     cultureHistPopupFOC.push(cultureHistoryMarker)
                     cultureHistoryMarker.addTo(cultureHistoryLayerfoc);
                     document.querySelector('#culture-hist-foc').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                      </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn directions-arts btn-dark view-culture-foc" 
+                    class="btn btn-outline-danger view-culture-foc" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -211,16 +218,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     cultureHistPopup.push(cultureHistoryMarker)
                     cultureHistoryMarker.addTo(cultureHistoryLayer);
                     document.querySelector('#culture-hist').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                      </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn directions-arts btn-dark view-culture" 
+                    class="btn btn-outline-danger view-culture" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -255,16 +263,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     archiLandPopupFOC.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc);
                     document.querySelector('#archi-land-foc').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                      </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn directions-arts btn-dark view-archi-foc" 
+                    class="btn btn-outline-danger view-archi-foc" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -274,16 +283,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     archiLandPopup.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayer);
                     document.querySelector('#archi-land').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                      </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn directions-arts btn-dark view-archi" 
+                    class="btn btn-outline-danger view-archi" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -317,16 +327,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     recreationPopupFOC.push(recreationMarker);
                     recreationMarker.addTo(recreationLayerfoc);
                     document.querySelector('#recreation-foc').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                      </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn directions-arts btn-dark view-recre-foc" 
+                    class="btn btn-outline-danger view-recre-foc" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -336,16 +347,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     recreationPopup.push(recreationMarker);
                     recreationMarker.addTo(recreationLayer);
                     document.querySelector('#recreation').innerHTML +=
-                        `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
+                      </div>
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn directions-arts btn-dark view-recre" 
+                    class="btn btn-outline-danger view-recre" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
                     </div>`
@@ -410,13 +422,13 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 <img style='width: 100%' src='${photoLink}'>
                 <h4>${eachResult.name}</h4>
                 <h4>${details.hours.display}</h4>
-            <h6>${eachResult.location.formatted_address}</h6>
-            <h6>${eachResult.distance}m from this place</h6>
-            <h6>Ratings: ${details.rating}</h6>
-            <button class='btn-sm btn-dark'
+                <h6>${eachResult.location.formatted_address}</h6>
+                <h6>${eachResult.distance}m from this place</h6>
+                <h6>Ratings: ${details.rating}</h6>
+                <button class='btn-sm btn-outline-danger'
                 type="button" onclick='showRouteToNearby()'}>
                 get directions</button>
-                <a class = 'btn btn-dark' href='${details.website}'>visit website</a>`)
+               <a class = 'btn btn-sm btn-outline-danger place-link' type="button" href='${details.website}' target="_blank">visit website</a></button>`)
                 let resultPopup = L.marker([lat, lng], { icon: searchIcon })
                     .addTo(searchResultLayer)
                     .bindPopup(popupContent)
@@ -465,9 +477,9 @@ focToggle.addEventListener('click', function () {
     if (routing) {
         routing.remove()
     }
-    if (document.querySelector('#staticEmail').value == "Attractions with Paid Entry") {
+    if (document.querySelector('#staticEmail').innerHTML == "Attractions with Paid Entry") {
         controller.remove();
-        document.querySelector('#staticEmail').value = "Attractions with Free Entry";
+        document.querySelector('#staticEmail').innerHTML = "Attractions with Free Entry";
         document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
         document.querySelector('#nav-toggle').href = "#offcanvasExample2";
         document.querySelector('#nav-toggle').role = "button"
@@ -490,7 +502,7 @@ focToggle.addEventListener('click', function () {
         document.querySelector('.leaflet-control-layers-toggle').style.backgroundImage = "url(images/overlay-control/free.png)";
     }
     else {
-        document.querySelector('#staticEmail').value = "Attractions with Paid Entry";
+        document.querySelector('#staticEmail').innerHTML = "Attractions with Paid Entry";
         controller.remove();
         document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
         document.querySelector('#nav-toggle').href = "#offcanvasExample";
@@ -574,4 +586,3 @@ document.querySelector('#weatherBtn').addEventListener('click', function () {
 //     document.querySelector('#page-1').classList.add('show');
 //     document.querySelector('#page-1').classList.remove('hidden')
 // })
-
