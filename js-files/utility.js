@@ -1,16 +1,16 @@
-let recreation = [];
+
 let recreationLayer = L.markerClusterGroup();
 let recreationLayerfoc = L.markerClusterGroup();
-let nature = [];
+
 let natureLayer = L.markerClusterGroup();
 let natureLayerfoc = L.markerClusterGroup();
-let arts = [];
+
 let artsLayer = L.markerClusterGroup();
 let artsLayerfoc = L.markerClusterGroup();
-let cultureHistory = [];
+
 let cultureHistoryLayer = L.markerClusterGroup();
 let cultureHistoryLayerfoc = L.markerClusterGroup();
-let archiLandscapes = [];
+
 let archiLandscapesLayer = L.markerClusterGroup();
 let archiLandscapesLayerfoc = L.markerClusterGroup();
 
@@ -121,18 +121,48 @@ let artsPopupFOC = [];
 let naturePopup = [];
 let naturePopupFOC = [];
 let cultureHistPopup = [];
-let cultureHistFOC = [];
+let cultureHistPopupFOC = [];
 let archiLandPopup = [];
-let archiLandFOC = [];
+let archiLandPopupFOC = [];
 let recreationPopup = [];
 let recreationPopupFOC = [];
 
 function directToMap(button, layer, popup) {
     for (let j = 0; j < button.length; j++) {
         button[j].addEventListener('click', function () {
+            if (routing) {
+                routing.remove()
+            }
             layer.zoomToShowLayer(popup[j], function () {
                 popup[j].openPopup();
             });
+            chosenLat = button[j].dataset.latitude;
+            chosenLng = button[j].dataset.longitude
         })
     }
+}
+
+function showRouteToAttraction() {
+    if (routing) {
+        routing.remove()
+    }
+    navigator.geolocation.getCurrentPosition(position)
+    routing = L.Routing.control({
+        waypoints: [
+            L.latLng(userLat, userLng),
+            L.latLng(chosenLat, chosenLng)
+        ]
+    }).addTo(map)
+}
+
+function showRouteToNearby(){
+    if (routing) {
+        routing.remove()
+    }
+    routing = L.Routing.control({
+        waypoints: [
+            L.latLng(chosenLat, chosenLng),
+            L.latLng(lat, lng)
+        ]
+    }).addTo(map)
 }

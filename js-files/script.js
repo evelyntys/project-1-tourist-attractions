@@ -1,9 +1,8 @@
 let map = createMap()
-let testArr = [];
-let archiArr = [];
 let imgUrl = null;
 let routing = null;
-
+let lat = null;
+let lng = null;
 
 //get user location
 navigator.geolocation.getCurrentPosition(position)
@@ -29,8 +28,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 imgUrl = imgUrl.slice(25, indexEnd).join('')
             }
             let popup = L.responsivePopup()
-                    .setContent(
-                `<img style='width: 100%' src="${imgUrl}> 
+                .setContent(
+                    `<img style='width: 100%' src="${imgUrl}> 
                 <h6>${each[data]['Name']}</h6>  
                 <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
                 <p>${each[data]['description']}</p>
@@ -42,17 +41,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                 data-bs-target="#searchcanvas">search nearby</button>
                 
                 <button class='btn-sm btn-dark'
-                type="button" onclick='showRoute()'}>
+                type="button" onclick='showRouteToAttraction()'}>
                 get directions</button>`)
 
-                
+
 
             //arts layer
 
 
             if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('arts')
                 || each[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
-                    
+
 
                 let artsMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: artsIcon })
@@ -62,7 +61,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     artsPopupFOC.push(artsMarker)
                     artsMarker.addTo(artsLayerfoc);
                     document.querySelector('#artsfoc').innerHTML +=
-                `<div class="card mt-3" style="width: 18rem;">
+                        `<div class="card mt-3" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${each[data]['Name']}</h5>
@@ -120,7 +119,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //nature layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('nature') || each[data]['PHOTOURL'].toLowerCase().includes('nature'))) {
-                
+
 
                 let natureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: natureIcon })
@@ -182,7 +181,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //culture history layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('culture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('history')))) {
-                
+
 
                 cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: heritageIcon })
@@ -247,7 +246,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //archi landscape layer
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('architecture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('places-to-see')))) {
-                
+
 
                 let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: archiLandscapesIcon })
@@ -310,7 +309,7 @@ window.addEventListener('DOMContentLoaded', async function () {
             //recreation layer
 
             else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('recreation') || each[data]['PHOTOURL'].toLowerCase().includes('recreation'))) {
-                
+
                 let recreationMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
                     { icon: recreationIcon })
                     .bindPopup(popup)
@@ -397,24 +396,30 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
         else {
             for (let eachResult of locations.results) {
                 let id = eachResult.fsq_id;
-                let lat = eachResult.geocodes.main.latitude;
-                let lng = eachResult.geocodes.main.longitude;
+                lat = eachResult.geocodes.main.latitude;
+                lng = eachResult.geocodes.main.longitude;
                 let photoLink = ""
                 let photo = await photoSearch(id);
-                let displayHours = await openingHours(id);
-                if(photo[0]){
-                photoLink = photo[0].prefix + 'original' + photo[0].suffix;
+                let details = await placeDetails(id);
+                if (photo[0]) {
+                    photoLink = photo[0].prefix + 'original' + photo[0].suffix;
                 }
-                
+
                 let popupContent = L.responsivePopup()
-                .setContent(`
+                    .setContent(`
                 <img style='width: 100%' src='${photoLink}'>
                 <h4>${eachResult.name}</h4>
-                <h4>${displayHours.hours.display}</h4>
-            <h6>${eachResult.location.formatted_address}</h6>`)
+                <h4>${details.hours.display}</h4>
+            <h6>${eachResult.location.formatted_address}</h6>
+            <h6>${eachResult.distance}m from this place</h6>
+            <h6>Ratings: ${details.rating}</h6>
+            <button class='btn-sm btn-dark'
+                type="button" onclick='showRouteToNearby()'}>
+                get directions</button>
+                <a class = 'btn btn-dark' href='${details.website}'>visit website</a>`)
                 let resultPopup = L.marker([lat, lng], { icon: searchIcon })
-                .addTo(searchResultLayer)
-                .bindPopup(popupContent)
+                    .addTo(searchResultLayer)
+                    .bindPopup(popupContent)
                 let perResult = document.createElement('div');
                 perResult.className = 'search-result';
                 perResult.innerHTML = eachResult.name;
@@ -424,7 +429,7 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                     map.flyTo([lat, lng], 16);
                     resultPopup.openPopup()
                 })
-            document.querySelector('#results').appendChild(perResult);
+                document.querySelector('#results').appendChild(perResult);
             }
         }
     }

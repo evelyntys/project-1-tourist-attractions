@@ -34,12 +34,12 @@ async function photoSearch(id) {
     return response.data
 }
 
-async function openingHours (id){
+async function placeDetails (id){
     let url = BASE_API_URL + `places/${id}`;
     let response = await axios.get(url, {
         'params': {
             'fsq_id': id,
-            'fields': 'hours'
+            'fields': 'hours,website,rating'
         },
         'headers': {
             'Accept': 'application/json',
