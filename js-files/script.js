@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', async function () {
             }
             let popup = L.responsivePopup()
                 .setContent(
-                    `<img style='width: 100%' src="${imgUrl}> 
+                    `<img class='pop-up-border' style='width: 100%' src="${imgUrl}> 
                 <h6>${each[data]['Name']}</h6>  
                 <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
                 <p>${each[data]['description']}</p>
@@ -419,7 +419,7 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
 
                 let popupContent = L.responsivePopup()
                     .setContent(`
-                <img style='width: 100%' src='${photoLink}'>
+                <img class='pop-up-border' style='width: 100%' src='${photoLink}'>
                 <h4>${eachResult.name}</h4>
                 <h4>${details.hours.display}</h4>
                 <h6>${eachResult.location.formatted_address}</h6>
@@ -470,20 +470,20 @@ let controller = L.control.layers({}, overlayLayers).addTo(map);
 
 //toggle for current layer
 let focToggle = document.querySelector('#change')
-let PAID = [artsLayer, natureLayer, cultureHistoryLayer, archiLandscapesLayer, recreationLayer];
-let FREE = [artsLayerfoc, natureLayerfoc, cultureHistoryLayerfoc, archiLandscapesLayerfoc, recreationLayerfoc];
+let paidAttractions = [artsLayer, natureLayer, cultureHistoryLayer, archiLandscapesLayer, recreationLayer];
+let freeAttractions = [artsLayerfoc, natureLayerfoc, cultureHistoryLayerfoc, archiLandscapesLayerfoc, recreationLayerfoc];
 
 focToggle.addEventListener('click', function () {
     if (routing) {
         routing.remove()
     }
-    if (document.querySelector('#staticEmail').innerHTML == "Attractions with Paid Entry") {
+    if (document.querySelector('#current-layer').innerHTML == "Attractions with Paid Entry") {
         controller.remove();
-        document.querySelector('#staticEmail').innerHTML = "Attractions with Free Entry";
+        document.querySelector('#current-layer').innerHTML = "Attractions with Free Entry";
         document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
-        document.querySelector('#nav-toggle').href = "#offcanvasExample2";
+        document.querySelector('#nav-toggle').href = "#foc-attractions";
         document.querySelector('#nav-toggle').role = "button"
-        document.querySelector('#nav-toggle')['aria-controls'] = "offcanvasExample2"
+        document.querySelector('#nav-toggle')['aria-controls'] = "foc-attractions"
         overlayLayersFOC = {
             '<img style="height: 25px" src="images/map-markers/arts.png"> artsfoc': artsLayerfoc,
             '<img style="height: 25px" src="images/map-markers/nature.png">naturefoc': natureLayerfoc,
@@ -493,8 +493,8 @@ focToggle.addEventListener('click', function () {
         }
         let i = 0;
         for (let each in overlayLayers) {
-            map.removeLayer(PAID[i]);
-            FREE[i].addTo(map)
+            map.removeLayer(paidAttractions[i]);
+            freeAttractions[i].addTo(map)
             i++;
         }
         controller = L.control.layers({}, overlayLayersFOC, { position: 'topright' }).addTo(map);
@@ -502,20 +502,20 @@ focToggle.addEventListener('click', function () {
         document.querySelector('.leaflet-control-layers-toggle').style.backgroundImage = "url(images/overlay-control/free.png)";
     }
     else {
-        document.querySelector('#staticEmail').innerHTML = "Attractions with Paid Entry";
+        document.querySelector('#current-layer').innerHTML = "Attractions with Paid Entry";
         controller.remove();
         document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
-        document.querySelector('#nav-toggle').href = "#offcanvasExample";
+        document.querySelector('#nav-toggle').href = "#paid-attractions";
         document.querySelector('#nav-toggle').role = "button"
-        document.querySelector('#nav-toggle')['aria-controls'] = "offcanvasExample"
+        document.querySelector('#nav-toggle')['aria-controls'] = "paid-attractions"
         let i = 0;
         for (let each in overlayLayers) {
-            map.removeLayer(FREE[i]);
-            PAID[i].addTo(map)
+            map.removeLayer(freeAttractions[i]);
+            paidAttractions[i].addTo(map)
             i++;
         }
         controller = L.control.layers({}, overlayLayers, { position: 'topright' }).addTo(map);
-        document.querySelector('.leaflet-control-layers-toggle').style.backgroundImage = "url(images/overlay-control/tickets.png)";
+        document.querySelector('.leaflet-control-layers-toggle').style.backgroundImage = "url(images/overlay-control/money.png)";
     }
 })
 
@@ -586,3 +586,52 @@ document.querySelector('#weatherBtn').addEventListener('click', function () {
 //     document.querySelector('#page-1').classList.add('show');
 //     document.querySelector('#page-1').classList.remove('hidden')
 // })
+
+
+document.querySelector('#nav-subscribe').addEventListener('click', function(){
+    if (document.querySelector('#newsletter').style.display=='block'){
+        document.querySelector('#newsletter').style.display='none'
+    }
+
+    else{
+    document.querySelector('#newsletter').style.display='block'
+    }
+})
+
+//form validation
+
+
+document.querySelector('#subscribeBtn').addEventListener('click', function(){
+    if (!document.querySelector('#first-name').value){
+        document.querySelector('#invalid-first-name').style.display = 'block';
+    }
+    else{
+        document.querySelector('#invalid-first-name').style.display = 'none';
+    }
+
+    if (!document.querySelector('#last-name').value){
+        document.querySelector('#invalid-last-name').style.display = 'block';
+    }
+    else{
+        document.querySelector('#invalid-last-name').style.display = 'none';
+    }
+
+    if(!document.querySelector('#email').value || !document.querySelector('#email').value.includes('@')){
+        document.querySelector('#invalid-email').style.display = 'block';
+    }
+    else{
+        document.querySelector('#invalid-email').style.display = 'none';
+    }
+
+    if (!document.querySelector('#agreement').checked){
+        document.querySelector('#invalid-agreement').style.display = 'block';
+    }
+
+    else{
+        document.querySelector('#invalid-agreement').style.display = 'none';
+    }
+
+    if(document.querySelector('#invalid-first-name').style.display == 'none' && document.querySelector('#invalid-last-name').style.display == 'none' && document.querySelector('#invalid-email').style.display == 'none'&& document.querySelector('#invalid-agreement').style.display == 'none'){
+        document.querySelector('#newsletter').innerHTML = '<h4 class="text-center">Thank you for subscribing!</h4>'
+    }
+})

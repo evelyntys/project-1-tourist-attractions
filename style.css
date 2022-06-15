@@ -1,127 +1,173 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
-#map{
-    height: 80vh;
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Dancing+Script:wght@400;500&family=Fredoka+One&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
+
+#map {
+    height: 90vh;
 }
 
-#map-container{
+#map-container {
     position: relative;
 }
 
-#results{
+#results {
     overflow-y: scroll;
 }
 
-.search-result{
+.search-result {
     margin: 10px;
     cursor: pointer;
 }
 
 .marker-cluster-small {
     background-color: rgba(218, 94, 94, 0.6);
-    }
-    .marker-cluster-small div {
+}
+
+.marker-cluster-small div {
     background-color: rgba(226, 36, 36, 0.6);
-    }
-    .marker-cluster-medium {
+}
+
+.marker-cluster-medium {
     background-color: rgba(3, 96, 110, 0.6);
-    }
-    .marker-cluster-medium div {
+}
+
+.marker-cluster-medium div {
     background-color: rgba(12, 104, 150, 0.6);
-    }
-    
-    .marker-cluster-large {
+}
+
+.marker-cluster-large {
     background-color: rgba(85, 51, 36, 0.6);
-    }
-    .marker-cluster-large div {
+}
+
+.marker-cluster-large div {
     background-color: rgba(91, 54, 19, 0.6);
-    }
+}
 
 
-.leaflet-control{
+.leaflet-control {
     background-color: burlywood;
 }
 
-.leaflet-control-layers{
+.leaflet-control-layers {
     background-color: rosybrown;
 }
 
 .leaflet-control-layers-expanded {
-	padding: 6px 10px 6px 6px;
-	color: #333;
-	background-color: rosybrown;
-	}
+    padding: 6px 10px 6px 6px;
+    color: #333;
+    background-color: rosybrown;
+}
 
 
 
 .leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle {
-    background-image: url(images/overlay-control/tickets.png);
+    background-image: url(images/overlay-control/money.png);
     width: 36px;
     height: 36px;
 }
 
 .custom-popup .leaflet-popup-content-wrapper {
-    background: rgba(192, 57, 43, 0.8);
-    color:black;
-    font-size:10px;
-    /* line-height:24px; */
-    }
-  .custom-popup .leaflet-popup-content-wrapper a {
-    color:rgba(255,255,255,0.5);
-    }
+    color: black;
+    font-size: 15px;
+    line-height: 24px;
+    border: 2px solid rgba(192, 57, 43, 0.8) !important;
+    border-radius: 0px !important
+}
 
-  .custom-popup .leaflet-popup-tip {
-    border-style: solid 2px #C0392B;
-    }
-/* #all-pages{
+.custom-popup .leaflet-popup-tip {
+    background: rgba(192, 57, 43, 0.8);
+}
+
+.custom-popup .leaflet-popup-content-wrapper a {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* #all-pages {
     position: relative;
 }
 
-#page-1{
+#page-1 {
     height: 100vh;
     width: 100vw;
-    display: block; */
-    /* box-sizing: border-box; */
-    /* position: absolute;
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
 }
+    .hidden {
+        transform: translateY(-100%);
+        transition: transform 0s;
+    }
 
-.hidden{
-    transform: translateY(-100%);
-    transition: transform 0s;
-}
+    .show {
+        transform: translateX(0);
+        transition: transform 1s;
+    }
 
-.show{
-    transform: translateX(0);
-    transition: transform 1s;
-}
+    #page-1 {
+        background-image: url(images/merlion.png);
+        background-position: center;
+        background-size: fit;
+    }
 
-#page-1{
-    background-image: url(images/merlion.png);
-    background-position: center;
-    background-size: fit;
-}
-#page-2{
+    #page-2 {
+        display: none;
+    }
+
+    .tab-pane {
+        height: 600px;
+        overflow-y: scroll;
+    } */
+
+#search-side {
     display: none;
-}
-
-.tab-pane{
-    height: 600px;
-    overflow-y: scroll;
-} */
-
-#search-side{
-    display:none;
     width: 200px;
     position: absolute;
     z-index: 800;
     bottom: 50px;
     right: 20px;
-    background-color: rgba(192, 57, 43, 0.8);
+    background-color: rosybrown;
+    color: white
 }
 
-#weatherBtn{
+#weatherBtn {
     position: absolute;
     z-index: 800;
     top: 10px;
     right: 50px;
-    background-color: rgba(192, 57, 43, 0.8);
+    background-color: rosybrown;
+    color: white;
+    border: 2px solid black !important
+}
+
+#offcanvasExample {
+    border-style: 5px solid black !important;
+}
+
+.card{
+    border:rgba(192, 57, 43, 0.8) 2px solid;
+}
+
+.card>img{
+    border:rgba(192, 57, 43, 0.8) 2px solid;
+}
+
+.pop-up-border{
+    border:rgba(192, 57, 43, 0.8) 2px solid;
+}
+
+#nav-toggle{
+    font-family: 'Fredoka One';
+}
+
+.header-image{
+    height: 30px;
+}
+
+.invalid{
+    color: darkred;
+    display:none;
+}
+
+#newsletter{
+    display:none;
 }
