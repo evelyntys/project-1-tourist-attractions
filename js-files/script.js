@@ -416,19 +416,35 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 if (photo[0]) {
                     photoLink = photo[0].prefix + 'original' + photo[0].suffix;
                 }
+                else{
+                    photoLink = eachResult.categories[0].icon.prefix + 'bg_120' + eachResult.categories[0].icon.suffix;
+                }
+
+                if (!details.hours.display){
+                    details.hours.display = 'opening hours unavailable'
+                }
+
+                if (!details.rating){
+                    details.rating = 'ratings unavailable'
+                }
+
+                if (!details.website){
+                    details.website = 'https://www.google.com'
+                }
 
                 let popupContent = L.responsivePopup()
                     .setContent(`
-                <img class='pop-up-border' style='width: 100%' src='${photoLink}'>
+                <img class='pop-up-border' style='width: 297px; height: 167px; object-fit: contain;' src='${photoLink}'>
                 <h4>${eachResult.name}</h4>
-                <h4>${details.hours.display}</h4>
+                <h6>${details.hours.display}</h6>
                 <h6>${eachResult.location.formatted_address}</h6>
                 <h6>${eachResult.distance}m from this place</h6>
-                <h6>Ratings: ${details.rating}</h6>
+                <h6>Ratings: ${details.rating} <i class="bi bi-star-fill"></i>
+                </h6>
                 <button class='btn-sm btn-outline-danger'
                 type="button" onclick='showRouteToNearby()'}>
                 get directions</button>
-               <a class = 'btn btn-sm btn-outline-danger place-link' type="button" href='${details.website}' target="_blank">visit website</a></button>`)
+               <a class = 'btn btn-sm btn-outline-danger text-danger place-link' type="button" href='${details.website}' target="_blank">visit website</a>`)
                 let resultPopup = L.marker([lat, lng], { icon: searchIcon })
                     .addTo(searchResultLayer)
                     .bindPopup(popupContent)
@@ -477,7 +493,12 @@ focToggle.addEventListener('click', function () {
     if (routing) {
         routing.remove()
     }
+    searchResultLayer.clearLayers();
+    if (userLocation)
+    {map.removeLayer(userLocation)}
+    document.querySelector('#search-side').style.display = 'none';
     if (document.querySelector('#current-layer').innerHTML == "Attractions with Paid Entry") {
+        document.querySelector('#change').innerHTML = '<i class="bi bi-toggle-off"></i>';
         controller.remove();
         document.querySelector('#current-layer').innerHTML = "Attractions with Free Entry";
         document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
@@ -503,6 +524,7 @@ focToggle.addEventListener('click', function () {
     }
     else {
         document.querySelector('#current-layer').innerHTML = "Attractions with Paid Entry";
+        document.querySelector('#change').innerHTML = '<i class="bi bi-toggle-on"></i>';
         controller.remove();
         document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
         document.querySelector('#nav-toggle').href = "#paid-attractions";
@@ -604,6 +626,7 @@ document.querySelector('#nav-subscribe').addEventListener('click', function(){
 document.querySelector('#subscribeBtn').addEventListener('click', function(){
     if (!document.querySelector('#first-name').value){
         document.querySelector('#invalid-first-name').style.display = 'block';
+        document.querySelector('#first-name').style.border = 'solid 1px darkred';
     }
     else{
         document.querySelector('#invalid-first-name').style.display = 'none';
@@ -611,6 +634,7 @@ document.querySelector('#subscribeBtn').addEventListener('click', function(){
 
     if (!document.querySelector('#last-name').value){
         document.querySelector('#invalid-last-name').style.display = 'block';
+        document.querySelector('#last-name').style.border = 'solid 1px darkred';
     }
     else{
         document.querySelector('#invalid-last-name').style.display = 'none';
@@ -618,6 +642,7 @@ document.querySelector('#subscribeBtn').addEventListener('click', function(){
 
     if(!document.querySelector('#email').value || !document.querySelector('#email').value.includes('@')){
         document.querySelector('#invalid-email').style.display = 'block';
+        document.querySelector('#email').style.border = 'solid 1px darkred';
     }
     else{
         document.querySelector('#invalid-email').style.display = 'none';
@@ -625,6 +650,7 @@ document.querySelector('#subscribeBtn').addEventListener('click', function(){
 
     if (!document.querySelector('#agreement').checked){
         document.querySelector('#invalid-agreement').style.display = 'block';
+        document.querySelector('#agreement').style.border = 'solid 1px darkred';
     }
 
     else{
