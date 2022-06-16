@@ -16,6 +16,8 @@ let archiLandscapesLayerfoc = L.markerClusterGroup();
 
 let searchResultLayer = L.layerGroup();
 
+let userLocation = null;
+
 //marker icons for map
 var natureIcon = L.icon({
     iconUrl: 'images/map-markers/nature.png',
@@ -64,6 +66,14 @@ var searchIcon = L.icon({
     popupAnchor: [-3, -76]
 })
 
+var userIcon = L.icon({
+    iconUrl: 'images/user.png',
+
+    iconSize: [50, 50],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
+
 //variables to store lat/lng of chosen attraction to serve as start point for routing 
 let chosenLat = null;
 let chosenLng = null;
@@ -80,7 +90,7 @@ var fairIcon = L.icon({
 var partlyCloudyIcon = L.icon({
     iconUrl: 'images/weather/partly-cloudy.png',
 
-    iconSize: [50, 50],
+    iconSize: [35, 35],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76]
 });
@@ -88,7 +98,7 @@ var partlyCloudyIcon = L.icon({
 var cloudyIcon = L.icon({
     iconUrl: 'images/weather/cloudy.png',
 
-    iconSize: [50, 50],
+    iconSize: [35, 35],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76]
 });
@@ -96,7 +106,7 @@ var cloudyIcon = L.icon({
 var rainIcon = L.icon({
     iconUrl: 'images/weather/rain.png',
 
-    iconSize: [50, 50],
+    iconSize: [35, 35],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76]
 });
@@ -104,7 +114,7 @@ var rainIcon = L.icon({
 var thunderyIcon = L.icon({
     iconUrl: 'images/weather/storm.png',
 
-    iconSize: [50, 50],
+    iconSize: [35, 35],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76]
 });
@@ -147,6 +157,10 @@ function showRouteToAttraction() {
         routing.remove()
     }
     navigator.geolocation.getCurrentPosition(position)
+    userLocation = L.marker([userLat, userLng], {icon: userIcon}).bindPopup('You are here');
+    userLocation.addTo(map).openPopup()
+    let bounds = L.latLngBounds([userLat,userLng], [chosenLat,chosenLng])
+    map.flyToBounds(bounds)
     routing = L.Routing.control({
         waypoints: [
             L.latLng(userLat, userLng),

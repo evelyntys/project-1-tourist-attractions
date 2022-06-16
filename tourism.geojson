@@ -2500,7 +2500,7 @@
                 "X_ADDR": "31286.5785",
                 "Y_ADDR": "31694.7056",
                 "HYPERLINK": "",
-                "PHOTOURL": "\/content\/dam\/desktop\/global\/see-do-singapore\/architecture\/hajjah-fatimah-mosque-carousel01-rect.jpg",
+                "PHOTOURL": "<a target=\"_blank\" href=\"https://www.visitsingapore.com/see-do-singapore/architecture/historical/hajjah-fatimah-mosque/jcr:content/par-carousel/carousel_detailpage/carousel/item_1.thumbnail.carousel-img.1480.833.jpg\">https://www.visitsingapore.com/see-do-singapore/architecture/historical/hajjah-fatimah-mosque/jcr:content/par-carousel/carousel_detailpage/carousel/item_1.thumbnail.carousel-img.1480.833.jpg<\/a>",
                 "Last Modified": "2015-11-02T09:55:25.479+08:00",
                 "Latitude": "1.30291",
                 "FMEL_UPD_D": "1\/9\/2017 2:59:32 PM",
@@ -3208,40 +3208,6 @@
         {
             "type": "Feature",
             "properties": {
-                "Name": "Gardens by the Bay",
-                "description": "Gardens by the Bay provides mesmerising waterfront views across three gardens, spanning over 101 hectares of reclaimed land.",
-                "altitudeMode": "clampToGround",
-                "X_ADDR": "31371.5217",
-                "Y_ADDR": "29334.818",
-                "HYPERLINK": "<a target=\"_blank\" href=\"http:\/\/www.gardensbythebay.com.sg\/en\/home.html\">http:\/\/www.gardensbythebay.com.sg\/en\/home.html<\/a>",
-                "PHOTOURL": "<a target=\"_blank\" href=\"http:\/\/www.yoursingapore.com\/content\/dam\/desktop\/global\/see-do-singapore\/nature-wildlife\/gardens-by-the-bay-carousel02-rect.jpg\">www.yoursingapore.com\/content\/dam\/desktop\/global\/see-do-singapore\/nature-wildlife\/gardens-by-the-bay-carousel02-rect.jpg<\/a>",
-                "Last Modified": "2015-10-19T15:26:06.746+08:00",
-                "Latitude": "1.281568",
-                "FMEL_UPD_D": "1\/9\/2017 2:59:32 PM",
-                "Longtitude": "103.863613",
-                "Opening Hours": "Bay South Outdoor Gardens Daily, 5am - 2am Cooled Conservatories and OCBC Skyway Daily, 9am - 9pm(last ticket sale at 8pm).Far East Organization Children's Garden Tuesday* to Friday, 10am - 7pm(last admission: 6.30pm)*Closed on Tuesday if a public holiday falls on the preceding Monday Weekends and public holidays, 9am - 9pm(last admission: 8.30pm)",
-                "SHAPE": "Point",
-                "ADDRESSPOSTALCODE": "",
-                "URL Path": "<a target=\"_blank\" href=\"http:\/\/www.yoursingapore.com\/en\/see-do-singapore\/nature-wildlife\/parks-gardens\/gardens-by-the-bay.html\">www.yoursingapore.com\/en\/see-do-singapore\/nature-wildlife\/parks-gardens\/gardens-by-the-bay.html<\/a>",
-                "ADDRESSSTREETNAME": "18 Marina Gardens Drive",
-                "INC_CRC": "FA494CA60D7D5D19",
-                "Image Text": "Be mesmerised by stunning waterfront views at the award-winning horticultural destination that is Gardens by the Bay.",
-                "Field_1": "www.yoursingapore.com\/en\/see-do-singapore\/nature-wildlife\/parks-gardens\/gardens-by-the-bay.html",
-                "Image By": "Derrick See",
-                "foc": "no",
-                "entry": "prices differ for residents and non-residents"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    103.863612999905797,
-                    1.281567999977022
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
                 "Name": "Bras Basah.Bugis, Singapore Cultural District",
                 "description": "The Bras Basah.Bugis Precinct is the vibrant arts and cultural district in the heart of Singapore's civic centre, and home to top museums and monuments.",
                 "altitudeMode": "clampToGround",
@@ -3338,40 +3304,6 @@
                 "coordinates": [
                     103.801943999568195,
                     1.265833000328956
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "Name": "Marina Bay Sands, Singapore",
-                "description": "Marina Bay Sands® boasts luxury accommodations, upscale shopping and an infinity pool with unparalleled views of the city.",
-                "altitudeMode": "clampToGround",
-                "X_ADDR": "30857.017",
-                "Y_ADDR": "29590.2956",
-                "HYPERLINK": "<a target=\"_blank\" href=\"http:\/\/www.marinabaysands.com\/index.html\">http:\/\/www.marinabaysands.com\/index.html<\/a>",
-                "PHOTOURL": "<a target=\"_blank\" href=\"http:\/\/www.yoursingapore.com\/content\/dam\/desktop\/global\/see-do-singapore\/recreation-leisure\/marina-bay-sands-carousel01-rect.jpg\">www.yoursingapore.com\/content\/dam\/desktop\/global\/see-do-singapore\/recreation-leisure\/marina-bay-sands-carousel01-rect.jpg<\/a>",
-                "Last Modified": "2015-09-01T15:35:42.052+08:00",
-                "Latitude": "1.283879",
-                "FMEL_UPD_D": "1\/9\/2017 2:59:32 PM",
-                "Longtitude": "103.85899",
-                "Opening Hours": "Opening hours varies. Please visit the official website for more information.",
-                "SHAPE": "Point",
-                "ADDRESSPOSTALCODE": "",
-                "URL Path": "<a target=\"_blank\" href=\"http:\/\/www.yoursingapore.com\/en\/see-do-singapore\/recreation-leisure\/resorts\/marina-bay-sands.html\">www.yoursingapore.com\/en\/see-do-singapore\/recreation-leisure\/resorts\/marina-bay-sands.html<\/a>",
-                "ADDRESSSTREETNAME": "10 Bayfront Avenue",
-                "INC_CRC": "DACF0BC7DBD1F3ED",
-                "Image Text": "",
-                "Field_1": "www.yoursingapore.com\/en\/see-do-singapore\/recreation-leisure\/resorts\/marina-bay-sands.html",
-                "Image By": "",
-                "foc": "yes",
-                "entry": "no entry fee"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    103.858990000432797,
-                    1.283878500351668
                 ]
             }
         },
@@ -3576,40 +3508,6 @@
                 "coordinates": [
                     103.706442000095294,
                     1.318706000436972
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "Name": "Lasalle College of the Arts",
-                "description": "How can something that fits so perfectly into a cityscape evoke nature as well? It all lies in the design of Lasalle College of the Arts.",
-                "altitudeMode": "clampToGround",
-                "X_ADDR": "30034.5559",
-                "Y_ADDR": "31693.5879",
-                "HYPERLINK": "<a target=\"_blank\" href=\"https:\/\/www.lasalle.edu.sg\">https:\/\/www.lasalle.edu.sg<\/a>",
-                "PHOTOURL": "<a target=\"_blank\" href=\"http:\/\/www.yoursingapore.com\/content\/dam\/desktop\/global\/see-do-singapore\/architecture\/lasalle-college-of-the-arts-carousel01-rect.jpg\">www.yoursingapore.com\/content\/dam\/desktop\/global\/see-do-singapore\/architecture\/lasalle-college-of-the-arts-carousel01-rect.jpg<\/a>",
-                "Last Modified": "2015-09-24T12:37:44.129+08:00",
-                "Latitude": "1.3029",
-                "FMEL_UPD_D": "1\/9\/2017 2:59:32 PM",
-                "Longtitude": "103.8516",
-                "Opening Hours": "Administration Office Monday to Friday, 9am – 6pm.Visitors can still walk around the campus after office opening hours.",
-                "SHAPE": "Point",
-                "ADDRESSPOSTALCODE": "",
-                "URL Path": "<a target=\"_blank\" href=\"http:\/\/www.yoursingapore.com\/en\/see-do-singapore\/architecture\/modern\/lassalle-college-of-the-arts.html\">www.yoursingapore.com\/en\/see-do-singapore\/architecture\/modern\/lassalle-college-of-the-arts.html<\/a>",
-                "ADDRESSSTREETNAME": "1 McNally Street",
-                "INC_CRC": "C3B4EB775480D9C4",
-                "Image Text": "Lasalle College of the Arts pushes the boundaries of creativity in architecture.",
-                "Field_1": "www.yoursingapore.com\/en\/see-do-singapore\/architecture\/modern\/lassalle-college-of-the-arts.html",
-                "Image By": "",
-                "foc": "yes",
-                "entry": "no entry fee"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    103.851600000364698,
-                    1.302900000419045
                 ]
             }
         }
