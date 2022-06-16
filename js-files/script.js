@@ -26,6 +26,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 imgUrl = each[data]['PHOTOURL'].split('')
                 let indexEnd = imgUrl.indexOf('>')
                 imgUrl = imgUrl.slice(25, indexEnd).join('')
+                imgUrl = 'http' + imgUrl.slice(4);
+                console.log(imgUrl)
             }
             let popup = L.responsivePopup()
                 .setContent(
