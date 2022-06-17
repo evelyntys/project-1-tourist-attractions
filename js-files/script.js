@@ -9,6 +9,8 @@ navigator.geolocation.getCurrentPosition(position)
 let userLat = null;
 let userLng = null;
 
+// let loader = document.querySelector('#loader');
+
 function position(markers) {
     userLat = markers.coords.latitude;
     userLng = markers.coords.longitude;
@@ -27,17 +29,12 @@ window.addEventListener('DOMContentLoaded', async function () {
                 let indexEnd = imgUrl.indexOf('>')
                 imgUrl = imgUrl.slice(25, indexEnd-1).join('')
                 imgUrl= imgUrl.replace("yoursingapore", "visitsingapore");
-                console.log(imgUrl)
-
-                // let updatedLink = await axios.get(imgUrl);
-                // console.log(updatedLink.data)
             }
 
             if (each[data]['HYPERLINK']){
                 hyperlink = each[data]['HYPERLINK'].split('')
                 let indexStart = hyperlink.indexOf('>')+1;
                 hyperlink = hyperlink.slice(indexStart, -4).join('');
-                console.log(hyperlink)
             }
 
             let popup = L.responsivePopup()
@@ -465,7 +462,6 @@ archiLandscapesLayer.addTo(map)
 artsLayer.addTo(map)
 natureLayer.addTo(map)
 recreationLayer.addTo(map)
-searchResultLayer.addTo(map)
 
 //usersearch foursquare
 document.querySelector('#searchBtn').addEventListener('click', async function () {
@@ -477,12 +473,16 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
     document.querySelector('#results').innerHTML = "";
     query = document.querySelector('#search').value;
     if (query.length > 0) {
+        document.querySelector('#loader').style.display = 'block';
         let locations = await searchNearby(query);
         L.circle([chosenLat, chosenLng], { radius: 1000, color: '#C0392B' }).addTo(searchResultLayer);
         if (locations.results == false) {
             document.querySelector('#results').innerHTML = "no results found";
         }
         else {
+            let allResults = document.createElement('div');
+            //create global variable to store results first before appending
+            //can also have spinner to indicate loading; show before then hide when finish appending
             for (let eachResult of locations.results) {
                 let id = eachResult.fsq_id;
                 lat = eachResult.geocodes.main.latitude;
@@ -535,8 +535,11 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                     map.flyTo([lat, lng], 16);
                     resultPopup.openPopup()
                 })
-                document.querySelector('#results').appendChild(perResult);
+               allResults.appendChild(perResult);
             }
+            document.querySelector('#results').appendChild(allResults);
+            document.querySelector('#loader').style.display = 'none';
+            searchResultLayer.addTo(map)
         }
     }
     else {
@@ -725,7 +728,7 @@ document.querySelector('#subscribeBtn').addEventListener('click', function(){
 
 document.querySelector('#map').addEventListener('click', function(){
 if(document.querySelector('.leaflet-control-layers-expanded')){
-    document.querySelector('#weatherBtn').style.right = '230px';
+    document.querySelector('#weatherBtn').style.right = '240px';
 }
 else{
     document.querySelector('#weatherBtn').style.right = '60px';
@@ -734,7 +737,7 @@ else{
 
 document.querySelector('#map').addEventListener('mouseover', function(){
     if(document.querySelector('.leaflet-control-layers-expanded')){
-        document.querySelector('#weatherBtn').style.right = '230px';
+        document.querySelector('#weatherBtn').style.right = '240px';
     }
     else{
         document.querySelector('#weatherBtn').style.right = '60px';

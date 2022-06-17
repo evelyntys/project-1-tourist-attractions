@@ -28,12 +28,7 @@
 </head>
 
 <body>
-    <!-- <div id="all-pages">
-        <div id='page-1' class="page">
-            <button id="toggle">foc</button>
-        </div> -->
-
-    <!-- <div id="page-2" class="page hidden"> -->
+    
         
         <!-- navbar -->
           <nav class="navbar navbar-light bg-light">
@@ -42,24 +37,23 @@
                 <img style='height: 40px' src='images/navbar/traveler.png'>SGgoWHERE</a>
               <section class="d-flex">
                 <div class="form-control me-2" id="current-layer" style="width: auto;">Attractions with Paid Entry</div>
-                <button class="btn btn-outline-danger" id="change"><i class="bi bi-toggle-on"></i></button>
-                <a href='#newsletter' class="btn btn-outline-danger ms-2" id="nav-subscribe">subscribe</a>
+                <button class="btn btn-general" id="change" data-bs-dismiss="offcanvas" data-bs-target="#paid-attractions" aria-label="Close" type="button"><i class="bi bi-toggle-on"></i></button>
+                <a href='#newsletter' class="btn btn-general ms-2" id="nav-subscribe">subscribe</a>
               </section>
             </div>
           </nav>
-        <!-- <div class="container mt-3">
-            <button id="go-back">return to animation</button>
-        </div> -->
 
     </div>
 
     <div id='map-container'>
         <div id="map" class="custom-popup col-12"></div>
-        <button class='btn' id="weatherBtn"><i class="bi bi-brightness-high"></i>weather</button>
+        <button class='btn' id="weatherBtn"><i class="bi bi-cloud"></i> weather</button>
         <a class="btn" data-bs-toggle="offcanvas" href="#searchcanvas" role="button"
             aria-controls="searchcanvas" id="search-side">
             return to search
         </a>
+    </div>
+
     </div>
 
 
@@ -109,7 +103,7 @@
     </div>
 
     <!-- nav foc off-canvas -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="foc-attractions" aria-labelledby="free-attractions"
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="foc-attractions" aria-labelledby="foc-attractions"
         data-bs-scroll="true" data-bs-backdrop="false">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">Attractions with Free Entry <img src='images/overlay-control/free.png' class="header-image"></h5>
@@ -159,10 +153,19 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <input class="btn" type="text" placeholder="e.g. food, stations" id="search">
-            <button class="btn btn-warning" id="searchBtn"><i class="bi bi-search"></i></button>
-            <button class="btn btn-warning" id="reset"><i class="bi bi-arrow-counterclockwise"></i></button>
+            <div class="row">
+                <div class="col">
+            <input class="form-control" type="text" placeholder="e.g. food, stations" id="search">
+            </div>
+            <div class="col">
+            <button class="btn btn-general" id="searchBtn"><i class="bi bi-search"></i></button>
+            <button class="btn btn-general" id="reset"><i class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+            </div>
             <div id="results"></div>
+                <div id="loader">
+                <img src="images/loading.gif">
+                </div>
             <div id="validate"></div>
         </div>
     </div>
@@ -198,7 +201,7 @@
                 <label for="agreement">i agree to receive materials regarding tourist attractions in singapore via email</label>
                 <div class="invalid" id="invalid-agreement">Please select the checkbox</div>
             </div>
-            <input type="submit" value="subscribe" id="subscribeBtn" class="btn btn-outline-danger">
+            <input type="submit" value="subscribe" id="subscribeBtn" class="btn btn-general">
             </div>
         </div>
     </footer>
