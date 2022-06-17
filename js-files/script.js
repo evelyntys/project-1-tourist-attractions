@@ -26,11 +26,11 @@ window.addEventListener('DOMContentLoaded', async function () {
                 imgUrl = each[data]['PHOTOURL'].split('')
                 let indexEnd = imgUrl.indexOf('>')
                 imgUrl = imgUrl.slice(25, indexEnd-1).join('')
-                imgUrl= imgUrl.replace("http://", "https://");
+                imgUrl= imgUrl.replace("yoursingapore", "visitsingapore");
                 console.log(imgUrl)
 
-                let updatedLink = await axios.get(imgUrl);
-                console.log(updatedLink.data)
+                // let updatedLink = await axios.get(imgUrl);
+                // console.log(updatedLink.data)
             }
 
             if (each[data]['HYPERLINK']){
