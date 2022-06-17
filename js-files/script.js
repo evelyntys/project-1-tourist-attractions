@@ -25,8 +25,12 @@ window.addEventListener('DOMContentLoaded', async function () {
             if (each[data]['PHOTOURL']) {
                 imgUrl = each[data]['PHOTOURL'].split('')
                 let indexEnd = imgUrl.indexOf('>')
-                imgUrl = imgUrl.slice(25, indexEnd).join('')
-              
+                imgUrl = imgUrl.slice(25, indexEnd-1).join('')
+                imgUrl= imgUrl.replace("http://", "https://");
+                console.log(imgUrl)
+
+                let updatedLink = await axios.get(imgUrl);
+                console.log(updatedLink.data)
             }
 
             if (each[data]['HYPERLINK']){
@@ -38,7 +42,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             let popup = L.responsivePopup()
                 .setContent(
-                    `<img class='pop-up-border' style='width: 100%' src="${imgUrl}> 
+                    `<img class='pop-up-border' style='width: 100%' src="${imgUrl}"> 
                 <h6>${each[data]['Name']}</h6>  
                 <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
                 <p>${each[data]['description']}</p>
@@ -573,6 +577,7 @@ focToggle.addEventListener('click', function () {
     document.querySelector('#search-side').style.display = 'none';
     if (document.querySelector('#current-layer').innerHTML == "Attractions with Paid Entry") {
         document.querySelector('#change').innerHTML = '<i class="bi bi-toggle-off"></i>';
+        document.querySelector('#change')['data-bs-target'] = "#foc-attractions"
         controller.remove();
         document.querySelector('#current-layer').innerHTML = "Attractions with Free Entry";
         document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
@@ -599,6 +604,7 @@ focToggle.addEventListener('click', function () {
     else {
         document.querySelector('#current-layer').innerHTML = "Attractions with Paid Entry";
         document.querySelector('#change').innerHTML = '<i class="bi bi-toggle-on"></i>';
+        document.querySelector('#change')['data-bs-target'] = "#paid-attractions"
         controller.remove();
         document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
         document.querySelector('#nav-toggle').href = "#paid-attractions";
@@ -664,25 +670,6 @@ document.querySelector('#weatherBtn').addEventListener('click', function () {
         map.addLayer(weatherMarkers)
     }
 })
-
-
-//animation code
-// document.querySelector('#toggle').addEventListener('click', function (e) {
-//     let page = e.target.dataset.page;
-//     document.querySelector('#page-1').classList.add('hidden');
-//     document.querySelector('#page-1').classList.remove('show');
-//     document.querySelector('#page-2').style.display = 'block';
-//     document.querySelector('#page-2').classList.add('show');
-//     document.querySelector('#page-2').classList.remove('hidden')
-// })
-
-// document.querySelector('#go-back').addEventListener('click', function (e) {
-//     document.querySelector('#page-2').classList.add('hidden');
-//     document.querySelector('#page-2').classList.remove('show');
-//     document.querySelector('#page-1').classList.add('show');
-//     document.querySelector('#page-1').classList.remove('hidden')
-// })
-
 
 document.querySelector('#nav-subscribe').addEventListener('click', function(){
     if (document.querySelector('#newsletter').style.display=='block'){
