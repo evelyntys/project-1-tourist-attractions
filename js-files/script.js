@@ -3,7 +3,7 @@ let imgUrl = null;
 let routing = null;
 let lat = null;
 let lng = null;
-
+let hyperlink = null;
 //get user location
 navigator.geolocation.getCurrentPosition(position)
 let userLat = null;
@@ -26,9 +26,16 @@ window.addEventListener('DOMContentLoaded', async function () {
                 imgUrl = each[data]['PHOTOURL'].split('')
                 let indexEnd = imgUrl.indexOf('>')
                 imgUrl = imgUrl.slice(25, indexEnd).join('')
-                imgUrl = 'http' + imgUrl.slice(4);
-                console.log(imgUrl)
+              
             }
+
+            if (each[data]['HYPERLINK']){
+                hyperlink = each[data]['HYPERLINK'].split('')
+                let indexStart = hyperlink.indexOf('>')+1;
+                hyperlink = hyperlink.slice(indexStart, -4).join('');
+                console.log(hyperlink)
+            }
+
             let popup = L.responsivePopup()
                 .setContent(
                     `<img class='pop-up-border' style='width: 100%' src="${imgUrl}> 
@@ -38,12 +45,12 @@ window.addEventListener('DOMContentLoaded', async function () {
                 <h6>${entranceFee[each[data]['foc']]}</h6>
 
                 <div class='mx-auto'>
-                <button class='btn-sm btn-outline-danger view'
+                <button class='btn-sm btn-general view'
                 type="button" data-bs-toggle="offcanvas" role="button" 
                 aria-controls="searchcanvas" 
                 data-bs-target="#searchcanvas">search nearby</button>
                 
-                <button class='btn-sm btn-outline-danger'
+                <button class='btn-sm btn-general'
                 type="button" onclick='showRouteToAttraction()'}>
                 get directions</button>
                 </div>`)
@@ -73,12 +80,18 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                     </div>
+                    <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn view-arts-foc btn-outline-danger" 
+                    class="btn view-arts-foc btn-general w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
                   </div>`
                 }
 
@@ -93,12 +106,18 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       </div>
+                      <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn view-arts btn-outline-danger" 
+                    class="btn view-arts btn-general w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
                     </div>`
 
                 }
@@ -141,12 +160,19 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                     </div>
+
+                   <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn btn-outline-danger view-nature-foc" 
+                    class="btn btn-general view-nature-foc w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
+                    
                     </div>`
 
                 }
@@ -161,12 +187,18 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       </div>
+                      <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn btn-outline-danger view-nature" 
+                    class="btn btn-general view-nature w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
                     </div>`
 
                 }
@@ -206,12 +238,19 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       </div>
+
+                      <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn btn-outline-danger view-culture-foc" 
+                    class="btn btn-general view-culture-foc w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+                    
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
                     </div>`
 
                 }
@@ -227,13 +266,20 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       </div>
+
+                      <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn btn-outline-danger view-culture" 
+                    class="btn btn-general view-culture w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
-                    </div>`
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
+                    </div>
+                    `
 
                 }
 
@@ -272,12 +318,19 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       </div>
+
+                      <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn btn-outline-danger view-archi-foc" 
+                    class="btn btn-general view-archi-foc w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
                     </div>`
 
                 }
@@ -292,12 +345,18 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       </div>
+                      <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn btn-outline-danger view-archi" 
+                    class="btn btn-general view-archi w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
                     </div>`
                 }
 
@@ -336,12 +395,18 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       </div>
+
+                      <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn btn-outline-danger view-recre-foc" 
+                    class="btn btn-general view-recre-foc w-50" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
                     </div>`
 
                 }
@@ -356,12 +421,18 @@ window.addEventListener('DOMContentLoaded', async function () {
                       <h6 class="card-text">${each[data]['Opening Hours']}</h6>
                       <p class="card-text">${each[data]['description']}</p>
                       </div>
+
+                      <div class="d-flex flex-row">
                     <button data-latitude='${each.geometry.coordinates[1]}' 
                     data-longitude='${each.geometry.coordinates[0]}' 
                     type="button" 
-                    class="btn btn-outline-danger view-recre" 
+                    class="btn btn-general view-recre" 
                     data-bs-dismiss="offcanvas" 
                     aria-label="Close">view on map</button>
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${hyperlink}' target="_blank">
+                    visit website</a>
+                    </div>
                     </div>`
                 }
                 recreationMarker.on('click', function () {
@@ -434,8 +505,8 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                     details.website = 'https://www.google.com'
                 }
 
-                let popupContent = L.responsivePopup()
-                    .setContent(`
+                let popupDiv = document.createElement('div')
+                popupDiv.innerHTML = `
                 <img class='pop-up-border' style='width: 297px; height: 167px; object-fit: contain;' src='${photoLink}'>
                 <h4>${eachResult.name}</h4>
                 <h6>${details.hours.display}</h6>
@@ -443,10 +514,11 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 <h6>${eachResult.distance}m from this place</h6>
                 <h6>Ratings: ${details.rating} <i class="bi bi-star-fill"></i>
                 </h6>
-                <button class='btn-sm btn-outline-danger'
+                <button class='btn-sm btn-general'
                 type="button" onclick='showRouteToNearby()'}>
                 get directions</button>
-               <a class = 'btn btn-sm btn-outline-danger text-danger place-link' type="button" href='${details.website}' target="_blank">visit website</a>`)
+               <a class = 'btn-sm btn-general place-link' type="button" href='${details.website}' target="_blank">visit website</a>`
+                let popupContent = L.responsivePopup().setContent(popupDiv)
                 let resultPopup = L.marker([lat, lng], { icon: searchIcon })
                     .addTo(searchResultLayer)
                     .bindPopup(popupContent)
@@ -663,3 +735,21 @@ document.querySelector('#subscribeBtn').addEventListener('click', function(){
         document.querySelector('#newsletter').innerHTML = '<h4 class="text-center">Thank you for subscribing!</h4>'
     }
 })
+
+document.querySelector('#map').addEventListener('click', function(){
+if(document.querySelector('.leaflet-control-layers-expanded')){
+    document.querySelector('#weatherBtn').style.right = '230px';
+}
+else{
+    document.querySelector('#weatherBtn').style.right = '60px';
+}
+})
+
+document.querySelector('#map').addEventListener('mouseover', function(){
+    if(document.querySelector('.leaflet-control-layers-expanded')){
+        document.querySelector('#weatherBtn').style.right = '230px';
+    }
+    else{
+        document.querySelector('#weatherBtn').style.right = '60px';
+    }
+    })
