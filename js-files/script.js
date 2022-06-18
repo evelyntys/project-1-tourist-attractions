@@ -9,7 +9,6 @@ navigator.geolocation.getCurrentPosition(position)
 let userLat = null;
 let userLng = null;
 
-// let loader = document.querySelector('#loader');
 
 function position(markers) {
     userLat = markers.coords.latitude;
@@ -17,44 +16,47 @@ function position(markers) {
 }
 
 
+
 window.addEventListener('DOMContentLoaded', async function () {
 
     let response = await axios.get('tourism.geojson');
-    for (let each of response.data.features) {
-        for (let data in each) {
+    for (let eachAttraction of response.data.features) {
+        for (let data in eachAttraction) {
 
             //to get image imgUrl for display of images
-            if (each[data]['PHOTOURL']) {
-                imgUrl = each[data]['PHOTOURL'].split('')
-                let indexEnd = imgUrl.indexOf('>')
-                imgUrl = imgUrl.slice(25, indexEnd-1).join('')
+            if (eachAttraction[data]['PHOTOURL']) {
+                imgUrl = eachAttraction[data]['PHOTOURL'].split('')
+                let indexEnd = imgUrl.indexOf('>')-1
+                imgUrl = imgUrl.slice(25, indexEnd).join('')
                 imgUrl= imgUrl.replace("yoursingapore", "visitsingapore");
             }
 
-            if (each[data]['HYPERLINK']){
-                hyperlink = each[data]['HYPERLINK'].split('')
+            if (eachAttraction[data]['HYPERLINK']){
+                hyperlink = eachAttraction[data]['HYPERLINK'].split('')
                 let indexStart = hyperlink.indexOf('>')+1;
                 hyperlink = hyperlink.slice(indexStart, -4).join('');
             }
 
-            let popup = L.responsivePopup()
-                .setContent(
-                    `<img class='pop-up-border' style='width: 100%' src="${imgUrl}"> 
-                <h6>${each[data]['Name']}</h6>  
-                <h6>Opening Hours: ${each[data]['Opening Hours']}</h6>
-                <p>${each[data]['description']}</p>
-                <h6>${entranceFee[each[data]['foc']]}</h6>
+            let attractionsPopupDiv = document.createElement('div');
+            attractionsPopupDiv.innerHTML = 
+            `<img class='pop-up-border' style='width: 100%' src="${imgUrl}"> 
+            <h6>${eachAttraction[data]['Name']}</h6>  
+            <h6><i class="bi bi-clock"></i> ${eachAttraction[data]['Opening Hours']}</h6>
+            <p>${eachAttraction[data]['description']}</p>
+            <h6>${entranceFee[eachAttraction[data]['foc']]}</h6>
 
-                <div class='mx-auto'>
-                <button class='btn-sm btn-general view'
-                type="button" data-bs-toggle="offcanvas" role="button" 
-                aria-controls="searchcanvas" 
-                data-bs-target="#searchcanvas">search nearby</button>
-                
-                <button class='btn-sm btn-general'
-                type="button" onclick='showRouteToAttraction()'}>
-                get directions</button>
-                </div>`)
+            <div class='mx-auto'>
+            <button class='btn-sm btn-general view'
+            type="button" data-bs-toggle="offcanvas" role="button" 
+            aria-controls="searchcanvas" 
+            data-bs-target="#searchcanvas">search nearby</button>
+            
+            <button class='btn-sm btn-general'
+            type="button" onclick='showRouteToAttraction()'}>
+            get directions</button>
+            </div>`
+            let popup = L.responsivePopup()
+                .setContent(attractionsPopupDiv)
             
 
 
@@ -62,28 +64,28 @@ window.addEventListener('DOMContentLoaded', async function () {
             //arts layer
 
 
-            if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('arts')
-                || each[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
+            if (eachAttraction[data]['Field_1'] && (eachAttraction[data]['Field_1'].toLowerCase().includes('arts')
+                || eachAttraction[data]['PHOTOURL'].toLowerCase().includes('arts'))) {
 
 
-                let artsMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                let artsMarker = L.marker([eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]],
                     { icon: artsIcon })
                     .bindPopup(popup)
 
-                if (each[data]['foc'] == 'yes') {
+                if (eachAttraction[data]['foc'] == 'yes') {
                     artsPopupFOC.push(artsMarker)
                     artsMarker.addTo(artsLayerfoc);
                     document.querySelector('#artsfoc').innerHTML +=
                         `<div class="card mt-3 mx-auto mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                     </div>
                     <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn view-arts-foc btn-general w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -103,13 +105,13 @@ window.addEventListener('DOMContentLoaded', async function () {
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                       </div>
                       <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn view-arts btn-general w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -123,14 +125,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 }
 
-                artsMarker.on('click', function () {
-                    searchResultLayer.clearLayers();
-                    chosenLat = each.geometry.coordinates[1];
-                    chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
-                    document.querySelector('#search-side').style.display = 'block';
-                })
-
+                artsMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
                 //event listener to direct from offcanvas to map
                 let artsButtonFOC = document.querySelectorAll('.view-arts-foc');
                 directToMap(artsButtonFOC, artsLayerfoc, artsPopupFOC)
@@ -144,27 +139,27 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 
             //nature layer
-            else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('nature') || each[data]['PHOTOURL'].toLowerCase().includes('nature'))) {
+            else if (eachAttraction[data]['Field_1'] && (eachAttraction[data]['Field_1'].toLowerCase().includes('nature') || eachAttraction[data]['PHOTOURL'].toLowerCase().includes('nature'))) {
 
 
-                let natureMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                let natureMarker = L.marker([eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]],
                     { icon: natureIcon })
                     .bindPopup(popup);
-                if (each[data]['foc'] == 'yes') {
+                if (eachAttraction[data]['foc'] == 'yes') {
                     naturePopupFOC.push(natureMarker)
                     natureMarker.addTo(natureLayerfoc);
                     document.querySelector('#naturefoc').innerHTML +=
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                     </div>
 
                    <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn btn-general view-nature-foc w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -184,13 +179,13 @@ window.addEventListener('DOMContentLoaded', async function () {
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                       </div>
                       <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn btn-general view-nature w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -203,13 +198,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     </div>`
 
                 }
-                natureMarker.on('click', function () {
-                    searchResultLayer.clearLayers();
-                    chosenLat = each.geometry.coordinates[1];
-                    chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
-                    document.querySelector('#search-side').style.display = 'block';
-                })
+                natureMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
 
                 //event listener to direct from offcanvas to map
                 let natureButtonFOC = document.querySelectorAll('.view-nature-foc');
@@ -221,28 +210,28 @@ window.addEventListener('DOMContentLoaded', async function () {
             }
 
             //culture history layer
-            else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('culture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('history')))) {
+            else if (eachAttraction[data]['Field_1'] && (eachAttraction[data]['Field_1'].toLowerCase().includes('culture') || eachAttraction[data]['Field_1'] && (eachAttraction[data]['Field_1'].toLowerCase().includes('history')))) {
 
 
-                cultureHistoryMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                cultureHistoryMarker = L.marker([eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]],
                     { icon: heritageIcon })
                     .bindPopup(popup)
 
-                if (each[data]['foc'] == 'yes') {
+                if (eachAttraction[data]['foc'] == 'yes') {
                     cultureHistPopupFOC.push(cultureHistoryMarker)
                     cultureHistoryMarker.addTo(cultureHistoryLayerfoc);
                     document.querySelector('#culture-hist-foc').innerHTML +=
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                       </div>
 
                       <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn btn-general view-culture-foc w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -263,14 +252,14 @@ window.addEventListener('DOMContentLoaded', async function () {
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                       </div>
 
                       <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn btn-general view-culture w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -284,13 +273,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 }
 
-                cultureHistoryMarker.on('click', function () {
-                    searchResultLayer.clearLayers();
-                    chosenLat = each.geometry.coordinates[1];
-                    chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
-                    document.querySelector('#search-side').style.display = 'block';
-                })
+                cultureHistoryMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
 
                 //event listener to direct from offcanvas to map
                 let cultureHistButtonFOC = document.querySelectorAll('.view-culture-foc');
@@ -302,27 +285,27 @@ window.addEventListener('DOMContentLoaded', async function () {
             }
 
             //archi landscape layer
-            else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('architecture') || each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('places-to-see')))) {
+            else if (eachAttraction[data]['Field_1'] && (eachAttraction[data]['Field_1'].toLowerCase().includes('architecture') || eachAttraction[data]['Field_1'] && (eachAttraction[data]['Field_1'].toLowerCase().includes('places-to-see')))) {
 
 
-                let archiLandscapesMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                let archiLandscapesMarker = L.marker([eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]],
                     { icon: archiLandscapesIcon })
                     .bindPopup(popup)
-                if (each[data]['foc'] == 'yes') {
+                if (eachAttraction[data]['foc'] == 'yes') {
                     archiLandPopupFOC.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc);
                     document.querySelector('#archi-land-foc').innerHTML +=
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                       </div>
 
                       <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn btn-general view-archi-foc w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -342,13 +325,13 @@ window.addEventListener('DOMContentLoaded', async function () {
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                       </div>
                       <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn btn-general view-archi w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -361,14 +344,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     </div>`
                 }
 
-                archiLandscapesMarker.on('click', function () {
-                    searchResultLayer.clearLayers();
-                    chosenLat = each.geometry.coordinates[1];
-                    chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
-                    document.querySelector('#search-side').style.display = 'block';
-                })
-
+                archiLandscapesMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
                 //event listener to direct from offcanvas to map
                 let archiLandButtonFOC = document.querySelectorAll('.view-archi-foc');
                 directToMap(archiLandButtonFOC, archiLandscapesLayerfoc, archiLandPopupFOC)
@@ -380,26 +356,26 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             //recreation layer
 
-            else if (each[data]['Field_1'] && (each[data]['Field_1'].toLowerCase().includes('recreation') || each[data]['PHOTOURL'].toLowerCase().includes('recreation'))) {
+            else if (eachAttraction[data]['Field_1'] && (eachAttraction[data]['Field_1'].toLowerCase().includes('recreation') || eachAttraction[data]['PHOTOURL'].toLowerCase().includes('recreation'))) {
 
-                let recreationMarker = L.marker([each.geometry.coordinates[1], each.geometry.coordinates[0]],
+                let recreationMarker = L.marker([eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]],
                     { icon: recreationIcon })
                     .bindPopup(popup)
-                if (each[data]['foc'] == 'yes') {
+                if (eachAttraction[data]['foc'] == 'yes') {
                     recreationPopupFOC.push(recreationMarker);
                     recreationMarker.addTo(recreationLayerfoc);
                     document.querySelector('#recreation-foc').innerHTML +=
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                       </div>
 
                       <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn btn-general view-recre-foc w-50" 
                     data-bs-dismiss="offcanvas" 
@@ -418,14 +394,14 @@ window.addEventListener('DOMContentLoaded', async function () {
                         `<div class="card mt-3 mx-auto" style="width: 18rem;">
                     <img src="${imgUrl}" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">${each[data]['Name']}</h5>
-                      <h6 class="card-text">${each[data]['Opening Hours']}</h6>
-                      <p class="card-text">${each[data]['description']}</p>
+                      <h5 class="card-title">${eachAttraction[data]['Name']}</h5>
+                      <h6 class="card-text">${eachAttraction[data]['Opening Hours']}</h6>
+                      <p class="card-text">${eachAttraction[data]['description']}</p>
                       </div>
 
                       <div class="d-flex flex-row">
-                    <button data-latitude='${each.geometry.coordinates[1]}' 
-                    data-longitude='${each.geometry.coordinates[0]}' 
+                    <button data-latitude='${eachAttraction.geometry.coordinates[1]}' 
+                    data-longitude='${eachAttraction.geometry.coordinates[0]}' 
                     type="button" 
                     class="btn btn-general view-recre" 
                     data-bs-dismiss="offcanvas" 
@@ -436,13 +412,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     </div>
                     </div>`
                 }
-                recreationMarker.on('click', function () {
-                    searchResultLayer.clearLayers();
-                    chosenLat = each.geometry.coordinates[1];
-                    chosenLng = each.geometry.coordinates[0];
-                    map.flyTo([chosenLat, chosenLng], 16);
-                    document.querySelector('#search-side').style.display = 'block';
-                })
+                recreationMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
 
                 let recreationButtonFOC = document.querySelectorAll('.view-recre-foc');
                 directToMap(recreationButtonFOC, recreationLayerfoc, recreationPopupFOC);
@@ -477,6 +447,7 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
         let locations = await searchNearby(query);
         L.circle([chosenLat, chosenLng], { radius: 1000, color: '#C0392B' }).addTo(searchResultLayer);
         if (locations.results == false) {
+            document.querySelector('#loader').style.display = 'none';
             document.querySelector('#results').innerHTML = "no results found";
         }
         else {
@@ -519,9 +490,12 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 <h6>Ratings: ${details.rating} <i class="bi bi-star-fill"></i>
                 </h6>
                 <button class='btn-sm btn-general'
-                type="button" onclick='showRouteToNearby()'}>
+                type="button">
                 get directions</button>
                <a class = 'btn-sm btn-general place-link' type="button" href='${details.website}' target="_blank">visit website</a>`
+               popupDiv.querySelector('button').addEventListener('click', function(){
+                   showRouteToNearby(eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude)
+               })
                 let popupContent = L.responsivePopup().setContent(popupDiv)
                 let resultPopup = L.marker([lat, lng], { icon: searchIcon })
                     .addTo(searchResultLayer)
@@ -532,7 +506,7 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 perResult.setAttribute("data-bs-dismiss", "offcanvas");
                 perResult.setAttribute("aria-label", "Close")
                 perResult.addEventListener('click', function () {
-                    map.flyTo([lat, lng], 16);
+                    map.flyTo([eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude], 16);
                     resultPopup.openPopup()
                 })
                allResults.appendChild(perResult);
@@ -580,13 +554,13 @@ focToggle.addEventListener('click', function () {
     document.querySelector('#search-side').style.display = 'none';
     if (document.querySelector('#current-layer').innerHTML == "Attractions with Paid Entry") {
         document.querySelector('#change').innerHTML = '<i class="bi bi-toggle-off"></i>';
-        document.querySelector('#change')['data-bs-target'] = "#foc-attractions"
+        document.querySelector('#change').style.backgroundColor = 'white';
+        document.querySelector('#change').style.color = '#C0392B';
+        document.querySelector('#change').setAttribute('data-bs-target', '#foc-attractions');
         controller.remove();
         document.querySelector('#current-layer').innerHTML = "Attractions with Free Entry";
-        document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
         document.querySelector('#nav-toggle').href = "#foc-attractions";
-        document.querySelector('#nav-toggle').role = "button"
-        document.querySelector('#nav-toggle')['aria-controls'] = "foc-attractions"
+        document.querySelector('#nav-toggle').setAttribute('aria-controls', "foc-attractions")
         overlayLayersFOC = {
             '<img style="height: 25px" src="images/map-markers/arts.png"> artsfoc': artsLayerfoc,
             '<img style="height: 25px" src="images/map-markers/nature.png">naturefoc': natureLayerfoc,
@@ -607,12 +581,10 @@ focToggle.addEventListener('click', function () {
     else {
         document.querySelector('#current-layer').innerHTML = "Attractions with Paid Entry";
         document.querySelector('#change').innerHTML = '<i class="bi bi-toggle-on"></i>';
-        document.querySelector('#change')['data-bs-target'] = "#paid-attractions"
+        document.querySelector('#change').setAttribute('data-bs-target', '#paid-attractions');
         controller.remove();
-        document.querySelector('#nav-toggle')['data-bs-toggle'] = "offcanvas";
         document.querySelector('#nav-toggle').href = "#paid-attractions";
-        document.querySelector('#nav-toggle').role = "button"
-        document.querySelector('#nav-toggle')['aria-controls'] = "paid-attractions"
+        document.querySelector('#nav-toggle').setAttribute('aria-controls', "paid-attractions")
         let i = 0;
         for (let each in overlayLayers) {
             map.removeLayer(freeAttractions[i]);
@@ -664,8 +636,8 @@ async function getWeather() {
 
 
 //for weather markers and selectors
-document.querySelector('#weatherBtn').addEventListener('click', function () {
-    getWeather()
+document.querySelector('#weatherBtn').addEventListener('click', async function () {
+    await getWeather()
     if (map.hasLayer(weatherMarkers)) {
         map.removeLayer(weatherMarkers)
     }
