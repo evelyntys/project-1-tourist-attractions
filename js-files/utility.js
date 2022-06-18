@@ -157,9 +157,9 @@ function showRouteToAttraction() {
         routing.remove()
     }
     navigator.geolocation.getCurrentPosition(position)
-    userLocation = L.marker([userLat, userLng], {icon: userIcon}).bindPopup('You are here');
+    userLocation = L.marker([userLat, userLng], { icon: userIcon }).bindPopup('You are here');
     userLocation.addTo(map).openPopup()
-    let bounds = L.latLngBounds([userLat,userLng], [chosenLat,chosenLng])
+    let bounds = L.latLngBounds([userLat, userLng], [chosenLat, chosenLng])
     map.flyToBounds(bounds)
     routing = L.Routing.control({
         waypoints: [
@@ -169,14 +169,49 @@ function showRouteToAttraction() {
     }).addTo(map)
 }
 
-function showRouteToNearby(){
+function showRouteToNearby(placeLat,placeLng) {
     if (routing) {
         routing.remove()
     }
     routing = L.Routing.control({
         waypoints: [
             L.latLng(chosenLat, chosenLng),
-            L.latLng(lat, lng)
+            L.latLng(placeLat, placeLng)
         ]
     }).addTo(map)
+}
+
+function markerClick(attractionLat, attractionLng) {
+    searchResultLayer.clearLayers();
+    chosenLat = attractionLat;
+    chosenLng = attractionLng;
+    map.flyTo([chosenLat, chosenLng], 16);
+    document.querySelector('#search-side').style.display = 'block';
+}
+
+function getCardContent(attractionImage, attractionName, attractionDescription, attractionAddress, attractionLat, attractionLng, category, attractionLink ){
+    let content = `<div class="card mt-3 mx-auto mx-auto" style="width: 18rem;">
+                    <img src="${attractionImage}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">${attractionName}</h5>
+                    
+                      <p class="card-text">${attractionDescription} </p>
+                      <p class="card-text"> Address: ${attractionAddress}</p>
+                      
+                    </div>
+                    <div class="d-flex flex-row">
+                    <button data-latitude='${attractionLat}' 
+                    data-longitude='${attractionLng}' 
+                    type="button" 
+                    class="btn ${category} btn-general w-50" 
+                    data-bs-dismiss="offcanvas" 
+                    aria-label="Close">view on map</button>
+
+                    <a class = 'btn btn-general w-50' 
+                    type="button" href='${attractionLink}' target="_blank">
+                    visit website</a>
+                    </div>
+                  </div>`
+
+                  return content
 }
