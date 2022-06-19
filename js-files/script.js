@@ -37,8 +37,6 @@ window.addEventListener('DOMContentLoaded', async function () {
                 hyperlink = hyperlink.slice(indexStart, -4).join('');
             }
 
-            
-
 
             let attractionsPopupDiv = document.createElement('div');
             attractionsPopupDiv.classList.add('test')
@@ -378,8 +376,7 @@ layerControl.addEventListener('click', function () {
             freeAttractions[i].addTo(map)
             i++;
         }
-        controller = L.control.layers({}, overlayLayersFOC, { position: 'topright' }).addTo(map);
-        controller.setPosition('topright');
+        controller = L.control.layers({}, overlayLayersFOC).addTo(map);
         document.querySelector('.leaflet-control-layers-toggle').style.backgroundImage = "url(images/overlay-control/free.png)";
     }
     else {
@@ -404,43 +401,6 @@ layerControl.addEventListener('click', function () {
 
 
 
-//weather API
-let weatherMarkers = L.layerGroup()
-
-let weatherAPI = 'https://api.data.gov.sg/v1/environment/2-hour-weather-forecast';
-async function getWeather() {
-    let response = await axios.get(weatherAPI);
-    let weatherData = response.data;
-    for (let i = 0; i < weatherData.area_metadata.length; i++) {
-        if (weatherData.items[0].forecasts[i].forecast.toLowerCase().includes('partly cloudy')) {
-            let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: partlyCloudyIcon }).addTo(weatherMarkers)
-            marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
-            ${weatherData.items[0].forecasts[i].forecast}`)
-        }
-        else if (weatherData.items[0].forecasts[i].forecast.toLowerCase().includes('cloudy')) {
-            let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: cloudyIcon }).addTo(weatherMarkers)
-            marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
-        ${weatherData.items[0].forecasts[i].forecast}`)
-        }
-        else if (weatherData.items[0].forecasts[i].forecast.toLowerCase().includes('thunder')) {
-            let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: thunderyIcon }).addTo(weatherMarkers)
-            marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
-            ${weatherData.items[0].forecasts[i].forecast}`)
-        }
-        else if (weatherData.items[0].forecasts[i].forecast.toLowerCase().includes('rain') || weatherData.items[0].forecasts[i].forecast.toLowerCase().includes('showers')) {
-            let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: rainIcon }).addTo(weatherMarkers)
-            marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
-            ${weatherData.items[0].forecasts[i].forecast}`)
-        }
-        else {
-            let marker = L.marker([weatherData.area_metadata[i].label_location.latitude, weatherData.area_metadata[i].label_location.longitude], { icon: fairIcon }).addTo(weatherMarkers)
-            marker.bindPopup(`<h6>${weatherData.items[0].forecasts[i].area}</h6>
-            ${weatherData.items[0].forecasts[i].forecast}`)
-        }
-    }
-}
-
-
 //for weather markers and selectors
 document.querySelector('#weatherBtn').addEventListener('click', async function () {
     await getWeather()
@@ -451,6 +411,25 @@ document.querySelector('#weatherBtn').addEventListener('click', async function (
         map.addLayer(weatherMarkers)
     }
 })
+
+//weather button styling
+document.querySelector('#map').addEventListener('click', function(){
+    if(document.querySelector('.leaflet-control-layers-expanded')){
+        document.querySelector('#weatherBtn').style.right = '240px';
+    }
+    else{
+        document.querySelector('#weatherBtn').style.right = '60px';
+    }
+    })
+    
+    document.querySelector('#map').addEventListener('mouseover', function(){
+        if(document.querySelector('.leaflet-control-layers-expanded')){
+            document.querySelector('#weatherBtn').style.right = '240px';
+        }
+        else{
+            document.querySelector('#weatherBtn').style.right = '60px';
+        }
+        })
 
 document.querySelector('#nav-subscribe').addEventListener('click', function(){
     if (document.querySelector('#newsletter').style.display=='block'){
@@ -504,20 +483,3 @@ document.querySelector('#subscribeBtn').addEventListener('click', function(){
     }
 })
 
-document.querySelector('#map').addEventListener('click', function(){
-if(document.querySelector('.leaflet-control-layers-expanded')){
-    document.querySelector('#weatherBtn').style.right = '240px';
-}
-else{
-    document.querySelector('#weatherBtn').style.right = '60px';
-}
-})
-
-document.querySelector('#map').addEventListener('mouseover', function(){
-    if(document.querySelector('.leaflet-control-layers-expanded')){
-        document.querySelector('#weatherBtn').style.right = '240px';
-    }
-    else{
-        document.querySelector('#weatherBtn').style.right = '60px';
-    }
-    })
