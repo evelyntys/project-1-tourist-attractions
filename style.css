@@ -270,6 +270,14 @@ a {
     width: 100%;
 }
 
+#contact-page{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+}
+
 .view-layer{
 position: absolute;
 color: white;
@@ -277,4 +285,25 @@ background-color: rgba(0, 0, 0, 0.5);
 top: 300px;
 width: 60vw;
 padding: 5px;
+}
+
+.btn-image{
+    height: 20px;
+}
+
+@media screen and (max-width: 768px){
+    #landing-page{
+        background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(images/mbs.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .view-layer{
+        justify-content: center;
+        align-items: center;
+        width: 80vw;
+    }
+    .animate-buttons{
+        display: flex;
+       flex-direction: column;
+    }
 }

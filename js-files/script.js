@@ -1,5 +1,5 @@
 let map = createMap();
-let imgUrl = null;
+let imgUrl = "";
 let routing = null;
 let lat = null;
 let lng = null;
@@ -45,6 +45,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             let attractionsPopupDiv = document.createElement('div');
             attractionsPopupDiv.classList.add('test')
+            //loop through and find the one with missing image
             attractionsPopupDiv.innerHTML =
                 `<img class='pop-up-border' style='width: 100%' src="${imgUrl}"> 
             <h5 class='card-title'>${eachAttraction[data]['Name']}</h6>  
@@ -299,7 +300,9 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 <button class='btn-sm btn-general'
                 type="button">
                 get directions</button>
-               <a class = 'btn-sm btn-general place-link' type="button" href='${details.website}' target="_blank">visit website</a>`
+               <a class = 'btn-sm btn-general place-link' type="button" href='${details.website}' 
+               target="_blank">visit website</a>`
+               // customise styling of a button
                 popupDiv.querySelector('button').addEventListener('click', function () {
                     showRouteToNearby(eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude)
                 })
@@ -436,6 +439,10 @@ document.querySelector('#map').addEventListener('mouseover', function () {
 })
 
 document.querySelector('#nav-subscribe').addEventListener('click', function () {
+    document.querySelector('#contact-page').classList.remove('hide-page');
+    document.querySelector('#contact-page').classList.add('show-page');
+    document.querySelector('#main-page').classList.add('hide-page');
+    document.querySelector('#main-page').classList.remove('show-page');
     if (document.querySelector('#newsletter').style.display == 'block') {
         document.querySelector('#newsletter').style.display = 'none'
     }
@@ -455,6 +462,7 @@ document.querySelector('#subscribeBtn').addEventListener('click', function () {
     }
     else {
         document.querySelector('#invalid-first-name').style.display = 'none';
+        document.querySelector('#first-name').style.border = '';
     }
 
     if (!document.querySelector('#last-name').value) {
@@ -463,6 +471,7 @@ document.querySelector('#subscribeBtn').addEventListener('click', function () {
     }
     else {
         document.querySelector('#invalid-last-name').style.display = 'none';
+        document.querySelector('#last-name').style.border = '';
     }
 
     if (!document.querySelector('#message').value) {
@@ -471,6 +480,7 @@ document.querySelector('#subscribeBtn').addEventListener('click', function () {
     }
     else {
         document.querySelector('#invalid-message').style.display = 'none';
+        document.querySelector('#message').style.border = '';
     }
 
     let residencyRadio = document.querySelectorAll('.residency');
@@ -494,31 +504,13 @@ document.querySelector('#subscribeBtn').addEventListener('click', function () {
     }
     else {
         document.querySelector('#invalid-email').style.display = 'none';
+        document.querySelector('#email').style.border = '';
     }
 
-    if (!document.querySelector('#agreement').checked) {
-        document.querySelector('#invalid-agreement').style.display = 'block';
-        document.querySelector('#agreement').style.border = 'solid 1px darkred';
+    if(document.querySelector('#first-name').value && document.querySelector('#last-name').value && document.querySelector('#message').value && residency && document.querySelector('#email') && document.querySelector('#email').value){
+        document.querySelector('#newsletter').innerHTML = '<h2>thank you for contacting us! we will try to get in touch with you as soon as possible</h2>'
     }
 
-    else {
-        document.querySelector('#invalid-agreement').style.display = 'none';
-    }
-
-
-    let validation = document.querySelectorAll('.invalid');
-    let validationCheck = true;
-    for (let eachDiv of validation) {
-        if (eachDiv.style.display = 'none') {
-            validationCheck = true;
-        }
-        else {
-            validationCheck = false;
-        }
-    }
-    if (validationCheck) {
-        document.querySelector('#newslatter').innerHTML = '<h4 class="text-center">Thank you for sendingu us a response! We will try to get back to you as soon as possible!</h4>'
-    }
 })
 
 let animateBtn = document.querySelectorAll('.animate-btn')
@@ -557,3 +549,10 @@ for (let each of animateBtn) {
         }
     })
 }
+
+document.querySelector('.return').addEventListener('click', function(){
+    document.querySelector('#main-page').classList.remove('hide-page');
+        document.querySelector('#main-page').classList.add('show-page');
+        document.querySelector('#contact-page').classList.add('hide-page');
+        document.querySelector('#contact-page').classList.remove('show-page');
+})
