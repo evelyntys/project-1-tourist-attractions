@@ -21,6 +21,11 @@ window.addEventListener('DOMContentLoaded', async function () {
         for (let data in eachAttraction) {
 
             //to get image imgUrl for display of images
+
+            if(!eachAttraction[data]['PHOTOURL']){
+                imgUrl = eachAttraction[data]['new-photo']
+            }
+
             if (eachAttraction[data]['PHOTOURL']) {
                 imgUrl = eachAttraction[data]['PHOTOURL'].split('')
                 let indexEnd = imgUrl.indexOf('>') - 1
@@ -44,7 +49,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 
             let attractionsPopupDiv = document.createElement('div');
-            attractionsPopupDiv.classList.add('test')
+            attractionsPopupDiv.classList.add('popup-interior')
             //loop through and find the one with missing image
             attractionsPopupDiv.innerHTML =
                 `<img class='pop-up-border' style='width: 100%' src="${imgUrl}"> 
@@ -79,16 +84,27 @@ window.addEventListener('DOMContentLoaded', async function () {
                 if (eachAttraction[data]['foc'] == 'yes') {
                     artsPopupFOC.push(artsMarker)
                     artsMarker.addTo(artsLayerfoc);
-                    document.querySelector('#artsfoc').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-arts-foc', hyperlink)
+                    document.querySelector('#artsfoc').innerHTML += getCardContent(imgUrl, 
+                            eachAttraction[data]['Name'], 
+                            eachAttraction[data]['description'], 
+                            eachAttraction[data]['ADDRESSSTREETNAME'], 
+                            eachAttraction.geometry.coordinates[1], 
+                            eachAttraction.geometry.coordinates[0], 
+                            'view-arts-foc', 
+                            hyperlink)
                 }
 
                 else {
                     artsPopup.push(artsMarker)
                     artsMarker.addTo(artsLayer);
-                    document.querySelector('#arts').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-arts', hyperlink)
-
+                    document.querySelector('#arts').innerHTML += getCardContent(imgUrl, 
+                            eachAttraction[data]['Name'], 
+                            eachAttraction[data]['description'], 
+                            eachAttraction[data]['ADDRESSSTREETNAME'], 
+                            eachAttraction.geometry.coordinates[1], 
+                            eachAttraction.geometry.coordinates[0], 
+                            'view-arts', 
+                            hyperlink)
                 }
 
                 artsMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
@@ -114,16 +130,26 @@ window.addEventListener('DOMContentLoaded', async function () {
                 if (eachAttraction[data]['foc'] == 'yes') {
                     naturePopupFOC.push(natureMarker)
                     natureMarker.addTo(natureLayerfoc);
-                    document.querySelector('#naturefoc').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-nature-foc', hyperlink)
-
+                    document.querySelector('#naturefoc').innerHTML += getCardContent(imgUrl, 
+                            eachAttraction[data]['Name'], 
+                            eachAttraction[data]['description'], 
+                            eachAttraction[data]['ADDRESSSTREETNAME'], 
+                            eachAttraction.geometry.coordinates[1], 
+                            eachAttraction.geometry.coordinates[0], 
+                            'view-nature-foc', 
+                            hyperlink)
                 }
                 else {
                     naturePopup.push(natureMarker);
                     natureMarker.addTo(natureLayer);
-                    document.querySelector('#nature').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-nature', hyperlink)
-
+                    document.querySelector('#nature').innerHTML += getCardContent(imgUrl, 
+                            eachAttraction[data]['Name'], 
+                            eachAttraction[data]['description'], 
+                            eachAttraction[data]['ADDRESSSTREETNAME'], 
+                            eachAttraction.geometry.coordinates[1], 
+                            eachAttraction.geometry.coordinates[0],
+                            'view-nature', 
+                            hyperlink)
                 }
                 natureMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
@@ -147,17 +173,26 @@ window.addEventListener('DOMContentLoaded', async function () {
                 if (eachAttraction[data]['foc'] == 'yes') {
                     cultureHistPopupFOC.push(cultureHistoryMarker)
                     cultureHistoryMarker.addTo(cultureHistoryLayerfoc);
-                    document.querySelector('#culture-hist-foc').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-culture-foc', hyperlink)
-
+                    document.querySelector('#culture-hist-foc').innerHTML += getCardContent(imgUrl, 
+                        eachAttraction[data]['Name'], eachAttraction[data]['description'], 
+                        eachAttraction[data]['ADDRESSSTREETNAME'], 
+                        eachAttraction.geometry.coordinates[1], 
+                        eachAttraction.geometry.coordinates[0], 
+                        'view-culture-foc', 
+                        hyperlink)
                 }
 
                 else {
                     cultureHistPopup.push(cultureHistoryMarker)
                     cultureHistoryMarker.addTo(cultureHistoryLayer);
-                    document.querySelector('#culture-hist').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-culture', hyperlink)
-
+                    document.querySelector('#culture-hist').innerHTML += getCardContent(imgUrl, 
+                        eachAttraction[data]['Name'], 
+                        eachAttraction[data]['description'], 
+                        eachAttraction[data]['ADDRESSSTREETNAME'], 
+                        eachAttraction.geometry.coordinates[1], 
+                        eachAttraction.geometry.coordinates[0], 
+                        'view-culture', 
+                        hyperlink)
                 }
 
                 cultureHistoryMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
@@ -181,15 +216,27 @@ window.addEventListener('DOMContentLoaded', async function () {
                 if (eachAttraction[data]['foc'] == 'yes') {
                     archiLandPopupFOC.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc);
-                    document.querySelector('#archi-land-foc').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-archi-foc', hyperlink)
+                    document.querySelector('#archi-land-foc').innerHTML += getCardContent(imgUrl, 
+                        eachAttraction[data]['Name'], 
+                        eachAttraction[data]['description'], 
+                        eachAttraction[data]['ADDRESSSTREETNAME'], 
+                        eachAttraction.geometry.coordinates[1], 
+                        eachAttraction.geometry.coordinates[0], 
+                        'view-archi-foc', 
+                        hyperlink)
 
                 }
                 else {
                     archiLandPopup.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayer);
-                    document.querySelector('#archi-land').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-archi', hyperlink)
+                    document.querySelector('#archi-land').innerHTML += getCardContent(imgUrl, 
+                        eachAttraction[data]['Name'], 
+                        eachAttraction[data]['description'], 
+                        eachAttraction[data]['ADDRESSSTREETNAME'], 
+                        eachAttraction.geometry.coordinates[1], 
+                        eachAttraction.geometry.coordinates[0], 
+                        'view-archi', 
+                        hyperlink)
                 }
 
                 archiLandscapesMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
@@ -212,15 +259,27 @@ window.addEventListener('DOMContentLoaded', async function () {
                 if (eachAttraction[data]['foc'] == 'yes') {
                     recreationPopupFOC.push(recreationMarker);
                     recreationMarker.addTo(recreationLayerfoc);
-                    document.querySelector('#recreation-foc').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-recre-foc', hyperlink)
+                    document.querySelector('#recreation-foc').innerHTML += getCardContent(imgUrl, 
+                        eachAttraction[data]['Name'], 
+                        eachAttraction[data]['description'], 
+                        eachAttraction[data]['ADDRESSSTREETNAME'], 
+                        eachAttraction.geometry.coordinates[1], 
+                        eachAttraction.geometry.coordinates[0], 
+                        'view-recre-foc', 
+                        hyperlink)
 
                 }
                 else {
                     recreationPopup.push(recreationMarker);
                     recreationMarker.addTo(recreationLayer);
-                    document.querySelector('#recreation').innerHTML +=
-                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-recre', hyperlink)
+                    document.querySelector('#recreation').innerHTML += getCardContent(imgUrl, 
+                        eachAttraction[data]['Name'], 
+                        eachAttraction[data]['description'], 
+                        eachAttraction[data]['ADDRESSSTREETNAME'], 
+                        eachAttraction.geometry.coordinates[1], 
+                        eachAttraction.geometry.coordinates[0], 
+                        'view-recre', 
+                        hyperlink)
                 }
                 recreationMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
@@ -237,11 +296,6 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 
 //adding layers to map
-// cultureHistoryLayer.addTo(map)
-// archiLandscapesLayer.addTo(map)
-// artsLayer.addTo(map)
-// natureLayer.addTo(map)
-// recreationLayer.addTo(map)
 
 //usersearch foursquare
 document.querySelector('#searchBtn').addEventListener('click', async function () {
@@ -288,21 +342,22 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                     details.website = 'https://www.google.com'
                 }
 
-                let popupDiv = document.createElement('div')
+                let popupDiv = document.createElement('div');
+                popupDiv.classList.add('popup-interior')
                 popupDiv.innerHTML = `
                 <img class='pop-up-border' style='width: 297px; height: 167px; object-fit: contain;' src='${photoLink}'>
                 <h4>${eachResult.name}</h4>
-                <h6>${details.hours.display}</h6>
-                <h6>${eachResult.location.formatted_address}</h6>
-                <h6>${eachResult.distance}m from this place</h6>
-                <h6>Ratings: ${details.rating} <i class="bi bi-star-fill"></i>
-                </h6>
+                <p>Opening Hours: ${details.hours.display}</p>
+                <p>Address: ${eachResult.location.formatted_address}</p>
+                <p>${eachResult.distance}m from the attraction</p>
+                <p>Ratings: ${details.rating} <i class="bi bi-star-fill"></i>
+                </p>
                 <button class='btn-sm btn-general'
                 type="button">
                 get directions</button>
                <a class = 'btn-sm btn-general place-link' type="button" href='${details.website}' 
                target="_blank">visit website</a>`
-               // customise styling of a button
+                // customise styling of a button
                 popupDiv.querySelector('button').addEventListener('click', function () {
                     showRouteToNearby(eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude)
                 })
@@ -345,9 +400,17 @@ let overlayLayers = {
     '<img style="height: 25px" src="images/map-markers/heritage.png">culture & history': cultureHistoryLayer,
     '<img style="height: 25px" src="images/map-markers/landscapes.png">architecture & landscapes': archiLandscapesLayer,
     '<img style="height: 25px" src="images/map-markers/recreation.png">recreation': recreationLayer
-}
+};
 
-let controller = L.control.layers({}, overlayLayers).addTo(map);
+let overlayLayersFOC = {
+    '<img style="height: 25px" src="images/map-markers/arts.png">arts': artsLayerfoc,
+    '<img style="height: 25px" src="images/map-markers/nature.png">nature': natureLayerfoc,
+    '<img style="height: 25px" src="images/map-markers/heritage.png">culture & history': cultureHistoryLayerfoc,
+    '<img style="height: 25px" src="images/map-markers/landscapes.png">architecture & landscapes': archiLandscapesLayerfoc,
+    '<img style="height: 25px" src="images/map-markers/recreation.png">recreation': recreationLayerfoc
+};
+
+let controller = L.control.layers({}, overlayLayersFOC).addTo(map);
 
 //toggle for current layer
 let layerControl = document.querySelector('#change')
@@ -369,14 +432,7 @@ layerControl.addEventListener('click', function () {
         controller.remove();
         document.querySelector('#current-layer').innerHTML = "Attractions with Free Entry";
         document.querySelector('#nav-toggle').href = "#foc-attractions";
-        document.querySelector('#nav-toggle').setAttribute('aria-controls', "foc-attractions")
-        overlayLayersFOC = {
-            '<img style="height: 25px" src="images/map-markers/arts.png">arts': artsLayerfoc,
-            '<img style="height: 25px" src="images/map-markers/nature.png">nature': natureLayerfoc,
-            '<img style="height: 25px" src="images/map-markers/heritage.png">culture & history': cultureHistoryLayerfoc,
-            '<img style="height: 25px" src="images/map-markers/landscapes.png">architecture & landscapes': archiLandscapesLayerfoc,
-            '<img style="height: 25px" src="images/map-markers/recreation.png">recreation': recreationLayerfoc
-        }
+        document.querySelector('#nav-toggle').setAttribute('aria-controls', "foc-attractions");
         let i = 0;
         for (let eachLayer in overlayLayers) {
             map.removeLayer(paidAttractions[i]);
@@ -438,24 +494,18 @@ document.querySelector('#map').addEventListener('mouseover', function () {
     }
 })
 
-document.querySelector('#nav-subscribe').addEventListener('click', function () {
+document.querySelector('#contact-us-button').addEventListener('click', function () {
     document.querySelector('#contact-page').classList.remove('hide-page');
     document.querySelector('#contact-page').classList.add('show-page');
     document.querySelector('#main-page').classList.add('hide-page');
     document.querySelector('#main-page').classList.remove('show-page');
-    if (document.querySelector('#newsletter').style.display == 'block') {
-        document.querySelector('#newsletter').style.display = 'none'
-    }
-
-    else {
-        document.querySelector('#newsletter').style.display = 'block'
-    }
+    document.querySelector('#contact-us').style.display = 'block';
 })
 
 //form validation
 
 
-document.querySelector('#subscribeBtn').addEventListener('click', function () {
+document.querySelector('#submitBtn').addEventListener('click', function () {
     if (!document.querySelector('#first-name').value) {
         document.querySelector('#invalid-first-name').style.display = 'block';
         document.querySelector('#first-name').style.border = 'solid 1px darkred';
@@ -507,8 +557,9 @@ document.querySelector('#subscribeBtn').addEventListener('click', function () {
         document.querySelector('#email').style.border = '';
     }
 
-    if(document.querySelector('#first-name').value && document.querySelector('#last-name').value && document.querySelector('#message').value && residency && document.querySelector('#email') && document.querySelector('#email').value){
-        document.querySelector('#newsletter').innerHTML = '<h2>thank you for contacting us! we will try to get in touch with you as soon as possible</h2>'
+    if (document.querySelector('#first-name').value && document.querySelector('#last-name').value && document.querySelector('#message').value && residency && document.querySelector('#email') && document.querySelector('#email').value) {
+        document.querySelector('.form-content').innerHTML = `<h2>thank you for contacting us! <br>
+        we will try to get in touch with you as soon as possible</h2>`
     }
 
 })
@@ -520,13 +571,14 @@ for (let each of animateBtn) {
         document.querySelector('#main-page').classList.add('show-page');
         document.querySelector('#landing-page').classList.add('hide-page');
         document.querySelector('#landing-page').classList.remove('show-page');
+        document.querySelector('#landing-page').style.display = 'none';
         if (each.dataset.toggle == 'foc-toggle') {
             layerControl.setAttribute('data-bs-target', '#foc-attractions');
             document.querySelector('#nav-toggle').href = "#foc-attractions";
             document.querySelector('#nav-toggle').setAttribute('aria-controls', "foc-attractions")
             document.querySelector('.leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle').style.backgroundImage = 'url(images/overlay-control/free.png)';
             document.querySelector('#current-layer').innerHTML = "Attractions with Free Entry";
-            layerControl.innerHTML = '<i class="bi bi-toggle-off"></i>'
+            layerControl.innerHTML = '<i class="bi bi-toggle-off"></i>';
             cultureHistoryLayerfoc.addTo(map)
             archiLandscapesLayerfoc.addTo(map)
             artsLayerfoc.addTo(map)
@@ -540,19 +592,30 @@ for (let each of animateBtn) {
             document.querySelector('#nav-toggle').setAttribute('aria-controls', "paid-attractions")
             document.querySelector('.leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle').style.backgroundImage = 'url(images/overlay-control/money.png)';
             document.querySelector('#current-layer').innerHTML = "Attractions with Paid Entry";
-            layerControl.innerHTML = '<i class="bi bi-toggle-on"></i>'
+            layerControl.innerHTML = '<i class="bi bi-toggle-on"></i>';
             cultureHistoryLayer.addTo(map)
             archiLandscapesLayer.addTo(map)
             artsLayer.addTo(map)
             natureLayer.addTo(map)
             recreationLayer.addTo(map)
+            let i=0;
+            controller.remove();
+            for (let eachLayer in overlayLayers) {
+                map.removeLayer(freeAttractions[i]);
+                paidAttractions[i].addTo(map)
+                i++;
+            }
+            controller = L.control.layers({}, overlayLayers, { position: 'topright' }).addTo(map);
+            document.querySelector('.leaflet-control-layers-toggle').style.backgroundImage = "url(images/overlay-control/money.png)";
         }
-    })
-}
+        })
+    }
 
-document.querySelector('.return').addEventListener('click', function(){
+
+document.querySelector('.return').addEventListener('click', function () {
     document.querySelector('#main-page').classList.remove('hide-page');
-        document.querySelector('#main-page').classList.add('show-page');
-        document.querySelector('#contact-page').classList.add('hide-page');
-        document.querySelector('#contact-page').classList.remove('show-page');
+    document.querySelector('#main-page').classList.add('show-page');
+    document.querySelector('#contact-page').classList.add('hide-page');
+    document.querySelector('#contact-page').classList.remove('show-page');
+    // document.querySelector('#contact-us').style.display = 'none';
 })
