@@ -23,30 +23,30 @@ window.addEventListener('DOMContentLoaded', async function () {
             //to get image imgUrl for display of images
             if (eachAttraction[data]['PHOTOURL']) {
                 imgUrl = eachAttraction[data]['PHOTOURL'].split('')
-                let indexEnd = imgUrl.indexOf('>')-1
+                let indexEnd = imgUrl.indexOf('>') - 1
                 imgUrl = imgUrl.slice(25, indexEnd).join('')
-                imgUrl= imgUrl.replace("yoursingapore", "visitsingapore");
+                imgUrl = imgUrl.replace("yoursingapore", "visitsingapore");
             }
 
-            if (eachAttraction[data]['HYPERLINK']){
+            if (eachAttraction[data]['HYPERLINK']) {
                 hyperlink = eachAttraction[data]['HYPERLINK'].split('')
-                let indexStart = hyperlink.indexOf('>')+1;
+                let indexStart = hyperlink.indexOf('>') + 1;
                 hyperlink = hyperlink.slice(indexStart, -4).join('');
             }
 
-            if (!eachAttraction[data]['Opening Hours']){
+            if (!eachAttraction[data]['Opening Hours']) {
                 eachAttraction[data]['Opening Hours'] = 'information not available'
             }
 
-            if (!eachAttraction[data]['ADDRESSSTREETNAME']){
+            if (!eachAttraction[data]['ADDRESSSTREETNAME']) {
                 eachAttraction[data]['ADDRESSSTREETNAME'] = 'information not available'
             }
 
 
             let attractionsPopupDiv = document.createElement('div');
             attractionsPopupDiv.classList.add('test')
-            attractionsPopupDiv.innerHTML = 
-            `<img class='pop-up-border' style='width: 100%' src="${imgUrl}"> 
+            attractionsPopupDiv.innerHTML =
+                `<img class='pop-up-border' style='width: 100%' src="${imgUrl}"> 
             <h5 class='card-title'>${eachAttraction[data]['Name']}</h6>  
             <p class='card-text'>Opening Hours: ${eachAttraction[data]['Opening Hours']}</p>
             <p class='card-text'>${entranceFee[eachAttraction[data]['foc']]}</p>
@@ -79,18 +79,18 @@ window.addEventListener('DOMContentLoaded', async function () {
                     artsPopupFOC.push(artsMarker)
                     artsMarker.addTo(artsLayerfoc);
                     document.querySelector('#artsfoc').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-arts-foc', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-arts-foc', hyperlink)
                 }
 
                 else {
                     artsPopup.push(artsMarker)
                     artsMarker.addTo(artsLayer);
                     document.querySelector('#arts').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-arts', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-arts', hyperlink)
 
                 }
 
-                artsMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
+                artsMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
                 //event listener to direct from offcanvas to map
                 let artsButtonFOC = document.querySelectorAll('.view-arts-foc');
                 directToMap(artsButtonFOC, artsLayerfoc, artsPopupFOC)
@@ -114,17 +114,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     naturePopupFOC.push(natureMarker)
                     natureMarker.addTo(natureLayerfoc);
                     document.querySelector('#naturefoc').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-nature-foc', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-nature-foc', hyperlink)
 
                 }
                 else {
                     naturePopup.push(natureMarker);
                     natureMarker.addTo(natureLayer);
                     document.querySelector('#nature').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-nature', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-nature', hyperlink)
 
                 }
-                natureMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
+                natureMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
                 //event listener to direct from offcanvas to map
                 let natureButtonFOC = document.querySelectorAll('.view-nature-foc');
@@ -147,7 +147,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     cultureHistPopupFOC.push(cultureHistoryMarker)
                     cultureHistoryMarker.addTo(cultureHistoryLayerfoc);
                     document.querySelector('#culture-hist-foc').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-culture-foc', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-culture-foc', hyperlink)
 
                 }
 
@@ -155,11 +155,11 @@ window.addEventListener('DOMContentLoaded', async function () {
                     cultureHistPopup.push(cultureHistoryMarker)
                     cultureHistoryMarker.addTo(cultureHistoryLayer);
                     document.querySelector('#culture-hist').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-culture', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-culture', hyperlink)
 
                 }
 
-                cultureHistoryMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
+                cultureHistoryMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
                 //event listener to direct from offcanvas to map
                 let cultureHistButtonFOC = document.querySelectorAll('.view-culture-foc');
@@ -181,17 +181,17 @@ window.addEventListener('DOMContentLoaded', async function () {
                     archiLandPopupFOC.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc);
                     document.querySelector('#archi-land-foc').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-archi-foc', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-archi-foc', hyperlink)
 
                 }
                 else {
                     archiLandPopup.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayer);
                     document.querySelector('#archi-land').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-archi', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-archi', hyperlink)
                 }
 
-                archiLandscapesMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
+                archiLandscapesMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
                 //event listener to direct from offcanvas to map
                 let archiLandButtonFOC = document.querySelectorAll('.view-archi-foc');
                 directToMap(archiLandButtonFOC, archiLandscapesLayerfoc, archiLandPopupFOC)
@@ -212,16 +212,16 @@ window.addEventListener('DOMContentLoaded', async function () {
                     recreationPopupFOC.push(recreationMarker);
                     recreationMarker.addTo(recreationLayerfoc);
                     document.querySelector('#recreation-foc').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-recre-foc', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-recre-foc', hyperlink)
 
                 }
                 else {
                     recreationPopup.push(recreationMarker);
                     recreationMarker.addTo(recreationLayer);
                     document.querySelector('#recreation').innerHTML +=
-                    getCardContent(imgUrl, eachAttraction[data]['Name'],eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-recre', hyperlink)
+                        getCardContent(imgUrl, eachAttraction[data]['Name'], eachAttraction[data]['description'], eachAttraction[data]['ADDRESSSTREETNAME'], eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0], 'view-recre', hyperlink)
                 }
-                recreationMarker.on('click', () => {markerClick(eachAttraction.geometry.coordinates[1],eachAttraction.geometry.coordinates[0])})
+                recreationMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
                 let recreationButtonFOC = document.querySelectorAll('.view-recre-foc');
                 directToMap(recreationButtonFOC, recreationLayerfoc, recreationPopupFOC);
@@ -236,11 +236,11 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 
 //adding layers to map
-cultureHistoryLayer.addTo(map)
-archiLandscapesLayer.addTo(map)
-artsLayer.addTo(map)
-natureLayer.addTo(map)
-recreationLayer.addTo(map)
+// cultureHistoryLayer.addTo(map)
+// archiLandscapesLayer.addTo(map)
+// artsLayer.addTo(map)
+// natureLayer.addTo(map)
+// recreationLayer.addTo(map)
 
 //usersearch foursquare
 document.querySelector('#searchBtn').addEventListener('click', async function () {
@@ -271,19 +271,19 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 if (photo[0]) {
                     photoLink = photo[0].prefix + 'original' + photo[0].suffix;
                 }
-                else{
+                else {
                     photoLink = eachResult.categories[0].icon.prefix + 'bg_120' + eachResult.categories[0].icon.suffix;
                 }
 
-                if (!details.hours.display){
+                if (!details.hours.display) {
                     details.hours.display = 'opening hours unavailable'
                 }
 
-                if (!details.rating){
+                if (!details.rating) {
                     details.rating = 'ratings unavailable'
                 }
 
-                if (!details.website){
+                if (!details.website) {
                     details.website = 'https://www.google.com'
                 }
 
@@ -300,9 +300,9 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 type="button">
                 get directions</button>
                <a class = 'btn-sm btn-general place-link' type="button" href='${details.website}' target="_blank">visit website</a>`
-               popupDiv.querySelector('button').addEventListener('click', function(){
-                   showRouteToNearby(eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude)
-               })
+                popupDiv.querySelector('button').addEventListener('click', function () {
+                    showRouteToNearby(eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude)
+                })
                 let popupContent = L.responsivePopup().setContent(popupDiv)
                 let resultPopup = L.marker([eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude], { icon: searchIcon })
                     .addTo(searchResultLayer)
@@ -316,7 +316,7 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                     map.flyTo([eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude], 16);
                     resultPopup.openPopup()
                 })
-               allResults.appendChild(perResult);
+                allResults.appendChild(perResult);
             }
             document.querySelector('#results').appendChild(allResults);
             document.querySelector('#loader').style.display = 'none';
@@ -356,8 +356,7 @@ layerControl.addEventListener('click', function () {
         routing.remove()
     }
     searchResultLayer.clearLayers();
-    if (userLocation)
-    {map.removeLayer(userLocation)}
+    if (userLocation) { map.removeLayer(userLocation) }
     document.querySelector('#search-side').style.display = 'none';
     if (document.querySelector('#current-layer').innerHTML == "Attractions with Paid Entry") {
         layerControl.innerHTML = '<i class="bi bi-toggle-off"></i>';
@@ -418,116 +417,143 @@ document.querySelector('#weatherBtn').addEventListener('click', async function (
 })
 
 //weather button styling
-document.querySelector('#map').addEventListener('click', function(){
-    if(document.querySelector('.leaflet-control-layers-expanded')){
+document.querySelector('#map').addEventListener('click', function () {
+    if (document.querySelector('.leaflet-control-layers-expanded')) {
         document.querySelector('#weatherBtn').style.right = '240px';
     }
-    else{
+    else {
         document.querySelector('#weatherBtn').style.right = '60px';
     }
-    })
-    
-    document.querySelector('#map').addEventListener('mouseover', function(){
-        if(document.querySelector('.leaflet-control-layers-expanded')){
-            document.querySelector('#weatherBtn').style.right = '240px';
-        }
-        else{
-            document.querySelector('#weatherBtn').style.right = '60px';
-        }
-        })
+})
 
-document.querySelector('#nav-subscribe').addEventListener('click', function(){
-    if (document.querySelector('#newsletter').style.display=='block'){
-        document.querySelector('#newsletter').style.display='none'
+document.querySelector('#map').addEventListener('mouseover', function () {
+    if (document.querySelector('.leaflet-control-layers-expanded')) {
+        document.querySelector('#weatherBtn').style.right = '240px';
+    }
+    else {
+        document.querySelector('#weatherBtn').style.right = '60px';
+    }
+})
+
+document.querySelector('#nav-subscribe').addEventListener('click', function () {
+    if (document.querySelector('#newsletter').style.display == 'block') {
+        document.querySelector('#newsletter').style.display = 'none'
     }
 
-    else{
-    document.querySelector('#newsletter').style.display='block'
+    else {
+        document.querySelector('#newsletter').style.display = 'block'
     }
 })
 
 //form validation
 
 
-document.querySelector('#subscribeBtn').addEventListener('click', function(){
-    if (!document.querySelector('#first-name').value){
+document.querySelector('#subscribeBtn').addEventListener('click', function () {
+    if (!document.querySelector('#first-name').value) {
         document.querySelector('#invalid-first-name').style.display = 'block';
         document.querySelector('#first-name').style.border = 'solid 1px darkred';
     }
-    else{
+    else {
         document.querySelector('#invalid-first-name').style.display = 'none';
     }
 
-    if (!document.querySelector('#last-name').value){
+    if (!document.querySelector('#last-name').value) {
         document.querySelector('#invalid-last-name').style.display = 'block';
         document.querySelector('#last-name').style.border = 'solid 1px darkred';
     }
-    else{
+    else {
         document.querySelector('#invalid-last-name').style.display = 'none';
     }
 
-    if (!document.querySelector('#message').value){
+    if (!document.querySelector('#message').value) {
         document.querySelector('#invalid-message').style.display = 'block';
         document.querySelector('#message').style.border = 'solid 1px darkred';
     }
-    else{
+    else {
         document.querySelector('#invalid-message').style.display = 'none';
     }
 
     let residencyRadio = document.querySelectorAll('.residency');
     let residency = "";
-    for (let each of residencyRadio){
-        if (each.checked){
+    for (let each of residencyRadio) {
+        if (each.checked) {
             residency = each.value;
         }
     }
-    if (!residency){
+    if (!residency) {
         document.querySelector('#invalid-residency').style.display = 'block';
     }
-    else{
-        document.querySelector('#invalid-residency').style.display='none';
+    else {
+        document.querySelector('#invalid-residency').style.display = 'none';
     }
-    
 
-    if(!document.querySelector('#email').value || !document.querySelector('#email').value.includes('@')){
+
+    if (!document.querySelector('#email').value || !document.querySelector('#email').value.includes('@')) {
         document.querySelector('#invalid-email').style.display = 'block';
         document.querySelector('#email').style.border = 'solid 1px darkred';
     }
-    else{
+    else {
         document.querySelector('#invalid-email').style.display = 'none';
     }
 
-    if (!document.querySelector('#agreement').checked){
+    if (!document.querySelector('#agreement').checked) {
         document.querySelector('#invalid-agreement').style.display = 'block';
         document.querySelector('#agreement').style.border = 'solid 1px darkred';
     }
 
-    else{
+    else {
         document.querySelector('#invalid-agreement').style.display = 'none';
     }
 
-    
+
     let validation = document.querySelectorAll('.invalid');
     let validationCheck = true;
-    for (let eachDiv of validation){
-        if (eachDiv.style.display = 'none'){
+    for (let eachDiv of validation) {
+        if (eachDiv.style.display = 'none') {
             validationCheck = true;
         }
-        else{
+        else {
             validationCheck = false;
         }
     }
-    if (validationCheck){
+    if (validationCheck) {
         document.querySelector('#newslatter').innerHTML = '<h4 class="text-center">Thank you for sendingu us a response! We will try to get back to you as soon as possible!</h4>'
     }
 })
 
-let animateBtn = document.querySelectorAll('.testcase')
-for (let each of animateBtn){
-    each.addEventListener('click', function(){
-        document.querySelector('#page2').classList.remove('hide-page');
-        document.querySelector('#page2').classList.add('show-page');
-        document.querySelector('#page1').classList.add('hide-page');
-        document.querySelector('#page1').classList.remove('show-page');
+let animateBtn = document.querySelectorAll('.animate-btn')
+for (let each of animateBtn) {
+    each.addEventListener('click', function () {
+        document.querySelector('#main-page').classList.remove('hide-page');
+        document.querySelector('#main-page').classList.add('show-page');
+        document.querySelector('#landing-page').classList.add('hide-page');
+        document.querySelector('#landing-page').classList.remove('show-page');
+        if (each.dataset.toggle == 'foc-toggle') {
+            layerControl.setAttribute('data-bs-target', '#foc-attractions');
+            document.querySelector('#nav-toggle').href = "#foc-attractions";
+            document.querySelector('#nav-toggle').setAttribute('aria-controls', "foc-attractions")
+            document.querySelector('.leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle').style.backgroundImage = 'url(images/overlay-control/free.png)';
+            document.querySelector('#current-layer').innerHTML = "Attractions with Free Entry";
+            layerControl.innerHTML = '<i class="bi bi-toggle-off"></i>'
+            cultureHistoryLayerfoc.addTo(map)
+            archiLandscapesLayerfoc.addTo(map)
+            artsLayerfoc.addTo(map)
+            natureLayerfoc.addTo(map)
+            recreationLayerfoc.addTo(map)
+        }
+
+        else {
+            layerControl.setAttribute('data-bs-target', '#paid-attractions');
+            document.querySelector('#nav-toggle').href = "#paid-attractions";
+            document.querySelector('#nav-toggle').setAttribute('aria-controls', "paid-attractions")
+            document.querySelector('.leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle').style.backgroundImage = 'url(images/overlay-control/money.png)';
+            document.querySelector('#current-layer').innerHTML = "Attractions with Paid Entry";
+            layerControl.innerHTML = '<i class="bi bi-toggle-on"></i>'
+            cultureHistoryLayer.addTo(map)
+            archiLandscapesLayer.addTo(map)
+            artsLayer.addTo(map)
+            natureLayer.addTo(map)
+            recreationLayer.addTo(map)
+        }
     })
 }

@@ -69,7 +69,6 @@ body {
 
 
 .leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle {
-    background-image: url(images/overlay-control/money.png);
     width: 36px;
     height: 36px;
 }
@@ -251,25 +250,27 @@ a {
     transform: translateY(-100%);
     transition: 2s;
 }
-#all{
+#all-pages{
     position: relative;
     
 }
 
-#page1{
+#landing-page{
     position: absolute;
     height: 100vh;
     width: 100%;
     z-index: 1000;
     background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(images/merlion.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-#page2{
+#main-page{
     position: absolute;
     height: 100vh;
     width: 100%;
 }
 
-.choose{
+.view-layer{
 position: absolute;
 color: white;
 background-color: rgba(0, 0, 0, 0.5);
