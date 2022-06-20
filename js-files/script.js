@@ -1,4 +1,4 @@
-let map = createMap()
+let map = createMap();
 let imgUrl = null;
 let routing = null;
 let lat = null;
@@ -15,10 +15,7 @@ function position(markers) {
     userLng = markers.coords.longitude;
 }
 
-
-
 window.addEventListener('DOMContentLoaded', async function () {
-
     let response = await axios.get('tourism.geojson');
     for (let eachAttraction of response.data.features) {
         for (let data in eachAttraction) {
@@ -35,6 +32,14 @@ window.addEventListener('DOMContentLoaded', async function () {
                 hyperlink = eachAttraction[data]['HYPERLINK'].split('')
                 let indexStart = hyperlink.indexOf('>')+1;
                 hyperlink = hyperlink.slice(indexStart, -4).join('');
+            }
+
+            if (!eachAttraction[data]['Opening Hours']){
+                eachAttraction[data]['Opening Hours'] = 'information not available'
+            }
+
+            if (!eachAttraction[data]['ADDRESSSTREETNAME']){
+                eachAttraction[data]['ADDRESSSTREETNAME'] = 'information not available'
             }
 
 
@@ -461,6 +466,29 @@ document.querySelector('#subscribeBtn').addEventListener('click', function(){
         document.querySelector('#invalid-last-name').style.display = 'none';
     }
 
+    if (!document.querySelector('#message').value){
+        document.querySelector('#invalid-message').style.display = 'block';
+        document.querySelector('#message').style.border = 'solid 1px darkred';
+    }
+    else{
+        document.querySelector('#invalid-message').style.display = 'none';
+    }
+
+    let residencyRadio = document.querySelectorAll('.residency');
+    let residency = "";
+    for (let each of residencyRadio){
+        if (each.checked){
+            residency = each.value;
+        }
+    }
+    if (!residency){
+        document.querySelector('#invalid-residency').style.display = 'block';
+    }
+    else{
+        document.querySelector('#invalid-residency').style.display='none';
+    }
+    
+
     if(!document.querySelector('#email').value || !document.querySelector('#email').value.includes('@')){
         document.querySelector('#invalid-email').style.display = 'block';
         document.querySelector('#email').style.border = 'solid 1px darkred';
@@ -478,8 +506,28 @@ document.querySelector('#subscribeBtn').addEventListener('click', function(){
         document.querySelector('#invalid-agreement').style.display = 'none';
     }
 
-    if(document.querySelector('#invalid-first-name').style.display == 'none' && document.querySelector('#invalid-last-name').style.display == 'none' && document.querySelector('#invalid-email').style.display == 'none'&& document.querySelector('#invalid-agreement').style.display == 'none'){
-        document.querySelector('#newsletter').innerHTML = '<h4 class="text-center">Thank you for subscribing!</h4>'
+    
+    let validation = document.querySelectorAll('.invalid');
+    let validationCheck = true;
+    for (let eachDiv of validation){
+        if (eachDiv.style.display = 'none'){
+            validationCheck = true;
+        }
+        else{
+            validationCheck = false;
+        }
+    }
+    if (validationCheck){
+        document.querySelector('#newslatter').innerHTML = '<h4 class="text-center">Thank you for sendingu us a response! We will try to get back to you as soon as possible!</h4>'
     }
 })
 
+let animateBtn = document.querySelectorAll('.testcase')
+for (let each of animateBtn){
+    each.addEventListener('click', function(){
+        document.querySelector('#page2').classList.remove('hide-page');
+        document.querySelector('#page2').classList.add('show-page');
+        document.querySelector('#page1').classList.add('hide-page');
+        document.querySelector('#page1').classList.remove('show-page');
+    })
+}

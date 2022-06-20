@@ -19,7 +19,7 @@
     <!-- routing CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <!-- own CSS -->
-    
+
     <link rel="stylesheet" href="style.css">
 
     <!-- tab header -->
@@ -28,72 +28,102 @@
 </head>
 
 <body>
-    
-        
-        <!-- navbar -->
-          <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand mx-auto me-md-5" id="nav-toggle" data-bs-toggle="offcanvas" href="#paid-attractions" role="button">
-                <img style='height: 40px' src='images/navbar/traveler.png'>SGgoWHERE</a>
-              <section class="d-flex">
-                <div class="form-control me-2" id="current-layer" style="width: auto;">Attractions with Paid Entry</div>
-                <button class="btn btn-general" id="change" data-bs-dismiss="offcanvas" data-bs-target="#paid-attractions" aria-label="Close" type="button"><i class="bi bi-toggle-on"></i></button>
-                <a href='#newsletter' class="btn btn-general ms-2" id="nav-subscribe">subscribe</a>
-              </section>
+
+    <div id="all">
+        <div id="page1" class="show-page d-flex justify-content-center">
+
+            <div class="choose text-center">
+                <h2>good day traveler! which attractions would you like to see today?</h2>
+                <a class="btn btn-danger" href="#page2" id="foc-toggle">show me the attractions with free entry</a>
+                <a class="btn btn-warning" href="#page2" id="paid-toggle">show me the attractions with Paid entry</a>
             </div>
-          </nav>
+        </div>
 
-    </div>
+        <!-- <div id="inbetween" class="hide-page">
 
-    <div id='map-container'>
-        <div id="map" class="custom-popup col-12"></div>
-        <button class='btn' id="weatherBtn"><i class="bi bi-cloud"></i> weather</button>
-        <a class="btn" data-bs-toggle="offcanvas" href="#searchcanvas" role="button"
-            aria-controls="searchcanvas" id="search-side">
-            return to search
-        </a>
-    </div>
+    </div> -->
 
+
+        <div id="page2" class="hide-page">
+            <!-- navbar -->
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand mx-auto me-md-5" id="nav-toggle" data-bs-toggle="offcanvas"
+                        href="#paid-attractions" role="button">
+                        <img style='height: 40px' src='images/navbar/traveler.png' alt='traveler'>SGgoWHERE</a>
+                    <div class="d-flex nav-buttons mx-auto mx-md-0">
+                        <div class="form-control me-2" id="current-layer" style="width: auto;">Attractions with Paid
+                            Entry</div>
+                        <button class="btn btn-general" id="change" data-bs-dismiss="offcanvas"
+                            data-bs-target="#paid-attractions" aria-label="Close" type="button"><i
+                                class="bi bi-toggle-on"></i></button>
+                        <a href='#newsletter' class="btn btn-general ms-2" id="nav-subscribe">contact us</a>
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <!-- map -->
+            <div id='map-container'>
+                <div id="map" class="custom-popup col-12"></div>
+                <button class='btn' id="weatherBtn"><i class="bi bi-cloud"></i> weather</button>
+                <a class="btn" data-bs-toggle="offcanvas" href="#searchcanvas" role="button"
+                    aria-controls="searchcanvas" id="search-side">
+                    return to search
+                </a>
+            </div>
+        </div>
     </div>
 
 
     <!-- nav paid off-canvas -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="paid-attractions" aria-labelledby="paid-attractions"
-    data-bs-scroll="true" data-bs-backdrop="false">
+        data-bs-scroll="true" data-bs-backdrop="false">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Attractions with Paid Entry <img src='images/overlay-control/money.png' class='header-image'></h5>
+            <h5 class="offcanvas-title">Attractions with Paid Entry <img src='images/overlay-control/money.png'
+                    alt="paid-attractions" class='header-image'></h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <nav>
                 <div class="nav nav-tabs" id="paid-nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-paid-arts-tab" data-bs-toggle="tab" data-bs-target="#nav-paid-arts"
-                        type="button" role="tab" aria-controls="nav-paid-arts" aria-selected="true">arts</button>
-                    <button class="nav-link" id="nav-paid-nature-tab" data-bs-toggle="tab" data-bs-target="#nav-paid-nature"
-                        type="button" role="tab" aria-controls="nav-nature" aria-selected="false">nature</button>
-                    <button class="nav-link" id="nav-paid-culture-hist-tab" data-bs-toggle="tab" data-bs-target="#nav-paid-culture-hist"
-                        type="button" role="tab" aria-controls="nav-culture-hist" aria-selected="false">culture &
+                    <button class="nav-link active" id="nav-paid-arts-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-paid-arts" type="button" role="tab" aria-controls="nav-paid-arts"
+                        aria-selected="true">arts</button>
+                    <button class="nav-link" id="nav-paid-nature-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-paid-nature" type="button" role="tab" aria-controls="nav-paid-nature"
+                        aria-selected="false">nature</button>
+                    <button class="nav-link" id="nav-paid-culture-hist-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-paid-culture-hist" type="button" role="tab"
+                        aria-controls="nav-paid-culture-hist" aria-selected="false">culture &
                         history</button>
-                    <button class="nav-link" id="nav-paid-archi-land-tab" data-bs-toggle="tab" data-bs-target="#nav-paid-archi-land"
-                        type="button" role="tab" aria-controls="nav-paid-archi-land" aria-selected="false">architecture & land</button>
-                    <button class="nav-link" id="nav-paid-recreation-tab" data-bs-toggle="tab" data-bs-target="#nav-paid-recreation"
-                        type="button" role="tab" aria-controls="nav-paid-recreation" aria-selected="false">recreation</button>
+                    <button class="nav-link" id="nav-paid-archi-land-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-paid-archi-land" type="button" role="tab"
+                        aria-controls="nav-paid-archi-land" aria-selected="false">architecture & land</button>
+                    <button class="nav-link" id="nav-paid-recreation-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-paid-recreation" type="button" role="tab"
+                        aria-controls="nav-paid-recreation" aria-selected="false">recreation</button>
                 </div>
             </nav>
             <div class="tab-content" id="paid-attractions-tab-content">
-                <div class="tab-pane fade show active" id="nav-paid-arts" role="tabpanel" aria-labelledby="nav-paid-arts-tab">
+                <div class="tab-pane fade show active" id="nav-paid-arts" role="tabpanel"
+                    aria-labelledby="nav-paid-arts-tab">
                     <div id="arts"></div>
                 </div>
                 <div class="tab-pane fade" id="nav-paid-nature" role="tabpanel" aria-labelledby="nav-paid-nature-tab">
                     <div id="nature"></div>
                 </div>
-                <div class="tab-pane fade" id="nav-paid-culture-hist" role="tabpanel" aria-labelledby="nav-paid-culture-hist-tab">
+                <div class="tab-pane fade" id="nav-paid-culture-hist" role="tabpanel"
+                    aria-labelledby="nav-paid-culture-hist-tab">
                     <div id="culture-hist"></div>
                 </div>
-                <div class="tab-pane fade" id="nav-paid-archi-land" role="tabpanel" aria-labelledby="nav-paid-archi-land-tab">
+                <div class="tab-pane fade" id="nav-paid-archi-land" role="tabpanel"
+                    aria-labelledby="nav-paid-archi-land-tab">
                     <div id="archi-land"></div>
                 </div>
-                <div class="tab-pane fade" id="nav-paid-recreation" role="tabpanel" aria-labelledby="nav-paid-recreation-tab">
+                <div class="tab-pane fade" id="nav-paid-recreation" role="tabpanel"
+                    aria-labelledby="nav-paid-recreation-tab">
                     <div id="recreation"></div>
                 </div>
             </div>
@@ -106,7 +136,8 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="foc-attractions" aria-labelledby="foc-attractions"
         data-bs-scroll="true" data-bs-backdrop="false">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Attractions with Free Entry <img src='images/overlay-control/free.png' class="header-image"></h5>
+            <h5 class="offcanvas-title">Attractions with Free Entry <img src='images/overlay-control/free.png'
+                    alt="free-entry" class="header-image"></h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -114,15 +145,18 @@
                 <div class="nav nav-tabs" id="foc-nav-tab" role="tablist">
                     <button class="nav-link active" id="foc-arts-tab" data-bs-toggle="tab" data-bs-target="#foc-arts"
                         type="button" role="tab" aria-controls="foc-arts" aria-selected="true">arts</button>
-                    <button class="nav-link" id="foc-nature-tab" data-bs-toggle="tab" data-bs-target="#foc-nature" type="button"
-                        role="tab" aria-controls="foc-nature" aria-selected="false">nature</button>
-                    <button class="nav-link" id="foc-culture-hist-tab" data-bs-toggle="tab" data-bs-target="#foc-culture-hist" type="button"
-                        role="tab" aria-controls="foc-culture-hist" aria-selected="false">culture &
+                    <button class="nav-link" id="foc-nature-tab" data-bs-toggle="tab" data-bs-target="#foc-nature"
+                        type="button" role="tab" aria-controls="foc-nature" aria-selected="false">nature</button>
+                    <button class="nav-link" id="foc-culture-hist-tab" data-bs-toggle="tab"
+                        data-bs-target="#foc-culture-hist" type="button" role="tab" aria-controls="foc-culture-hist"
+                        aria-selected="false">culture &
                         history</button>
-                    <button class="nav-link" id="foc-archi-land-tab" data-bs-toggle="tab" data-bs-target="#foc-archi-land" type="button"
-                        role="tab" aria-controls="foc-archi-land" aria-selected="false">architecture & landscapes</button>
-                    <button class="nav-link" id="foc-recreation-tab" data-bs-toggle="tab" data-bs-target="#foc-recreation" type="button"
-                        role="tab" aria-controls="foc-recreation" aria-selected="false">recreation</button>
+                    <button class="nav-link" id="foc-archi-land-tab" data-bs-toggle="tab"
+                        data-bs-target="#foc-archi-land" type="button" role="tab" aria-controls="foc-archi-land"
+                        aria-selected="false">architecture & landscapes</button>
+                    <button class="nav-link" id="foc-recreation-tab" data-bs-toggle="tab"
+                        data-bs-target="#foc-recreation" type="button" role="tab" aria-controls="foc-recreation"
+                        aria-selected="false">recreation</button>
                 </div>
             </nav>
             <div class="tab-content" id="foc-attractions-tab-content">
@@ -147,70 +181,84 @@
 
     <!-- search offcanvas -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="searchcanvas" aria-labelledby="searchcanvas"
-    data-bs-scroll="true" data-bs-backdrop="false">
+        data-bs-scroll="true" data-bs-backdrop="false">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Search for nearby items  <i class="bi bi-search"></i></h5>
+            <h5 class="offcanvas-title">Search for nearby items <i class="bi bi-search"></i></h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div class="row">
                 <div class="col">
-            <input class="form-control" type="text" placeholder="e.g. food, stations" id="search">
-            </div>
-            <div class="col">
-            <button class="btn btn-general" id="searchBtn"><i class="bi bi-search"></i></button>
-            <button class="btn btn-general" id="reset"><i class="bi bi-arrow-counterclockwise"></i></button>
-            </div>
+                    <input class="form-control" type="text" placeholder="e.g. food, stations" id="search">
+                </div>
+                <div class="col">
+                    <button class="btn btn-general" id="searchBtn"><i class="bi bi-search"></i></button>
+                    <button class="btn btn-general" id="reset"><i class="bi bi-arrow-counterclockwise"></i></button>
+                </div>
             </div>
             <div id="results"></div>
-                <div id="loader">
-                <img src="images/loading.gif">
-                </div>
+            <div id="loader">
+                <img src="images/loading.gif" alt="loader icon">
+            </div>
             <div id="validate"></div>
         </div>
     </div>
 
     <footer id="newsletter">
-        <div class="container" style="border: 2px solid black;">
-            <h6 class="text-center">subscribe to our newsletter</h6>
-        <div class="row">
-            <div class="col-6">
-                <label for="first-name">first name: </label>
-                <input type="text" class="form-control" id="first-name" placeholder="mike">
-                <div class="invalid" id="invalid-first-name">Please input your first name</div>
-            </div>
-            <div class="col-6">
-                <label for="last-name">last name: </label>
-                <input type="text" class="form-control" id="last-name" placeholder="miller">
-                <div class="invalid" id="invalid-last-name">Please input your last name</div>
-            </div>
-            <div class="col-12">
-                <label>age group:</label>
-                <input type="radio" class="age-group" name="age-group" value="below 18" id="below-18"> <label for='below-18'>below 18 years old</label>
-                <input type="radio" class="age-group" name="age-group" value="18-25" id="18-25" checked> <label for='18-25'>between 18 and 25 years old</label>
-                <input type="radio" class="age-group" name="age-group" value="26-40" id="26-40"> <label for='26-40'>between 26 and 40 years old</label>
-                <input type="radio" class="age-group" name="age-group" value="41 and above" id="41-and-above"> <label for='41-and-above'>41 years old and above</label>
-            </div>
-            <div class="col-12">
-                <label for="email">email: </label>
-                <input type="email" class="form-control" id="email" placeholder="mikemiller@gmail.com">
-                <div class="invalid" id="invalid-email">Please enter a valid email</div>
-            </div>
-            <div class="col-12">
-                <input type="checkbox" id="agreement">
-                <label for="agreement">i agree to receive materials regarding tourist attractions in singapore via email</label>
-                <div class="invalid" id="invalid-agreement">Please select the checkbox</div>
-            </div>
-            <input type="submit" value="subscribe" id="subscribeBtn" class="btn btn-general">
-            </div>
+        <div class="container" style="border: 2px solid #C0392B;">
+            <h4 class="newsletter-header text-center">contact us</h4>
+            <h6 class="newsletter-header text-center">feel free to contact us if you have any questions and/or places to
+                add!</h4>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="first-name" class="form-label">first name: </label>
+                        <input type="text" class="form-control" id="first-name" placeholder="mike">
+                        <div class="invalid" id="invalid-first-name">Please input your first name</div>
+                    </div>
+                    <div class="col-6">
+                        <label for="last-name" class="form-label">last name: </label>
+                        <input type="text" class="form-control" id="last-name" placeholder="miller">
+                        <div class="invalid" id="invalid-last-name">Please input your last name</div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">are you currently residing in singapore or planning a visit to
+                            singapore?</label>
+                        <div class="col-12"><input type="radio" class="residency form-check-input" name="residency"
+                                value="residing" id="residing"> <label for='residing'>currently residing in
+                                singapore</label></div>
+                        <div class="col-12">
+                            <input type="radio" class="residency form-check-input" name="residency" value="visiting"
+                                id="visiting"> <label for='visiting'>planning a visit to singapore</label>
+                        </div>
+                        <div class="invalid" id="invalid-residency">Please select one of the options</div>
+                    </div>
+                    <div class="col-12">
+                        <label for="email" class="form-label">email: </label>
+                        <input type="email" class="form-control" id="email" placeholder="mikemiller@gmail.com">
+                        <div class="invalid" id="invalid-email">Please enter a valid email</div>
+                    </div>
+                    <div class="col-12">
+                        <label for="message" class="form-label">please type in your message below: </label>
+                        <textarea class="form-control" rows="3" id="message"
+                            placeholder="any enquiry or feedback that you would like to share with us"></textarea>
+                        <div class="invalid" id="invalid-message">Please ensure that you input your message</div>
+                    </div>
+                    <div class="col-12">
+                        <input type="checkbox" id="agreement" class="form-check-input">
+                        <label for="agreement" class="form-label">i agree to receive materials regarding tourist
+                            attractions in singapore via email</label>
+                    </div>
+                    <div>
+                        <input type="submit" value="subscribe" id="subscribeBtn" class="btn btn-general mx-auto">
+                    </div>
+                </div>
         </div>
     </footer>
 
 
+
     <!-- axios script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
-        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
     <!-- leaflet -->
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
     <!-- responsive popup -->
@@ -228,6 +276,7 @@
     <script src="js-files/utility.js"></script>
     <script src="js-files/map.js"></script>
     <script src="js-files/foursquare-search.js"></script>
+    <script src="js-files/weather.js"></script>
     <script src="js-files/script.js"></script>
 
 </body>
