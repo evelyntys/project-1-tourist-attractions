@@ -16,7 +16,24 @@ let archiLandscapesLayerfoc = L.markerClusterGroup();
 
 let searchResultLayer = L.layerGroup();
 
+//arays to store the respective markers
+let artsPopup = [];
+let artsPopupFOC = [];
+let naturePopup = [];
+let naturePopupFOC = [];
+let cultureHistPopup = [];
+let cultureHistPopupFOC = [];
+let archiLandPopup = [];
+let archiLandPopupFOC = [];
+let recreationPopup = [];
+let recreationPopupFOC = [];
+
 let userLocation = null;
+//variables to store lat/lng of chosen attraction to serve as start point for routing 
+let chosenLat = null;
+let chosenLng = null;
+
+let routing = null;
 
 //marker icons for map
 var natureIcon = L.icon({
@@ -74,9 +91,6 @@ var userIcon = L.icon({
     popupAnchor: [-3, -76]
 });
 
-//variables to store lat/lng of chosen attraction to serve as start point for routing 
-let chosenLat = null;
-let chosenLng = null;
 
 //weather icons
 var fairIcon = L.icon({
@@ -126,17 +140,45 @@ let entranceFee = {
     'no': 'Tickets to be purchased prior to entry'
 }
 
-let artsPopup = [];
-let artsPopupFOC = [];
-let naturePopup = [];
-let naturePopupFOC = [];
-let cultureHistPopup = [];
-let cultureHistPopupFOC = [];
-let archiLandPopup = [];
-let archiLandPopupFOC = [];
-let recreationPopup = [];
-let recreationPopupFOC = [];
+//function to change layer with navbar toggle
+function changeLayerDetails(layer, image, entry) {
+    layerControl.setAttribute('data-bs-target', `#${layer}`);
+    document.querySelector('#nav-toggle').href = `#${layer}`;
+    document.querySelector('#nav-toggle').setAttribute('aria-controls', `${layer}`)
+    document.querySelector('.leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle').style.backgroundImage = `url(images/overlay-control/${image}.png)`;
+    document.querySelector('#current-layer').innerHTML = entry;
+    return
+}
 
+//function to obtain card content for side offcanvas
+function getCardContent(attractionImage, attractionName, attractionDescription, attractionAddress, attractionLat, attractionLng, category, attractionLink) {
+    let content = `<div class="card mt-3 mx-auto mx-auto" style="width: 18rem;">
+                    <img src="${attractionImage}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">${attractionName}</h5>
+                    
+                      <p class="card-text">${attractionDescription} </p>
+                      <p class="card-text"> Address: ${attractionAddress}</p>
+                      
+                    </div>
+                    <div class="d-flex flex-row">
+                    <button data-latitude='${attractionLat}' 
+                    data-longitude='${attractionLng}' 
+                    type="button" 
+                    class="btn ${category} btn-general-straight w-50" 
+                    data-bs-dismiss="offcanvas" 
+                    aria-label="Close">view on map</button>
+
+                    <a class = 'btn btn-general-straight w-50' 
+                    type="button" href='${attractionLink}' target="_blank">
+                    visit website</a>
+                    </div>
+                  </div>`
+
+    return content
+}
+
+//function to direct user from side offcanvas to map popup
 function directToMap(button, layer, popup) {
     for (let j = 0; j < button.length; j++) {
         button[j].addEventListener('click', function () {
@@ -152,6 +194,16 @@ function directToMap(button, layer, popup) {
     }
 }
 
+//function to trigger with each click
+function markerClick(attractionLat, attractionLng) {
+    searchResultLayer.clearLayers();
+    chosenLat = attractionLat;
+    chosenLng = attractionLng;
+    map.flyTo([chosenLat, chosenLng], 16);
+    document.querySelector('#search-side').style.display = 'block';
+}
+
+//routing functions
 function showRouteToAttraction() {
     if (routing) {
         routing.remove()
@@ -165,11 +217,12 @@ function showRouteToAttraction() {
         waypoints: [
             L.latLng(userLat, userLng),
             L.latLng(chosenLat, chosenLng)
-        ]
+        ],
+        collapsible: true,
     }).addTo(map)
 }
 
-function showRouteToNearby(placeLat,placeLng) {
+function showRouteToNearby(placeLat, placeLng) {
     if (routing) {
         routing.remove()
     }
@@ -177,41 +230,8 @@ function showRouteToNearby(placeLat,placeLng) {
         waypoints: [
             L.latLng(chosenLat, chosenLng),
             L.latLng(placeLat, placeLng)
-        ]
+        ],
+        collapsible: true
     }).addTo(map)
 }
 
-function markerClick(attractionLat, attractionLng) {
-    searchResultLayer.clearLayers();
-    chosenLat = attractionLat;
-    chosenLng = attractionLng;
-    map.flyTo([chosenLat, chosenLng], 16);
-    document.querySelector('#search-side').style.display = 'block';
-}
-
-function getCardContent(attractionImage, attractionName, attractionDescription, attractionAddress, attractionLat, attractionLng, category, attractionLink ){
-    let content = `<div class="card mt-3 mx-auto mx-auto" style="width: 18rem;">
-                    <img src="${attractionImage}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">${attractionName}</h5>
-                    
-                      <p class="card-text">${attractionDescription} </p>
-                      <p class="card-text"> Address: ${attractionAddress}</p>
-                      
-                    </div>
-                    <div class="d-flex flex-row">
-                    <button data-latitude='${attractionLat}' 
-                    data-longitude='${attractionLng}' 
-                    type="button" 
-                    class="btn ${category} btn-general w-50" 
-                    data-bs-dismiss="offcanvas" 
-                    aria-label="Close">view on map</button>
-
-                    <a class = 'btn btn-general w-50' 
-                    type="button" href='${attractionLink}' target="_blank">
-                    visit website</a>
-                    </div>
-                  </div>`
-
-                  return content
-}

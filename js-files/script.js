@@ -1,6 +1,5 @@
 let map = createMap();
 let imgUrl = "";
-let routing = null;
 let hyperlink = "";
 //get user location
 navigator.geolocation.getCurrentPosition(position)
