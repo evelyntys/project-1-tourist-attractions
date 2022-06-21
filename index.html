@@ -31,12 +31,11 @@
 
     <div id="all-pages">
         <div id="landing-page" class="show-page d-flex justify-content-center">
-
             <div class="view-layer text-center mx-auto">
-                <h2>good day traveler! which attractions would you like to see today?</h2>
+                <h2>Good day, traveler! Which attractions would you like to see today?</h2>
                 <div class="animate-buttons d-flex flex-row justify-content-evenly">
-                <button class="animate-btn btn btn-danger" data-toggle="foc-toggle">attractions with FREE entry <img src='images/overlay-control/free.png' class="btn-image"></button>
-                <button class="animate-btn btn btn-warning" data-toggle="paid-toggle">attractions with PAID entry <img src='images/overlay-control/money.png' class="btn-image"></button>
+                <button class="animate-btn btn btn-general" data-toggle="foc-toggle">Attractions with FREE entry <img src='images/overlay-control/free.png' class="btn-image"></button>
+                <button class="animate-btn btn btn-general" data-toggle="paid-toggle">Attractions with PAID entry <img src='images/overlay-control/money.png' class="btn-image"></button>
             </div>
             </div>
         </div>
@@ -51,12 +50,12 @@
                         href="#paid-attractions" role="button">
                         <img style='height: 40px' src='images/navbar/traveler.png' alt='traveler'>SGgoWHERE</a>
                     <div class="d-flex nav-buttons mx-auto mx-md-0">
-                        <div class="form-control me-2" id="current-layer" style="width: auto;">Attractions with Paid
+                        <div class="form-control me-2" style="width: auto;">Attractions with <span id="current-layer">PAID</span>
                             Entry</div>
                         <button class="btn btn-general" id="change" data-bs-dismiss="offcanvas"
                             data-bs-target="#paid-attractions" aria-label="Close" type="button"><i
                                 class="bi bi-toggle-on"></i></button>
-                        <a href='#newsletter' class="btn btn-general ms-2" id="nav-subscribe">contact us</a>
+                        <button class="btn btn-general ms-2" id="contact-us-button">Contact Us</button>
                     </div>
                 </div>
             </nav>
@@ -66,7 +65,7 @@
             <!-- map -->
             <div id='map-container'>
                 <div id="map" class="custom-popup col-12"></div>
-                <button class='btn' id="weatherBtn"><i class="bi bi-cloud"></i> weather</button>
+                <button class='btn' id="weatherBtn" type="button"><i class="bi bi-cloud"></i> Weather</button>
                 <a class="btn" data-bs-toggle="offcanvas" href="#searchcanvas" role="button"
                     aria-controls="searchcanvas" id="search-side">
                     return to search
@@ -74,56 +73,56 @@
             </div>
         </div>
         <div id="contact-page" class="hide-page">
-            <section id="newsletter">
-                <div class="container" style="border: 2px solid #C0392B;">
-                    <h4 class="newsletter-header text-center">contact us</h4>
-                    <h6 class="newsletter-header text-center">feel free to contact us if you have any questions and/or places to
+            <section id="contact-us" class="mt-3">
+                <div class="container form-content" style="border: 2px solid #C0392B;">
+                    <h4 class="contact-us-header text-center">Contact Us</h4>
+                    <h6 class="contact-us-header text-center">Feel free to contact us if you have any questions and/or places to
                         add!</h4>
                         <div class="row">
                             <div class="col-6">
-                                <label for="first-name" class="form-label">first name: </label>
+                                <label for="first-name" class="form-label">First Name: </label>
                                 <input type="text" class="form-control" id="first-name" placeholder="mike">
                                 <div class="invalid" id="invalid-first-name">Please input your first name</div>
                             </div>
                             <div class="col-6">
-                                <label for="last-name" class="form-label">last name: </label>
+                                <label for="last-name" class="form-label">Last Name: </label>
                                 <input type="text" class="form-control" id="last-name" placeholder="miller">
                                 <div class="invalid" id="invalid-last-name">Please input your last name</div>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">are you currently residing in singapore or planning a visit to
-                                    singapore?</label>
+                                <label class="form-label">Are you currently residing in singapore or planning a visit to
+                                    Singapore?</label>
                                 <div class="col-12"><input type="radio" class="residency form-check-input" name="residency"
-                                        value="residing" id="residing"> <label for='residing'>currently residing in
-                                        singapore</label></div>
+                                        value="residing" id="residing"> <label for='residing'>Currently residing in
+                                        Singapore</label></div>
                                 <div class="col-12">
                                     <input type="radio" class="residency form-check-input" name="residency" value="visiting"
-                                        id="visiting"> <label for='visiting'>planning a visit to singapore</label>
+                                        id="visiting"> <label for='visiting'>Planning a visit to singapore</label>
                                 </div>
                                 <div class="invalid" id="invalid-residency">Please select one of the options</div>
                             </div>
                             <div class="col-12">
-                                <label for="email" class="form-label">email: </label>
+                                <label for="email" class="form-label">Email: </label>
                                 <input type="email" class="form-control" id="email" placeholder="mikemiller@gmail.com">
                                 <div class="invalid" id="invalid-email">Please enter a valid email</div>
                             </div>
                             <div class="col-12">
-                                <label for="message" class="form-label">please type in your message below: </label>
+                                <label for="message" class="form-label">Please type in your message below: </label>
                                 <textarea class="form-control" rows="3" id="message"
                                     placeholder="any enquiry or feedback that you would like to share with us"></textarea>
                                 <div class="invalid" id="invalid-message">Please ensure that you input your message</div>
                             </div>
                             <div class="col-12">
                                 <input type="checkbox" id="agreement" class="form-check-input">
-                                <label for="agreement" class="form-label">i agree to receive materials regarding tourist
-                                    attractions in singapore via email</label>
+                                <label for="agreement" class="form-label">I agree to receive materials regarding tourist
+                                    attractions in Singapore via email</label>
                             </div>
-                            <div>
-                                <input type="submit" value="subscribe" id="subscribeBtn" class="btn btn-general mx-auto">
+                            <div class="text-center">
+                                <input type="submit" value="submit" id="submitBtn" class="btn btn-general mb-3">
                             </div>
                         </div>
                 </div>
-                <button class="btn btn-general return mx-auto">return to main page</button>
+                <button class="btn btn-general return mt-3 ms-3">return to main page</button>
             </section>
         </div>
     </div>
@@ -133,7 +132,7 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="paid-attractions" aria-labelledby="paid-attractions"
         data-bs-scroll="true" data-bs-backdrop="false">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Attractions with Paid Entry <img src='images/overlay-control/money.png'
+            <h5 class="offcanvas-title">Attractions with PAID Entry <img src='images/overlay-control/money.png'
                     alt="paid-attractions" class='header-image'></h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -188,7 +187,7 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="foc-attractions" aria-labelledby="foc-attractions"
         data-bs-scroll="true" data-bs-backdrop="false">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Attractions with Free Entry <img src='images/overlay-control/free.png'
+            <h5 class="offcanvas-title">Attractions with FREE Entry <img src='images/overlay-control/free.png'
                     alt="free-entry" class="header-image"></h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
