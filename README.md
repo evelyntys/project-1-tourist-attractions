@@ -124,7 +124,7 @@ Details for test cases for the website can be found [here](read-me-files/test-ca
     * [Leaflet Routing Machine](https://github.com/perliedman/leaflet-routing-machine) for getting directions
 * [Bootstrap v5.0](https://getbootstrap.com/) for general styling and design of the website
 * [MyGeoData](https://mygeodata.cloud/converter/kml-to-geojson) for conversion of KML file to Geojson
-* [Foursquare](https://developer.foursquare.com/docs) for gathering
+* [Foursquare](https://developer.foursquare.com/docs) for search function
 * [Axios](https://github.com/axios/axios) for calling API and getting data from promises
 * [Google Fonts](https://fonts.google.com/) for the fonts used
 * [Bootstrap Icons](https://icons.getbootstrap.com/) for icons
