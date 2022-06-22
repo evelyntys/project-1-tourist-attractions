@@ -112,7 +112,7 @@ This website was deployed using [Netlify](https://www.netlify.com/).
 * Wait for deployment to be completed
 
 ## Testing
-Details for test cases for the website can be found [here](https://github.com/evelyntys/project-1-tourist-attractions/blob/9d838046e736586abd631afacc9ab663702d3f1a/read-me-files/test-cases.pdf).
+Details for test cases for the website can be found [here](read-me-files/test-cases.pdf).
 
 ## Technologies Used
 * HTML
