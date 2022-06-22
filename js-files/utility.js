@@ -201,13 +201,18 @@ function markerClick(attractionLat, attractionLng) {
     chosenLng = attractionLng;
     map.flyTo([chosenLat, chosenLng], 16);
 }
-
+let userLat = null;
+let userLng = null;
 //routing functions
 function showRouteToAttraction() {
     if (routing) {
         routing.remove()
     }
     navigator.geolocation.getCurrentPosition(position)
+    if (userLat == null && userLng == null){
+        userLat = 1.3521;
+        userLng = 103.8198
+    }
     userLocation = L.marker([userLat, userLng], { icon: userIcon }).bindPopup('You are here');
     userLocation.addTo(map).openPopup()
     let bounds = L.latLngBounds([userLat, userLng], [chosenLat, chosenLng]);

@@ -3,8 +3,6 @@ let imgUrl = "";
 let hyperlink = "";
 //get user location
 navigator.geolocation.getCurrentPosition(position)
-let userLat = null;
-let userLng = null;
 function position(markers) {
     userLat = markers.coords.latitude;
     userLng = markers.coords.longitude;
