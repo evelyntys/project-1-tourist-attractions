@@ -138,6 +138,8 @@ Details for test cases for the website can be found [here](read-me-files/test-ca
 
 * Consider having a random generator to cater for users who are really unsure of which attractions to start. We could have the user select a category and return a random attraction from there.
 
+* Currently, images may have trouble loading and may take quite some time to load on mobile devices. We can consider inserting a new url path for the images for optimum loading.
+
 ## Credits
 ### Data
 * KML data of attractions & weather API from [data.gov.sg](data.gov.sg);
