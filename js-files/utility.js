@@ -210,8 +210,8 @@ function showRouteToAttraction() {
     }
     navigator.geolocation.getCurrentPosition(position)
     if (userLat == null && userLng == null){
-        userLat = 1.3521;
-        userLng = 103.8198
+        userLat = 1.286498854;
+        userLng = 103.841163302;
     }
     userLocation = L.marker([userLat, userLng], { icon: userIcon }).bindPopup('You are here');
     userLocation.addTo(map).openPopup()
