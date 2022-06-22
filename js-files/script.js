@@ -16,7 +16,7 @@ let overlayLayers = {
     '<img style="height: 25px" src="images/map-markers/recreation.png">recreation': recreationLayer
 };
 
-let overlayLayersFOC = {
+let overlayLayersfoc = {
     '<img style="height: 25px" src="images/map-markers/arts.png">arts': artsLayerfoc,
     '<img style="height: 25px" src="images/map-markers/nature.png">nature': natureLayerfoc,
     '<img style="height: 25px" src="images/map-markers/heritage.png">culture & history': cultureHistoryLayerfoc,
@@ -24,7 +24,7 @@ let overlayLayersFOC = {
     '<img style="height: 25px" src="images/map-markers/recreation.png">recreation': recreationLayerfoc
 };
 
-let controller = L.control.layers({}, overlayLayersFOC).addTo(map);
+let controller = L.control.layers({}, overlayLayersfoc).addTo(map);
 
 
 //#landing-page
@@ -133,7 +133,7 @@ window.addEventListener('DOMContentLoaded', async function () {
             type="button" onclick='showRouteToAttraction()'}>
             get directions</button>
             </div>`
-            attractionsPopupDiv.querySelector('.nearby').addEventListener('click', function(){
+            attractionsPopupDiv.querySelector('.nearby').addEventListener('click', function () {
                 document.querySelector('#search-side').style.display = 'block';
             })
             let popup = L.responsivePopup().setContent(attractionsPopupDiv)
@@ -149,7 +149,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 //arts foc
                 if (eachAttraction[data]['foc'] == 'yes') {
-                    artsPopupFOC.push(artsMarker)
+                    artsPopupfoc.push(artsMarker)
                     artsMarker.addTo(artsLayerfoc);
                     document.querySelector('#artsfoc').innerHTML += getCardContent(imgUrl,
                         eachAttraction[data]['Name'],
@@ -178,8 +178,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 artsMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
                 //event listener to direct from offcanvas to map
-                let artsButtonFOC = document.querySelectorAll('.view-arts-foc');
-                directToMap(artsButtonFOC, artsLayerfoc, artsPopupFOC)
+                let artsButtonfoc = document.querySelectorAll('.view-arts-foc');
+                directToMap(artsButtonfoc, artsLayerfoc, artsPopupfoc)
 
 
                 let artsButton = document.querySelectorAll('.view-arts');
@@ -201,7 +201,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 //nature foc
                 if (eachAttraction[data]['foc'] == 'yes') {
-                    naturePopupFOC.push(natureMarker)
+                    naturePopupfoc.push(natureMarker)
                     natureMarker.addTo(natureLayerfoc);
                     document.querySelector('#naturefoc').innerHTML += getCardContent(imgUrl,
                         eachAttraction[data]['Name'],
@@ -229,8 +229,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 natureMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
                 //event listener to direct from offcanvas to map
-                let natureButtonFOC = document.querySelectorAll('.view-nature-foc');
-                directToMap(natureButtonFOC, natureLayerfoc, naturePopupFOC)
+                let natureButtonfoc = document.querySelectorAll('.view-nature-foc');
+                directToMap(natureButtonfoc, natureLayerfoc, naturePopupfoc)
 
 
                 let natureButton = document.querySelectorAll('.view-nature');
@@ -248,7 +248,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 //culture history foc
                 if (eachAttraction[data]['foc'] == 'yes') {
-                    cultureHistPopupFOC.push(cultureHistoryMarker)
+                    cultureHistPopupfoc.push(cultureHistoryMarker)
                     cultureHistoryMarker.addTo(cultureHistoryLayerfoc);
                     document.querySelector('#culture-hist-foc').innerHTML += getCardContent(imgUrl,
                         eachAttraction[data]['Name'], eachAttraction[data]['description'],
@@ -276,8 +276,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 cultureHistoryMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
                 //event listener to direct from offcanvas to map
-                let cultureHistButtonFOC = document.querySelectorAll('.view-culture-foc');
-                directToMap(cultureHistButtonFOC, cultureHistoryLayerfoc, cultureHistPopupFOC)
+                let cultureHistButtonfoc = document.querySelectorAll('.view-culture-foc');
+                directToMap(cultureHistButtonfoc, cultureHistoryLayerfoc, cultureHistPopupfoc)
 
                 let cultureHistButton = document.querySelectorAll('.view-culture');
                 directToMap(cultureHistButton, cultureHistoryLayer, cultureHistPopup)
@@ -294,7 +294,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 //archi landscapes foc
                 if (eachAttraction[data]['foc'] == 'yes') {
-                    archiLandPopupFOC.push(archiLandscapesMarker);
+                    archiLandPopupfoc.push(archiLandscapesMarker);
                     archiLandscapesMarker.addTo(archiLandscapesLayerfoc);
                     document.querySelector('#archi-land-foc').innerHTML += getCardContent(imgUrl,
                         eachAttraction[data]['Name'],
@@ -323,8 +323,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 archiLandscapesMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
                 //event listener to direct from offcanvas to map
-                let archiLandButtonFOC = document.querySelectorAll('.view-archi-foc');
-                directToMap(archiLandButtonFOC, archiLandscapesLayerfoc, archiLandPopupFOC)
+                let archiLandButtonfoc = document.querySelectorAll('.view-archi-foc');
+                directToMap(archiLandButtonfoc, archiLandscapesLayerfoc, archiLandPopupfoc)
 
                 let archiLandButton = document.querySelectorAll('.view-archi');
                 directToMap(archiLandButton, archiLandscapesLayer, archiLandPopup)
@@ -341,7 +341,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 //recreation foc
                 if (eachAttraction[data]['foc'] == 'yes') {
-                    recreationPopupFOC.push(recreationMarker);
+                    recreationPopupfoc.push(recreationMarker);
                     recreationMarker.addTo(recreationLayerfoc);
                     document.querySelector('#recreation-foc').innerHTML += getCardContent(imgUrl,
                         eachAttraction[data]['Name'],
@@ -369,8 +369,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 recreationMarker.on('click', () => { markerClick(eachAttraction.geometry.coordinates[1], eachAttraction.geometry.coordinates[0]) })
 
                 //event listener to direct from offcanvas to map
-                let recreationButtonFOC = document.querySelectorAll('.view-recre-foc');
-                directToMap(recreationButtonFOC, recreationLayerfoc, recreationPopupFOC);
+                let recreationButtonfoc = document.querySelectorAll('.view-recre-foc');
+                directToMap(recreationButtonfoc, recreationLayerfoc, recreationPopupfoc);
 
                 let recreationButton = document.querySelectorAll('.view-recre');
                 directToMap(recreationButton, recreationLayer, recreationPopup)
@@ -379,7 +379,7 @@ window.addEventListener('DOMContentLoaded', async function () {
     }
 })
 
-map.on('click', function(){
+map.on('click', function () {
     document.querySelector('#search-side').style.display = 'none';
 })
 
@@ -411,7 +411,7 @@ layerControl.addEventListener('click', function () {
             freeAttractions[i].addTo(map)
             i++;
         }
-        controller = L.control.layers({}, overlayLayersFOC).addTo(map);
+        controller = L.control.layers({}, overlayLayersfoc).addTo(map);
         document.querySelector('.leaflet-control-layers-toggle').style.backgroundImage = "url(images/overlay-control/free.png)";
     }
     else {

@@ -78,7 +78,7 @@ body {
 }
 
 #map {
-    height: 90vh;
+    height: 91.5vh;
 }
 
 /* return to search button styling */
@@ -358,17 +358,11 @@ body {
 }
 
 /* media query for device responsiveness */
-/* @media screen and (max-width: 546px){
+@media screen and (max-width: 414px){
     #map{
-        height: 84.2vh;
+        height: 87vh;
     }
 }
-
-@media screen and (min-width: 547px){
-    #map{
-        height: 89.5vh;
-    }
-} */
 
 @media screen and (max-width: 768px) {
     .nav-buttons .form-control {

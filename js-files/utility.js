@@ -1,4 +1,5 @@
 
+//layer groups
 let recreationLayer = L.markerClusterGroup();
 let recreationLayerfoc = L.markerClusterGroup();
 
@@ -18,21 +19,26 @@ let searchResultLayer = L.layerGroup();
 
 //arays to store the respective markers
 let artsPopup = [];
-let artsPopupFOC = [];
+let artsPopupfoc = [];
 let naturePopup = [];
-let naturePopupFOC = [];
+let naturePopupfoc = [];
 let cultureHistPopup = [];
-let cultureHistPopupFOC = [];
+let cultureHistPopupfoc = [];
 let archiLandPopup = [];
-let archiLandPopupFOC = [];
+let archiLandPopupfoc = [];
 let recreationPopup = [];
-let recreationPopupFOC = [];
+let recreationPopupfoc = [];
 
+//variables to store user location
+let userLat = null;
+let userLng = null;
 let userLocation = null;
+
 //variables to store lat/lng of chosen attraction to serve as start point for routing 
 let chosenLat = null;
 let chosenLng = null;
 
+//variable to store routing function
 let routing = null;
 
 //marker icons for map
@@ -201,8 +207,7 @@ function markerClick(attractionLat, attractionLng) {
     chosenLng = attractionLng;
     map.flyTo([chosenLat, chosenLng], 16);
 }
-let userLat = null;
-let userLng = null;
+
 //routing functions
 function showRouteToAttraction() {
     if (routing) {
