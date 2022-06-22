@@ -170,7 +170,7 @@ function getCardContent(attractionImage, attractionName, attractionDescription, 
                     aria-label="Close">view on map</button>
 
                     <a class = 'btn btn-general-straight w-50' 
-                    type="button" href='${attractionLink}' target="_blank">
+                    href='${attractionLink}' target="_blank">
                     visit website</a>
                     </div>
                   </div>`
