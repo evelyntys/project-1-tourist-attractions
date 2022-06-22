@@ -135,8 +135,7 @@ window.addEventListener('DOMContentLoaded', async function () {
             <button class='btn-sm btn-general'
             type="button" onclick='showRouteToAttraction()'}>
             get directions</button>
-            </div>
-            ${imgUrl}`
+            </div>`
             let popup = L.responsivePopup().setContent(attractionsPopupDiv)
 
             //arts layer
