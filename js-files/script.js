@@ -97,6 +97,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 imgUrl = imgUrl.replace("yoursingapore", "visitsingapore");
             }
 
+            console.log(imgUrl)
+            
             if (!eachAttraction[data]['HYPERLINK']) {
                 hyperlink = 'unavailable.html'
             }
