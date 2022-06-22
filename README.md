@@ -76,7 +76,7 @@ As someone visitng an attraction, I would be concerned about the food choices ne
 <b> 4. Weather data</b>
 * 2-hourly weather data is available, triggered by clicking the weather button on the map
     * Weather data, marked by various icons, around the different areas of Singapore will be shown
-    * Aims to help users plan their days/itinerary better as some places, such as parks or nature reserves may not be so fun on rainy days!
+    * Aims to help users plan their days/itinerary better as some places may not be as enjoyable or closed on rainy days
 
 
 #### <u>Content</u>
