@@ -530,7 +530,7 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 <button class='btn-sm btn-general'
                 type="button">
                 get directions</button>
-               <a class = 'btn-sm btn-general place-link' type="button" href='${details.website}' 
+               <a class = 'btn-sm btn-general place-link' href='${details.website}' 
                target="_blank">visit website</a>`
                 // customise styling of a button
                 popupDiv.querySelector('button').addEventListener('click', function () {
