@@ -362,6 +362,15 @@ body {
     #map{
         height: 87vh;
     }
+    .custom-popup .leaflet-popup-content-wrapper {
+    font-size: 1em;
+    }
+    .pop-up-text{
+        font-size: 1em;
+    }
+    h5.card-title.my-3{
+        font-size: 1.3em;
+    }
 }
 
 @media screen and (max-width: 768px) {
