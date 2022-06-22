@@ -9,7 +9,6 @@ function position(markers) {
     userLat = markers.coords.latitude;
     userLng = markers.coords.longitude;
 }
-
 //overlay controls
 let overlayLayers = {
     '<img style="height: 25px" src="images/map-markers/arts.png">arts': artsLayer,

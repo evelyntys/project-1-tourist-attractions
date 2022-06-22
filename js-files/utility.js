@@ -210,7 +210,7 @@ function showRouteToAttraction() {
     navigator.geolocation.getCurrentPosition(position)
     userLocation = L.marker([userLat, userLng], { icon: userIcon }).bindPopup('You are here');
     userLocation.addTo(map).openPopup()
-    let bounds = L.latLngBounds([userLat, userLng], [chosenLat, chosenLng])
+    let bounds = L.latLngBounds([userLat, userLng], [chosenLat, chosenLng]);
     map.flyToBounds(bounds)
     routing = L.Routing.control({
         waypoints: [
@@ -218,6 +218,7 @@ function showRouteToAttraction() {
             L.latLng(chosenLat, chosenLng)
         ],
         collapsible: true,
+        geocoder: L.Control.Geocoder.nominatim()
     }).addTo(map)
 }
 
@@ -230,7 +231,8 @@ function showRouteToNearby(placeLat, placeLng) {
             L.latLng(chosenLat, chosenLng),
             L.latLng(placeLat, placeLng)
         ],
-        collapsible: true
+        collapsible: true,
+        geocoder: L.Control.Geocoder.nominatim()
     }).addTo(map)
 }
 
