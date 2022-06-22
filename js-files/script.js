@@ -44,7 +44,7 @@ for (let each of animateBtn) {
             changeLayerDetails('foc-attractions', 'free', 'FREE');
             layerControl.style.backgroundColor = 'white';
             layerControl.style.color = '#C0392B';
-            layerControl.innerHTML = '<i class="bi bi-toggle-off"></i>';
+            layerControl.innerHTML = '<i class="bi bi-toggle-on"></i>';
             cultureHistoryLayerfoc.addTo(map)
             archiLandscapesLayerfoc.addTo(map)
             artsLayerfoc.addTo(map)
@@ -56,7 +56,7 @@ for (let each of animateBtn) {
             changeLayerDetails('paid-attractions', 'money', 'PAID');
             layerControl.style.backgroundColor = '#C0392B';
             layerControl.style.color = 'white';
-            layerControl.innerHTML = '<i class="bi bi-toggle-on"></i>';
+            layerControl.innerHTML = '<i class="bi bi-toggle-off"></i>';
             cultureHistoryLayer.addTo(map)
             archiLandscapesLayer.addTo(map)
             artsLayer.addTo(map)
@@ -78,7 +78,7 @@ for (let each of animateBtn) {
 
 //#main map
 window.addEventListener('DOMContentLoaded', async function () {
-    let response = await axios.get('tourism.geojson');
+    let response = await axios.get('data/tourism.geojson');
     for (let eachAttraction of response.data.features) {
         for (let data in eachAttraction) {
 
@@ -96,8 +96,6 @@ window.addEventListener('DOMContentLoaded', async function () {
                 imgUrl = imgUrl.slice(25, indexEnd).join('')
                 imgUrl = imgUrl.replace("yoursingapore", "visitsingapore");
             }
-
-            console.log("each images",imgUrl)
 
             if (!eachAttraction[data]['HYPERLINK']) {
                 hyperlink = 'unavailable.html'
@@ -121,13 +119,15 @@ window.addEventListener('DOMContentLoaded', async function () {
             let attractionsPopupDiv = document.createElement('div');
             attractionsPopupDiv.classList.add('popup-interior')
             attractionsPopupDiv.innerHTML =
-                `<img class='pop-up-border' style='width: 100%' src="${imgUrl}"> 
-            <h5 class='card-title'>${eachAttraction[data]['Name']}</h6>  
-            <p class='card-text'>Opening Hours: ${eachAttraction[data]['Opening Hours']}</p>
-            <p class='card-text'>${entranceFee[eachAttraction[data]['foc']]}</p>
+                `<img class='image-border' style='width: 100%' src="${imgUrl}"> 
+            <h5 class='card-title my-3'>${eachAttraction[data]['Name']}</h5>
+            <h6 class='card-title entry-border my-3'>${entranceFee[eachAttraction[data]['foc']]}</h6>  
+            <p class='card-text'>${eachAttraction[data]['description']}
+            <p class='card-text'><u>Opening Hours</u>:<br></p> <p class='pop-up-text'>${eachAttraction[data]['Opening Hours']}</p>
+            
 
-            <div class='mx-auto'>
-            <button class='btn-sm btn-general view'
+            <div class='text-center'>
+            <button class='btn-sm btn-general nearby'
             type="button" data-bs-toggle="offcanvas" role="button" 
             aria-controls="searchcanvas" 
             data-bs-target="#searchcanvas">search nearby</button>
@@ -136,6 +136,9 @@ window.addEventListener('DOMContentLoaded', async function () {
             type="button" onclick='showRouteToAttraction()'}>
             get directions</button>
             </div>`
+            attractionsPopupDiv.querySelector('.nearby').addEventListener('click', function(){
+                document.querySelector('#search-side').style.display = 'block';
+            })
             let popup = L.responsivePopup().setContent(attractionsPopupDiv)
 
             //arts layer
@@ -379,6 +382,10 @@ window.addEventListener('DOMContentLoaded', async function () {
     }
 })
 
+map.on('click', function(){
+    document.querySelector('#search-side').style.display = 'none';
+})
+
 //#navbar
 //toggle for current layer
 let layerControl = document.querySelector('#change')
@@ -393,7 +400,7 @@ layerControl.addEventListener('click', function () {
     if (userLocation) { map.removeLayer(userLocation) }
     document.querySelector('#search-side').style.display = 'none';
     if (document.querySelector('#current-layer').innerHTML == "PAID") {
-        layerControl.innerHTML = '<i class="bi bi-toggle-off"></i>';
+        layerControl.innerHTML = '<i class="bi bi-toggle-on"></i>';
         layerControl.style.backgroundColor = 'white';
         layerControl.style.color = '#C0392B';
         layerControl.setAttribute('data-bs-target', '#foc-attractions');
@@ -412,7 +419,7 @@ layerControl.addEventListener('click', function () {
     }
     else {
         document.querySelector('#current-layer').innerHTML = "PAID";
-        layerControl.innerHTML = '<i class="bi bi-toggle-on"></i>';
+        layerControl.innerHTML = '<i class="bi bi-toggle-off"></i>';
         layerControl.style.backgroundColor = '#C0392B';
         layerControl.style.color = 'white';
         layerControl.setAttribute('data-bs-target', '#paid-attractions');
@@ -519,18 +526,21 @@ document.querySelector('#searchBtn').addEventListener('click', async function ()
                 let popupDiv = document.createElement('div');
                 popupDiv.classList.add('popup-interior')
                 popupDiv.innerHTML = `
-                <img class='pop-up-border' style='width: 297px; height: 167px; object-fit: contain;' src='${photoLink}'>
-                <h4>${eachResult.name}</h4>
-                <p>Opening Hours: ${details.hours.display}</p>
-                <p>Address: ${eachResult.location.formatted_address}</p>
-                <p>${eachResult.distance}m from the attraction</p>
-                <p>Ratings: ${details.rating} <i class="bi bi-star-fill"></i>
+                <img class='image-border' style='width: 297px; height: 167px; object-fit: contain;' src='${photoLink}'>
+                <h5 class='card-title my-3'>${eachResult.name}</h5>
+                <p class='card-text'><u>Address:</u></p> <p class='pop-up-text'>${eachResult.location.formatted_address}</p>
+                <p class='card-text'><u>Opening Hours</u>:<br></p> <p class='pop-up-text'> ${details.hours.display}</p>
+                <p class='pop-up-text'>${eachResult.distance}m away</p>
+                <p><b>Ratings:</b> ${details.rating} <i class="bi bi-star-fill"></i>
                 </p>
+
+                <div class='text-center'>                        
                 <button class='btn-sm btn-general'
                 type="button">
                 get directions</button>
                <a class = 'btn-sm btn-general place-link' href='${details.website}' 
-               target="_blank">visit website</a>`
+               target="_blank">visit website</a>
+               </div>`
                 // customise styling of a button
                 popupDiv.querySelector('button').addEventListener('click', function () {
                     showRouteToNearby(eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude)
@@ -614,7 +624,7 @@ document.querySelector('#submitBtn').addEventListener('click', function () {
     }
 
 
-    if (!document.querySelector('#email').value || !document.querySelector('#email').value.includes('@')) {
+    if (!document.querySelector('#email').value || (!document.querySelector('#email').value.includes('@') || !document.querySelector('#email').value.includes('.com'))) {
         document.querySelector('#invalid-email').style.display = 'block';
         document.querySelector('#email').style.border = 'solid 1px darkred';
     }

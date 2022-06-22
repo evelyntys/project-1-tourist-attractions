@@ -135,9 +135,9 @@ var thunderyIcon = L.icon({
 
 //keys for foc/paid attraction
 let entranceFee = {
-    'yes': 'Free entry',
-    'depends': 'Free entry for Singaporeans/PRs, foreigners to buy tickets',
-    'no': 'Tickets to be purchased prior to entry'
+    'yes': 'FREE ENTRY',
+    'depends': 'FREE ENTRY FOR SINGAPOREANS / PRs, FOREIGNERS TO BUY TICKETS',
+    'no': 'PURCHASE OF TICKETS REQUIRED'
 }
 
 //function to change layer with navbar toggle
@@ -200,7 +200,6 @@ function markerClick(attractionLat, attractionLng) {
     chosenLat = attractionLat;
     chosenLng = attractionLng;
     map.flyTo([chosenLat, chosenLng], 16);
-    document.querySelector('#search-side').style.display = 'block';
 }
 
 //routing functions
