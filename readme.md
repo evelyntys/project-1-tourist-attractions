@@ -1,5 +1,7 @@
 
 # SGgoWhere
+![Structure of the website](/images/read-me/landing-page.png?raw=true)
+![Structure of the website](/images/read-me/main-page.png?raw=true)
 The live demo of the website is available [here](https://sggowhere.netlify.app/).
 
 ## Project Summary
@@ -10,10 +12,16 @@ This website aims to serve as a guide for users on the different attractions ava
 * Architecture and Landmarks
 * Recreation
 
-The main target audience of this website are tourists coming to Singapore. It could also serve as a guide for fellow Singaporeans who are thinking about where to go or visit in Singapore on their next day off .
+The main target audience of this website are tourists coming to Singapore. It could also serve as a guide for fellow Singaporeans who are thinking about where to go or visit in Singapore on their next day off.
+
+### <b> Organisation's Goals </b>
+To promote Singapore's tourist attractions to both locals and tourists, not limited to just those well-known attractions such as USS and Singapore Zoo.
+
+### <b> Users' Goals </b>
+Users should be able to easily obtain the information about the available tourist attractions, including information such as the entry fee requirements.
 
 ## The Five Planes of UI/UX
-### 1. Strategy 
+### <b> 1. Strategy </b>
 #### Organisation
 * Objective: To provide information about the various attractions available in Singapore
 #### User 
@@ -40,50 +48,55 @@ As someone planning to visit outdoor attractions, I would like to know the weath
 As someone visitng an attraction, I would be concerned about the food choices nearby, as well as the bus stops and stations to plan my navigation. | <ul><li>Feature to search for nearby food places and stations etc</li> <li>Feature to show directions to aid in navigation planning</li></ul>
 
 
-### 2. Scope
-#### Functional Requirements
-#### Features
-1. <b>Layer toggle between free and paid attractions</b>
+### <b> 2. Scope </b>
+#### <b><u>Functional Requirements</b></u>
+#### <u>Features</u>
+<b> 1. Layer toggle between free and paid attractions</b>
 * Attractions separated based on whether they require an entry fee prior to entry or not
 * Navigation bar toggle allow users to toggle between attractions that have no entry fee and those that require an entry fee
 
-2. <b>Side-bar navigation</b>
+<b> 2. Side-bar navigation</b>
 * Triggered by clicking the main navigation bar icon
 * Allows for unobstructed view of the map
 * Allows for users to read the description of the different attractions
     * View more about the attraction on the map popup
     * Visit the respective websites of the attraction
 
-3. <b>Map popups</b>
+<b> 3. Map popups</b>
+
+<b> Routing </b>
 * Obtain directions to the attraction based on their current location
+
+<b> Nearby search </b>
 * Search for available amenities nearby (e.g. food, stations) within a 1km radius of the chosen attraction
     * Directions to the amenity of interest from the attraction of interest is also available
     
     <i>Note: Due to limitations, currently only driving instructions are available</i>
 
-4. <b>Weather data</b>
+<b> 4. Weather data</b>
 * 2-hourly weather data is available, triggered by clicking the weather button on the map
     * Weather data, marked by various icons, around the different areas of Singapore will be shown
     * Aims to help users plan their days/itinerary better as some places, such as parks or nature reserves may not be so fun on rainy days!
 
 
-#### Content
+#### <u>Content</u>
 * Information about the different attractions e.g. name, location, category, free entry or paid
 * Information about the weather
 
-#### Non-functional Requirements
+#### <b><u>Non-functional Requirements</b></u>
 * Mobile responsiveness 
 * Performance and loading
 
-### 3. Structure
+### <b> 3. Structure </b>
 ![Structure of the website](/images/read-me/structure.png?raw=true)
 
-### 4. Skeleton
+### <b> 4. Skeleton </b>
 An initial draft idea of the site layout has been attached.
 ![Initial wireframe of the website](/images/read-me/initial-wireframe.png?raw=true)
 
-### 5. Surface
-* The main colors used in this website are red and white, synchronus to the colors on the Singapore flag.
+### <b> 5. Surface </b>
+* The main colors used in this website are red and white, similar to the colors on the Singapore flag.
+* The shade of red was also chosen as it was similar to the markers icons, to create a standardized look.
 * The fonts used include:
     * Carme for general text
     * Fredoka One for navbar icon
@@ -101,9 +114,10 @@ Details for test cases for the website can be found [here]().
 * Javascript
 * [LeafletJS](https://leafletjs.com/) for map creation
     * [Marker Cluster](https://github.com/Leaflet/Leaflet.markercluster) for adding markers to group clusters
-    * [Leaflet Routing Machine](https://github.com/perliedman/leaflet-routing-machine)
-* [Boostrap v5.0](https://getbootstrap.com/) for general styling and design of the website
+    * [Leaflet Routing Machine](https://github.com/perliedman/leaflet-routing-machine) for getting directions
+* [Bootstrap v5.0](https://getbootstrap.com/) for general styling and design of the website
 * [MyGeoData](https://mygeodata.cloud/converter/kml-to-geojson) for conversion of KML file to Geojson
+* [Foursquare](https://developer.foursquare.com/docs) for gathering
 * [Axios](https://github.com/axios/axios) for calling API and getting data from promises
 * [Google Fonts](https://fonts.google.com/) for the fonts used
 * [Bootstrap Icons](https://icons.getbootstrap.com/) for icons
@@ -120,9 +134,15 @@ Details for test cases for the website can be found [here]().
 * KML data of attractions & weather API from [data.gov.sg](data.gov.sg);
 * API for nearby search from [Foursquare](https://developer.foursquare.com/docs);
 
+### Device mock-ups
+* Images of the website on the different device mockups was created on [shotsnapp](https://app.shotsnapp.com/)
+
+### Fonts
+* [Fontjoy](https://fontjoy.com/) for generating random fonts
+
 ### Landing Page Images
-* (Portrait photo for small-screen devices by Tiff Ng)[https://www.pexels.com/photo/marina-bay-sand-s-2434270/]
-* (Landscape photo for larger devices from Travel.Earth)[https://travel.earth/why-is-singapore-a-hard-to-beat-tourist-destination/]
+* [Portrait photo for small-screen devices by Tiff Ng](https://www.pexels.com/photo/marina-bay-sand-s-2434270/)
+* [Landscape photo for larger devices from Travel.Earth](https://travel.earth/why-is-singapore-a-hard-to-beat-tourist-destination/)
 
 ### Navbar Icon
 * <a href="https://www.flaticon.com/free-icons/tourist" title="tourist icons">Tourist icons created by Luvdat - Flaticon</a>
