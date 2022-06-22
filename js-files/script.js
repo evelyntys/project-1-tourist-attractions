@@ -97,8 +97,8 @@ window.addEventListener('DOMContentLoaded', async function () {
                 imgUrl = imgUrl.replace("yoursingapore", "visitsingapore");
             }
 
-            console.log(imgUrl)
-            
+            console.log("each images",imgUrl)
+
             if (!eachAttraction[data]['HYPERLINK']) {
                 hyperlink = 'unavailable.html'
             }
@@ -135,7 +135,8 @@ window.addEventListener('DOMContentLoaded', async function () {
             <button class='btn-sm btn-general'
             type="button" onclick='showRouteToAttraction()'}>
             get directions</button>
-            </div>`
+            </div>
+            ${imgUrl}`
             let popup = L.responsivePopup().setContent(attractionsPopupDiv)
 
             //arts layer
