@@ -65,7 +65,7 @@ As someone visitng an attraction, I would be concerned about the food choices ne
 <b> 3. Map popups</b>
 
 <b> Routing </b>
-* Obtain directions to the attraction based on their current location
+* Obtain directions to the attraction based on their current location (default) or input a location
 
 <b> Nearby search </b>
 * Search for available amenities nearby (e.g. food, stations) within a 1km radius of the chosen attraction
@@ -136,7 +136,7 @@ Details for test cases for the website can be found [here](https://github.com/ev
 
 * No search bar is implemented for those who may already have a specific attraction in mind and wish to search for it as this website mainly caters to those who are unsure of the attractions available. We can consider implementing a searchbar to cater for both groups.
 
-* Currently, users are only allowed to get directions to a specific attraction from their location. We can consider allowing users to input another location of choice into the routing machine to obtain the directions.
+* Consider having a random generator to cater for users who are really unsure of which attractions to start. We could have the user select a category and return a random attraction from there.
 
 ## Credits
 ### Data
