@@ -1,7 +1,7 @@
 
 # SGgoWhere
-![Structure of the website](/images/read-me/landing-page.png?raw=true)
-![Structure of the website](/images/read-me/main-page.png?raw=true)
+![Structure of the website](/read-me-files/images/landing-page.png?raw=true)
+![Structure of the website](/read-me-files/images/main-page.png?raw=true)
 The live demo of the website is available [here](https://sggowhere.netlify.app/).
 
 ## Project Summary
@@ -88,11 +88,11 @@ As someone visitng an attraction, I would be concerned about the food choices ne
 * Performance and loading
 
 ### <b> 3. Structure </b>
-![Structure of the website](/images/read-me/structure.png?raw=true)
+![Structure of the website](/read-me-files/images/structure.png?raw=true)
 
 ### <b> 4. Skeleton </b>
 An initial draft idea of the site layout has been attached.
-![Initial wireframe of the website](/images/read-me/initial-wireframe.png?raw=true)
+![Initial wireframe of the website](/read-me-files/images/initial-wireframe.png?raw=true)
 
 ### <b> 5. Surface </b>
 * The main colors used in this website are red and white, similar to the colors on the Singapore flag.
@@ -103,7 +103,13 @@ An initial draft idea of the site layout has been attached.
     * Cantarell for showing the current layer
 
 ## Deployment
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a4606763-89a7-4619-84aa-9e41d6d444e7/deploy-status)](https://app.netlify.com/sites/inthereddot/deploys)
+
 This website was deployed using [Netlify](https://www.netlify.com/). 
+* Edits were committed and pushed to the respective Github repository
+* Netlify is connected and granted access to Github repository
+* Create a new site and select continuous deployment for the desired repository
+* Wait for deployment to be completed
 
 ## Testing
 Details for test cases for the website can be found [here]().
@@ -112,6 +118,7 @@ Details for test cases for the website can be found [here]().
 * HTML
 * CSS
 * Javascript
+* [Visual Studio Code](https://code.visualstudio.com/) for code editing
 * [LeafletJS](https://leafletjs.com/) for map creation
     * [Marker Cluster](https://github.com/Leaflet/Leaflet.markercluster) for adding markers to group clusters
     * [Leaflet Routing Machine](https://github.com/perliedman/leaflet-routing-machine) for getting directions
@@ -121,6 +128,8 @@ Details for test cases for the website can be found [here]().
 * [Axios](https://github.com/axios/axios) for calling API and getting data from promises
 * [Google Fonts](https://fonts.google.com/) for the fonts used
 * [Bootstrap Icons](https://icons.getbootstrap.com/) for icons
+* [GitHub](http://github.com) for the repository
+* [Netlify](https://www.netlify.com/) for deployment
 
 ## Possible improvements to the project
 * Leaflet Routing Machine only provides driving directions, which may not be that applicable for tourists as they most likely will not be driving in Singapore. We could consider other forms of routing services if available in the future, to also include navigation with public transport and walking. 
