@@ -217,9 +217,13 @@ function showRouteToAttraction() {
     if (userLat == null && userLng == null) {
         userLat = 1.286498854;
         userLng = 103.841163302;
+        userLocation = L.marker([userLat, userLng], { icon: userIcon }).bindPopup('Default Location: <br> Clarke Quay Central');
+        userLocation.addTo(map).openPopup();
     }
+    else{
     userLocation = L.marker([userLat, userLng], { icon: userIcon }).bindPopup('You are here');
     userLocation.addTo(map).openPopup();
+    }
     let bounds = L.latLngBounds([userLat, userLng], [chosenLat, chosenLng]);
     map.flyToBounds(bounds);
     routing = L.Routing.control({
