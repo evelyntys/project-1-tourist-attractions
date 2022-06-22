@@ -179,7 +179,7 @@ function getCardContent(attractionImage, attractionName, attractionDescription, 
                     href='${attractionLink}' target="_blank">
                     visit website</a>
                     </div>
-                  </div>`
+                  </div>`;
 
     return content
 }
@@ -189,7 +189,7 @@ function directToMap(button, layer, popup) {
     for (let j = 0; j < button.length; j++) {
         button[j].addEventListener('click', function () {
             if (routing) {
-                routing.remove()
+                routing.remove();
             }
             layer.zoomToShowLayer(popup[j], function () {
                 popup[j].openPopup();
@@ -211,17 +211,17 @@ function markerClick(attractionLat, attractionLng) {
 //routing functions
 function showRouteToAttraction() {
     if (routing) {
-        routing.remove()
+        routing.remove();
     }
     navigator.geolocation.getCurrentPosition(position)
-    if (userLat == null && userLng == null){
+    if (userLat == null && userLng == null) {
         userLat = 1.286498854;
         userLng = 103.841163302;
     }
     userLocation = L.marker([userLat, userLng], { icon: userIcon }).bindPopup('You are here');
-    userLocation.addTo(map).openPopup()
+    userLocation.addTo(map).openPopup();
     let bounds = L.latLngBounds([userLat, userLng], [chosenLat, chosenLng]);
-    map.flyToBounds(bounds)
+    map.flyToBounds(bounds);
     routing = L.Routing.control({
         waypoints: [
             L.latLng(userLat, userLng),
@@ -229,12 +229,12 @@ function showRouteToAttraction() {
         ],
         collapsible: true,
         geocoder: L.Control.Geocoder.nominatim()
-    }).addTo(map)
+    }).addTo(map);
 }
 
 function showRouteToNearby(placeLat, placeLng) {
     if (routing) {
-        routing.remove()
+        routing.remove();
     }
     routing = L.Routing.control({
         waypoints: [
@@ -243,6 +243,6 @@ function showRouteToNearby(placeLat, placeLng) {
         ],
         collapsible: true,
         geocoder: L.Control.Geocoder.nominatim()
-    }).addTo(map)
+    }).addTo(map);
 }
 
